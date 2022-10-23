@@ -1,11 +1,12 @@
+
 from django.shortcuts import render, redirect
 from database_models.models import *
+from django.contrib.auth import login
 # Create your views here.
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == 'POST':
-        creater = User
         username=request.POST.get('username')
         email=request.POST.get('email')
         password=request.POST.get('password')
@@ -19,7 +20,7 @@ def register(request):
         is_active=request.POST.get('is_active')
         profile_pic=request.POST.get('profile_pic')
         print(username)
-        user = creater.objects.create_user(
+        user = User.objects.create_user(
             username=username,
             email=email,
             password=password,
@@ -33,6 +34,10 @@ def register(request):
             is_active=is_active if is_active else User._meta.get_field('is_active').get_default(),
             profile_pic=profile_pic,
         )
+        loginStatus=login(request, user)
+        return redirect('home')
     return render(request, 'register.html', {})
 def home(request):
-    return render(request, 'templates.html',{})
+    print(request.user)
+    context={'user':request.user}
+    return render(request, 'templates.html',context)
