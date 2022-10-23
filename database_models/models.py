@@ -67,7 +67,7 @@ class Book(models.Model):
     book_id = models.TextField(primary_key=True)
     book_name = models.CharField(max_length=60,default='Untitled')
     description = models.CharField(max_length=120, blank=True)
-    data_created = models.DateField(default=timezone.now)
+    date_created = models.DateField(default=timezone.now)
     book_type = models.IntegerField(default=1)
     thumbnail = models.ImageField(upload_to="book/" + str(book_id))
     pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs")
