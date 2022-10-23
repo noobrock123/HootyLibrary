@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'database_models',
     'register.apps.RegisterConfig',
     'MAIN_APP',
+    'userProfile.apps.UserprofileConfig',
 ]
 
 MIDDLEWARE = [
