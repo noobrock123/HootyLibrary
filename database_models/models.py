@@ -57,8 +57,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
     
+    def get_username(self):
+        return self.username
+    def get_about_self(self):
+        return (self.gender, self.age, self.occupation)
+    def get_bio(self):
+        return self.bio
+    def get_links(self):
+        return (self.social_link, self.donation_link)
+    def get_profile_pic(self):
+        return self.profile_pic
+
     def __str__(self):
-        return self.user_id + self.username
+        return self.user_id + ": " + self.username
 
 def user_id_gen():
     rand_id = hex(rand.randint(0, pow(16, 8)))
@@ -81,20 +92,62 @@ class Book(models.Model):
     thumbnail = models.ImageField(upload_to="book/" + str(book_id), blank=True, null=True)
     pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs", blank=True, null=True)
 
+    def get_book_name(self):
+        return self.book_name
+    def get_description(self):
+        return self.description
+    def get_date_created(self):
+        return self.date_created
+    def get_book_type(self):
+        return self.book_type
+    def get_genres(self):
+        return self.genres
+    def get_author(self):
+        return self.author
+    def get_thumbnail(self):
+        return self.thumbnail
+    def get_pdf_files(self):
+        return self.pdf_files
+    def get_reviews(self):
+        return Review.objects.filter(book_refer=self)
+    def get_issues(self):
+        return Issue.objects.filter(book_refer=self)
+    def get_favorite_books(self):
+        return Favorite.objects.filter(user_refer=self)
+    
+    def get_avg_score(self):
+        book_reviews = Review.objects.filter(book_refer=self)
+        score_sum = 0
+        for review in book_reviews:
+            score_sum += review.get_score()
+        return score_sum / len(book_reviews)
+        
+
     def __str__(self):
         return self.book_id + ": " + self.book_name
 
 class Favorite(models.Model):
     user_refer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, models.SET_NULL, blank=True, null=True)
- 
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+
 class Review(models.Model):
     reviewer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, models.SET_NULL, blank=True, null=True)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
     review_date = models.DateField(default=timezone.now)
     score = models.FloatField()
     title = models.CharField(max_length=40)
     msg = models.CharField(max_length=500)
+
+    def get_reviewer(self):
+        return self.reviewer
+    def get_book(self):
+        return self.book_refer
+    def get_score(self):
+        return self.score
+    def get_title(self):
+        return self.title
+    def get_msg(self):
+        return self.msg
 
 class Issue(models.Model):
     issuer = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -103,9 +156,24 @@ class Issue(models.Model):
     title = models.CharField(max_length=40)
     msg = models.CharField(max_length=500)
 
+    def get_issuer(self):
+        return self.issuer
+    def get_book_refer(self):
+        return self.book_refer
+    def get_attribs(self):
+        return (self.issue_date, self.title, self.msg)
+
 class Report(models.Model):
     reporter = models.OneToOneField(User, on_delete=models.CASCADE)
     book_refer = models.ForeignKey(Book, models.SET_NULL, blank=True, null=True)
     report_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
     msg = models.CharField(max_length=100, blank=True)
+
+    def get_reporter(self):
+        return self.issuer
+    def get_book_refer(self):
+        return self.book_refer
+    def get_attribs(self):
+        return (self.issue_date, self.title, self.msg)
+
