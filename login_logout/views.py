@@ -17,7 +17,7 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('index'))
         else:
             return render(request, 'login_logout/login.html', {
                 'message': 'Invalid credentials.'
