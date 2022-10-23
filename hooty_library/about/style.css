@@ -88,3 +88,13 @@ section img#mountains_front {
     font-size: 1.2em;
     color: #fff;
 }
+
+.WebContainer{
+    width: 100%;
+    height: auto;
+}
+.articles{
+    width:90%; /*Takes 90% width from WebContainer*/
+    height: auto;
+    margin: auto;
+} 
