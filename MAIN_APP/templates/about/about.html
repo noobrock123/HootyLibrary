@@ -1,18 +1,19 @@
+{% load static %}
 <!doctype html>
 <html>
     <head>
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="{% static "about/style.css" %}">
     </head>
     <body>
         <header>
-            <a href="#" class="logo">HootyLibraly</a>
+            <a href="{% url "MAIN_APP:home" %}" class="logo">HootyLibraly</a>
         </header>
         <section>
-            <img src="images/stars.png" id="stars">
-            <img src="images/moon.png" id="moon">
-            <img src="images/mountains_behind.png" id="mountains_behind">
-            <img src="images/mountains_front.png" id="mountains_front">
+            <img src="{% static "about/images/stars.png" %}" id="stars">
+            <img src="{% static "about/images/moon.png" %}" id="moon">
+            <img src="{% static "about/images/mountains_behind.png" %}" id="mountains_behind">
+            <img src="{% static "about/images/mountains_front.png" %}" id="mountains_front">
         </section> 
         <div class="sec" id="sec">
             <h2>ABOUT US</h2>

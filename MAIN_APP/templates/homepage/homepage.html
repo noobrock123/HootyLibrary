@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static "homepage/style.css" %}">
-
 </head>
 <body>
     <header>
@@ -14,7 +13,7 @@
         <ul>
             <li><a href="#">Sign-in/Signup</a></li>
             <li><a href="#">Follow</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="{% url 'MAIN_APP:about' %}">About</a></li>
         </ul>
         <div class="container">
             <div class="search_wrap">
