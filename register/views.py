@@ -7,7 +7,7 @@ from MAIN_APP import views as main_app
 # Create your views here.
 def register(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('/')
     if request.method == 'POST':
         username=request.POST.get('username')
         email=request.POST.get('email')
@@ -37,9 +37,9 @@ def register(request):
             profile_pic=profile_pic,
         )
         loginStatus=login(request, user)
-        return redirect(main_app.index)
+        return redirect('/')
     return render(request, 'register.html', {})
-def home(request):
-    print(request.user)
-    context={'user':request.user}
-    return render(request, 'templates.html',context)
+# def home(request):
+#     print(request.user)
+#     context={'user':request.user}
+#     return render(request, 'templates.html',context)
