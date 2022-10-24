@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect
 from database_models.models import *
 from django.contrib.auth import login
+
+from MAIN_APP import views as main_app
 # Create your views here.
 def register(request):
     if request.user.is_authenticated:
@@ -35,7 +37,7 @@ def register(request):
             profile_pic=profile_pic,
         )
         loginStatus=login(request, user)
-        return redirect('home')
+        return redirect(main_app.index)
     return render(request, 'register.html', {})
 def home(request):
     print(request.user)
