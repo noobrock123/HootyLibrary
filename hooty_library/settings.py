@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'MAIN_APP',
     'userProfile.apps.UserprofileConfig',
+    'MAIN_APP',
 ]
 
 MIDDLEWARE = [
