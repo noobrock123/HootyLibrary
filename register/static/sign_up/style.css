@@ -121,3 +121,74 @@ section .container .user .formBx form button span {
 section .container .user .formBx form button:hover span {
     width: 30px;
 }
+
+section .container .user .formBx form .signup {
+    position: relative;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #555;
+    text-transform: uppercase;
+    font-weight: 300;
+} 
+
+section .container .user .formBx form .signup a {
+    font-weight:  600;
+    text-decoration: none;
+    color: #677eff;
+}
+
+section .container .singupBx {
+    pointer-events: none;
+}
+
+section .container.active .singupBx {
+    pointer-events: initial;
+}
+
+section .container .singupBx .formBx {
+    left: 100%;
+}
+
+section .container.active .singupBx .formBx {
+    left: 0;
+}
+
+section .container .singupBx .imgBx {
+    left: -100%;
+}
+
+section .container.active .singupBx .imgBx {
+    left: 0;
+}
+
+
+section .container .singinBx .formBx {
+    left: 0;
+}
+
+section .container.active .singinBx .formBx {
+    left: -100%;
+}
+
+section .container .singinBx .imgBx {
+    left: 0;
+}
+
+section .container.active .singinBx .imgBx {
+    left: -100%;
+}
+
+@media (max-width: 991px) {
+    section .container {
+        max-width: 400px;
+    }
+
+    section .container .imgBx {
+        display: none;
+    }
+
+    section .container .user .formBx {
+        width: 100%;
+    }
+}
