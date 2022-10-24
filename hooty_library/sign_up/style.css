@@ -158,6 +158,18 @@ section .container.active .singinBx .imgBx {
     left: -100%;
 }
 
+section .container.active .singupBx .formBx .arrow {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+}
+
+section .container.active .singupBx .formBx .arrow img {
+    width: 60px;
+    cursor: pointer;
+}
+
 @media (max-width: 991px) {
     section .container {
         max-width: 400px;
