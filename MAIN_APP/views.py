@@ -6,4 +6,4 @@ def index(request):
     return render(request, 'homepage/homepage.html')
 
 def about(request):
-    return render(request, 'about/about.html')
+    return render(request, 'hooty_library/about/about.html')
