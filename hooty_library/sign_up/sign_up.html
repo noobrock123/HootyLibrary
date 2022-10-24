@@ -2,12 +2,13 @@
 <html>
     <head>
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title>Sign in & Sign Up Form | Vanilla Javascript</title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <section>
             <div class="container">
-                <div class="user signinBx">
+                <div class="user singinBx">
                     <div class="imgBx"><img src="images/img1.jpg"></div>
                     <div class="formBx">
                         <form>
@@ -15,29 +16,30 @@
                             <input type="text" name="" placeholder="Username">
                             <input type="password" name="" placeholder="Password">
                             <input type="submit" name="" placeholder="Login">
-                            <p class="signup">Don't have an account ? <a href="#" onclick="toggleForm();">Signup.</a></p>
+                            <p class="signup">Don't have an account ? <a href="#" onclick="toggleForm();">Sign up.</a></p>
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="user signupBx">
-                <div class="formBx">
-                    <form>
-                        <h2>Create an account</h2>
-                        <input type="text" name="" placeholder="Username">
-                        <input type="email" name="" placeholder="Email Address">
-                        <input type="password" name="" placeholder="CreatePassword">
-                        <input type="password" name="" placeholder="Confirm Password">
-                        <input type="submit" name="" placeholder="Sign Up">
-                        <p class="signup">Already have an account? <a href="#" onclick = "toggleForm();">Signin.</a></p>
-                    </form>
+                <div class="user singupBx">
+                    <div class="formBx">
+                        <form>
+                            <h2>Create an account</h2>
+                            <input type="text" name="" placeholder="Username">
+                            <input type="email" name="" placeholder="Email Address">
+                            <input type="password" name="" placeholder="CreatePassword">
+                            <input type="password" name="" placeholder="Confirm Password">
+                            <input type="submit" name="" placeholder="Sign Up">
+                            <p class="signup">Already have an account? <a href="#" onclick ="toggleForm();">Sign in.</a></p>
+                        </form>
+                    </div>
+                    <div class="imgBx"><img src="images/img2.jpg"></div>
                 </div>
-            </div>
+            </div>        
         </section>
         <script type="text/javascript">
             function toggleForm() {
             var container = document.querySelector('.container');
-            container,classlist.toggle('active')
+            container.classList.toggle('active')
             }
         </script>
     </body>
