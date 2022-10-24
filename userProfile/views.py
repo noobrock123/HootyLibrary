@@ -11,7 +11,7 @@ def userProfile(request, username):
     #     # in case user that access this profile is other user
     #     pass
     context = {
-        'my_book': Book.objects.filter(author=username),
+        'my_books': Book.objects.filter(author=user.user_id),
         'bio': user.get_bio(),
         'username':user.get_username(),
         'gender':user.get_about_self()[0],
