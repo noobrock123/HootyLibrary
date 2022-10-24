@@ -1,4 +1,4 @@
-@import url('http://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
 * {
     margin: 0;
@@ -10,8 +10,8 @@
 section {
     position: relative;
     min-height: 100vh;
-    background: #fee648;
     display: flex;
+    background-image: url(images/background.jpg);
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -59,6 +59,7 @@ section .container .user .formBx {
     background: #fff;
     display: flex;
     justify-items: center;
+    align-items: center;
     padding: 40px;
     transition: 0.5s;
 }
@@ -73,7 +74,7 @@ section .container .user .formBx form h2 {
     margin-bottom: 10px;
     color: #555;
 }
-
+ 
 section .container .user .formBx form input {
     position: relative;
     width: 100%;
@@ -89,15 +90,36 @@ section .container .user .formBx form input {
     font-weight: 300;
 }
 
-section .container .user .formBx form  input[type="submit"] {
-    max-width: 100px;
+section .container .user .formBx form  button {
+    width: 100%;
     background: #677eff;
-    color: #fff;
+    padding: 10px;
+    border: 0;
+    outline: none;
+    font-size: 16px;
+    margin-top: 20px;
     cursor: pointer;
-    font-size: 14px;
+    transition: background 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section .container .user .formBx form  button:hover {
     font-weight: 500;
-    letter-spacing: 1px;
-    transition: 0.5s;
+    background: #000;
+    color: #fff;
+}
+
+section .container .user .formBx form button span {
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.5s;
+}
+
+section .container .user .formBx form button:hover span {
+    width: 30px;
 }
 
 section .container .user .formBx form .signup {
@@ -116,44 +138,44 @@ section .container .user .formBx form .signup a {
     color: #677eff;
 }
 
-section .container .signupBx {
+section .container .singupBx {
     pointer-events: none;
 }
 
-section .container.active .signupBx {
+section .container.active .singupBx {
     pointer-events: initial;
 }
 
-section .container .signupBx .formBx {
+section .container .singupBx .formBx {
     left: 100%;
 }
 
-section .container.active .signupBx .formBx {
+section .container.active .singupBx .formBx {
     left: 0;
 }
 
-section .container .signupBx .imgBx {
+section .container .singupBx .imgBx {
     left: -100%;
 }
 
-section .container.active .signupBx .imgBx {
+section .container.active .singupBx .imgBx {
     left: 0;
 }
 
 
-section .container .signinBx .formBx {
+section .container .singinBx .formBx {
     left: 0;
 }
 
-section .container.active .signinBx .formBx {
+section .container.active .singinBx .formBx {
     left: -100%;
 }
 
-section .container .signinBx .imgBx {
+section .container .singinBx .imgBx {
     left: 0;
 }
 
-section .container.active .signinBx .imgBx {
+section .container.active .singinBx .imgBx {
     left: -100%;
 }
 
