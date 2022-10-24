@@ -10,8 +10,8 @@
 section {
     position: relative;
     min-height: 100vh;
-    background: #fee648;
     display: flex;
+    background-image: url(images/background.jpg);
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -90,15 +90,36 @@ section .container .user .formBx form input {
     font-weight: 300;
 }
 
-section .container .user .formBx form  input[type="submit"] {
-    max-width: 100px;
+section .container .user .formBx form  button {
+    width: 100%;
     background: #677eff;
-    color: #fff;
+    padding: 10px;
+    border: 0;
+    outline: none;
+    font-size: 16px;
+    margin-top: 20px;
     cursor: pointer;
-    font-size: 14px;
+    transition: background 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section .container .user .formBx form  button:hover {
     font-weight: 500;
-    letter-spacing: 1px;
-    transition: 0.5s;
+    background: #000;
+    color: #fff;
+}
+
+section .container .user .formBx form button span {
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.5s;
+}
+
+section .container .user .formBx form button:hover span {
+    width: 30px;
 }
 
 section .container .user .formBx form .signup {
@@ -156,18 +177,6 @@ section .container .singinBx .imgBx {
 
 section .container.active .singinBx .imgBx {
     left: -100%;
-}
-
-section .container.active .singupBx .formBx .arrow {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    width: 100%;
-}
-
-section .container.active .singupBx .formBx .arrow img {
-    width: 60px;
-    cursor: pointer;
 }
 
 @media (max-width: 991px) {
