@@ -28,16 +28,7 @@ def book_pdf(request, book_id):
 
 def book_views(request, book_id):
     book = Book.objects.get(book_id=book_id)
-    try:
-        with open(f'{Book.objects.get(book_id=book_id).get_thumbnail()}', 'rb') as thumnail:
-            thumnail = HttpResponse(thumnail.read(), content_type="image/jpeg")
-    except:
-        thumbnail = HttpResponse('Not found'),
-    try:
-        with open(f'{Book.objects.get(book_id=book_id).get_pdf_files()}', 'rb') as pdf:
-            pdf = HttpResponse(pdf.read(), content_type="application/pdf")
-    except:
-        pdf = HttpResponse('Not found')
+    
     context = {
         # 'book_id':book.(),
         'book_name': book.get_book_name(),
@@ -46,8 +37,6 @@ def book_views(request, book_id):
         'book_type': book.get_book_type(),
         'genres': book.get_genres(),
         'author': book.get_author(),
-        'thumbnail': thumnail,
-        'pdf_files': pdf,
         'reviews': book.get_reviews(),
         'favorite_books': Favorite.objects.filter(book_refer=book),
         'avg_score': book.get_avg_score(),
