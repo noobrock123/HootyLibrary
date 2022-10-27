@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
+    'book_views.apps.BookViewsConfig'
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,5 @@ if os.environ.get('GITHUB_ACTIONS') != 'true':
 import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
+
+MEDIA_ROOT = '/home/chain13/Documents/cn331/work/HootyLibrary/book'
