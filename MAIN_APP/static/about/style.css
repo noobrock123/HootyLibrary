@@ -94,7 +94,7 @@ section img#mountains_front {
     height: auto;
 }
 .articles{
-    width:90%; /*Takes 90% width from WebContainer*/
+    width:90%;
     height: auto;
     margin: auto;
 } 

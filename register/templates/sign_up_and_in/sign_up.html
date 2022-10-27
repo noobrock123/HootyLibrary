@@ -1,0 +1,33 @@
+{% load static %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href={% static "sign_up/style.css" %}>
+        <script src="https://kit.fontawesome.com/9ecd69c030.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <section >
+            <div class="container">
+                <div class="user singinBx">
+                    <div class="imgBx">
+                        <img src={% static "sign_up/images/img2.jpg" %}>
+                    </div>
+                    <div class="formBx">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <h2>Create an account</h2>
+                            <input type="text" name="username" placeholder="Username">
+                            <input type="email" name="email" placeholder="Email Address">
+                            <input type="password" name="password" placeholder="CreatePassword">
+                            <input type="text" name="bio" placeholder="bio" id="">
+                            <input type="password" name="confirm_password" placeholder="Confirm Password">
+                            <button type="submit">SIGN UP <span>&#x27f6;</span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>        
+        </section>
+    </body>
+</html> 

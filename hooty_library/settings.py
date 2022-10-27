@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'database_models',
     'register.apps.RegisterConfig',
+    'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
 ]
 
@@ -121,6 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'register' / 'static',
+]
 AUTH_USER_MODEL = 'database_models.User'
 
 # Default primary key field type
@@ -129,7 +133,7 @@ AUTH_USER_MODEL = 'database_models.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-        'http://127.0.0.1:8000/',
+        'http://127.0.0.1:8000/', 'https://appcoursetu.herokuapp.com',
 ]
 
 import os
