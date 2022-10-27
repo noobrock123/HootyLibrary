@@ -90,7 +90,12 @@ class Book(models.Model):
     genres = models.ForeignKey(Genre, on_delete=models.SET_NULL, blank=True, null=True)
     author = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     thumbnail = models.ImageField(upload_to="book/" + str(book_id), blank=True, null=True)
+    # It was return something like book/<django.db.models.fields.TextField>
+    # Book wasn't created
     pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs", blank=True, null=True)
+    # It was return something like book/<django.db.models.fields.TextField>/pdfs
+    # Book wasn't created
+
 
     def get_book_name(self):
         return self.book_name
@@ -113,6 +118,7 @@ class Book(models.Model):
     def get_issues(self):
         return Issue.objects.filter(book_refer=self)
     def get_favorite_books(self):
+        # Does not work
         return Favorite.objects.filter(user_refer=self)
     
     def get_avg_score(self):
@@ -120,7 +126,8 @@ class Book(models.Model):
         score_sum = 0
         for review in book_reviews:
             score_sum += review.get_score()
-        return score_sum / len(book_reviews)
+        return score_sum / len(book_reviews) if len(book_reviews) != 0 else 0
+        # error when len(book_reviews) == 0
         
 
     def __str__(self):

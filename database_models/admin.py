@@ -70,3 +70,4 @@ admin.site.register(models.Genre, GenreAdminConfig)
 admin.site.register(models.Review, ReviewsAdminConfig)
 admin.site.register(models.Issue, IssuesAdminView)
 admin.site.register(models.Report, ReportAdmin)
+
