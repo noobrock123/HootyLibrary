@@ -6,12 +6,14 @@ from django.contrib.auth import login
 from MAIN_APP import views as main_app
 # Create your views here.
 def register(request):
+    print(request.method)
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('/')
     if request.method == 'POST':
         username=request.POST.get('username')
         email=request.POST.get('email')
         password=request.POST.get('password')
+        confirm_password=request.POST.get('confirm_password')
         gender=request.POST.get('gender')
         age=request.POST.get('age')
         occupation=request.POST.get('occupation')
@@ -21,7 +23,6 @@ def register(request):
         is_staff=request.POST.get('is_staff')
         is_active=request.POST.get('is_active')
         profile_pic=request.POST.get('profile_pic')
-        print(username)
         user = User.objects.create_user(
             username=username,
             email=email,
@@ -36,10 +37,10 @@ def register(request):
             is_active=is_active if is_active else User._meta.get_field('is_active').get_default(),
             profile_pic=profile_pic,
         )
-        loginStatus=login(request, user)
-        return redirect(main_app.index)
-    return render(request, 'register.html', {})
-def home(request):
-    print(request.user)
-    context={'user':request.user}
-    return render(request, 'templates.html',context)
+        login(request, user)
+        return redirect('/')
+    return render(request, 'register/templates/sign_up_and_in/sign_up.html', {})
+# def home(request):
+#     print(request.user)
+#     context={'user':request.user}
+#     return render(request, 'templates.html',context)

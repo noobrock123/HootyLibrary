@@ -74,7 +74,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.profile_pic
 
     def __str__(self):
-        return self.user_id + ": " + self.username
+        return str(self.user_id) + ": " + str(self.username)
 
 def user_id_gen():
     rand_id = hex(rand.randint(0, pow(16, 8)))
@@ -132,7 +132,7 @@ class Book(models.Model):
         return book.user_refer.all()
 
     def __str__(self):
-        return self.book_id + ": " + self.book_name
+        return str(self.book_id) + ": " + str(self.book_name)
 
 class Read(models.Model):
     user_refer = models.OneToOneField(User, on_delete=models.CASCADE)
