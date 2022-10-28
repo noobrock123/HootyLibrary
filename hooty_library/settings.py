@@ -37,12 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'register.apps.RegisterConfig',
     'database_models',
-    'MAIN_APP',
-    'userProfile',
-    'book_views',
-    'allauth',
+    'register.apps.RegisterConfig',
+    'MAIN_APP.apps.MainAppConfig',
+    'userProfile.apps.UserprofileConfig',
+    'book_views.apps.BookViewsConfig',
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.google', 
 ]
 
 MIDDLEWARE = [
@@ -127,7 +130,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'register' / 'static',
 ]
-AUTH_USER_MODEL = 'database_models'
+AUTH_USER_MODEL = 'database_models.models.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
