@@ -43,11 +43,13 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 section::before {
     content: '';
     position: absolute;
+    bottom: 0;
     width: 100%;
     height: 100px;
     background: linear-gradient(to top, #1c0522, transparent);
@@ -62,10 +64,20 @@ section img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    pointer-events: none;
 }
 
 section img#moon {
     mix-blend-mode: screen;
+}
+
+#text {
+    position: absolute;
+    right: -350px;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 7.5vw;
+    z-index: 9;
 }
 
 section img#mountains_front {
