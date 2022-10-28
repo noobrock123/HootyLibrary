@@ -3,7 +3,6 @@ from .models import CustomAccountManager, User, Genre, Book, Favorite, Review, I
 from django.contrib.auth.admin import UserAdmin
 
 class UserAdminConfig(UserAdmin):
-    model = models.User
     search_fields = ('user_id', 'username', 'email',)
     list_filter = ('is_active', 'is_superuser')
     ordering = ('date_joined',)
