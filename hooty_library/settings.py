@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
+    'book_views.apps.BookViewsConfig',
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.google', 
 ]
 
 MIDDLEWARE = [
@@ -144,3 +149,25 @@ if os.environ.get('GITHUB_ACTIONS') != 'true':
 import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
+
+MEDIA_ROOT = './HootyLibrary/book'
+
+AUTHENTICATION_BACKENDS = (
+ 'django.contrib.auth.backends.ModelBackend',
+ 'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 5
+LOGIN_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
