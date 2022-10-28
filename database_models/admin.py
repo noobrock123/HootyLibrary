@@ -19,10 +19,10 @@ class BookAdminConfig(admin.ModelAdmin):
     book_model = models.Book
     search_fields = ('book_id', 'book_name', 'date_created', 'book_type')
     ordering = ('book_id', 'date_created')
-    list_display = ('book_id', 'book_name', 'book_type', 'genres','date_created')
+    list_display = ('book_id', 'book_name', 'book_type','date_created')
     fieldsets = (
         (None, {'fields': ('book_id', 'book_name', 'author')}),
-        ('Attributes', {'fields': ('book_type', 'description')}),
+        ('Attributes', {'fields': ('book_type', 'genres', 'description')}),
         ('Others', {'fields': ('thumbnail', 'pdf_files')})
     )
 
@@ -37,7 +37,7 @@ class ReviewsAdminConfig(admin.ModelAdmin):
     model = models.Review
     search_fields = ('reviewer', 'book_refer', 'review_date', 'title')
     ordering = ('reviewer', 'book_refer', 'review_date')
-    list_display = ('reviewer', 'book_refer', 'review_date', 'score', 'title')
+    list_display = ('reviewer', 'book_refer', 'review_date', 'last_edited', 'score', 'title')
     fieldsets = (
         ('Reviews', {'fields': ('reviewer', 'book_refer', 'score',
          'title', 'msg')}),
