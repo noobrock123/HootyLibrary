@@ -39,13 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'register.apps.RegisterConfig',
     "database_models",
-    'MAIN_APP.apps.MainAppConfig',
-    'userProfile.apps.UserprofileConfig',
+    'MAIN_APP,
+    'userProfile,
     'book_views.apps.BookViewsConfig',
-    'allauth', 
-    'allauth.account', 
-    'allauth.socialaccount', 
-    'allauth.socialaccount.providers.google', 
+    'allauth',
 ]
 
 MIDDLEWARE = [
