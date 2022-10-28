@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
-    'book_views.apps.BookViewsConfig'
+    'book_views.apps.BookViewsConfig',
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.google', 
 ]
 
 MIDDLEWARE = [
@@ -146,4 +150,24 @@ import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
-MEDIA_ROOT = '/home/chain13/Documents/cn331/work/HootyLibrary/book'
+MEDIA_ROOT = './HootyLibrary/book'
+
+AUTHENTICATION_BACKENDS = (
+ 'django.contrib.auth.backends.ModelBackend',
+ 'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 5
+LOGIN_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

@@ -22,4 +22,6 @@ urlpatterns = [
     #path('', include('register.urls')),
     path('', include('MAIN_APP.urls')),
     path('',include('book_views.urls')),
+    path('',include('login_via_google.urls')),
+    path('accounts/', include('allauth.urls')),
 ]

@@ -1,0 +1,5 @@
+{% load socialaccount %}
+<form action="{% provider_login_url 'google' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">SIGN IN WITH GOOGLE</button>
+</form>
