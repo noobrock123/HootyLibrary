@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "database_models",
     'MAIN_APP,
     'userProfile,
-    'book_views.apps.BookViewsConfig',
+    'book_views,
     'allauth',
 ]
 
