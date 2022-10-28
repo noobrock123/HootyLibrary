@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Registered, Quota, Subject
+from database_models.models import User, CustomAccountManager
 
 
 admin.site.register(CustomAccountManager)
