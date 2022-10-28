@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'register.apps.RegisterConfig',
-    "database_models",
-    'MAIN_APP,
-    'userProfile,
-    'book_views,
+    'database_models',
+    'MAIN_APP',
+    'userProfile',
+    'book_views',
     'allauth',
 ]
 
