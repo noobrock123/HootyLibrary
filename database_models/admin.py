@@ -15,7 +15,6 @@ class UserAdminConfig(UserAdmin):
     )
 
 class BookAdminConfig(admin.ModelAdmin):
-    book_model = models.Book
     search_fields = ('book_id', 'book_name', 'date_created', 'book_type')
     ordering = ('book_id', 'date_created')
     list_display = ('book_id', 'book_name', 'book_type', 'genres','date_created')
@@ -26,7 +25,7 @@ class BookAdminConfig(admin.ModelAdmin):
     )
 
 class GenreAdminConfig(admin.ModelAdmin):
-    model = models.Genre
+    model = Genre
     list_display = ('genre_list',)
     fieldsets = (
         (None, {'fields': ('genre_list',)}),
