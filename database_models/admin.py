@@ -1,5 +1,5 @@
 from django.contrib import admin
-import database_models.models as models
+from .models import CustomAccountManager, User, Genre, Book, Favorite, Review, Issue, Report
 from django.contrib.auth.admin import UserAdmin
 
 class UserAdminConfig(UserAdmin):
