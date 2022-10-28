@@ -97,22 +97,17 @@ class Book(models.Model):
     description = models.CharField(max_length=120, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
     book_type = models.IntegerField(default=1)
-<<<<<<< HEAD
-    genres = models.ForeignKey(Genre, on_delete=models.SET_NULL, blank=True, null=True)
-    author = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    thumbnail = models.ImageField(upload_to="book/" + str(book_id), blank=True, null=True)
     # It was return something like book/<django.db.models.fields.TextField>
     # Book wasn't created
-    pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs", blank=True, null=True)
-    # It was return something like book/<django.db.models.fields.TextField>/pdfs
-    # Book wasn't created
 
-=======
     genres = models.ManyToManyField(Genre)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     thumbnail = models.ImageField(upload_to="book/" + str(book_id) + "/", blank=True, null=True)
+    # It was return something like book/<django.db.models.fields.TextField>
+    # Book wasn't created
     pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs/", blank=True, null=True)
->>>>>>> dev
+    # It was return something like book/<django.db.models.fields.TextField>/pdfs
+    # Book wasn't created
 
     def get_book_id(self):
         return str(self.book_id)
