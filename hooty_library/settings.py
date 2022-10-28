@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'register.apps.RegisterConfig',
+    "database_models"
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
     'book_views.apps.BookViewsConfig',
@@ -129,7 +130,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'register' / 'static',
 ]
-AUTH_USER_MODEL = 'database_models.User'
+AUTH_USER_MODEL = 'database_models'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
