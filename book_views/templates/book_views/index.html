@@ -1,0 +1,23 @@
+<h1>This is book views</h1>
+<p>book_name: {{book_name}}</p>
+<p>description: {{description}}</p>
+<p>date_created: {{date_created}}</p> 
+<p>book_type: {{book_type}}</p>
+<p>genres: {{genres}}</p>
+<p>author: {{author}}</p>
+<hr>
+{% for review in reviews%}
+<p>reviewer: {{ review.reviewer.username}}</p>
+<p>score: {{ review.score }}</p>
+<p>title: {{ review.title }}</p>
+<p>msg: {{ review.msg }}</p>
+{% endfor %}
+<hr>
+{% for favorite_book in favorite_books%}
+<p>favorite: {{favorite_book.user_refer}}</p>
+{% endfor %}
+<p>avg_score: {{avg_score}}</p>
+<p>book_thumnail: <a href={% url 'book_thumnail' book.book_id%}>book</a></p>
+<p>book_pdf: <a href={% url 'book_pdf' book.book_id %}>book</a></p>
+<img src={% url 'book_thumnail' book.book_id %} width="500" height="600"> 
+<embed type="application/pdf" src={% url 'book_pdf' book.book_id %} width="800" height="500">

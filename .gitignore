@@ -24,3 +24,6 @@ venv.bak/
 __pycache__
 db.sqlite3
 media
+staticfiles/
+book/
+profile_pic/

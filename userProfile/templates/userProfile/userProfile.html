@@ -1,0 +1,11 @@
+<h1>This is user profile</h1>
+<small>{{username}}</small>
+{% for my_book in my_books %}
+<p>{{my_book.book_name}}</p>
+{% endfor %}
+<p>{{username}}</p>
+<p>{{gender}}</p>
+<p>{{occupation}}</p>
+<p>{{link}}</p>
+<p>{{user}}</p>
+<img src={% url 'user_picture' user.user_id %} width="500" height="600"> 
