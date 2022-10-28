@@ -21,7 +21,7 @@ class BookAdminConfig(admin.ModelAdmin):
     ordering = ('book_id', 'date_created')
     list_display = ('book_id', 'book_name', 'book_type','date_created')
     fieldsets = (
-        (None, {'fields': ('book_id', 'book_name', 'author')}),
+        (None, {'fields': ('book_name', 'author')}),
         ('Attributes', {'fields': ('book_type', 'genres', 'description')}),
         ('Others', {'fields': ('thumbnail', 'pdf_files')})
     )

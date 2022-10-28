@@ -109,6 +109,11 @@ class Book(models.Model):
     # It was return something like book/<django.db.models.fields.TextField>/pdfs
     # Book wasn't created
 
+    '''
+    def __init__(self):
+        super(Book, self).__init__()
+    '''
+
     def get_book_id(self):
         return str(self.book_id)
     def get_book_name(self):
@@ -145,6 +150,15 @@ class Book(models.Model):
     def get_views(self):
         book = Read.objects.filter(book_refer=self)
         return book.user_refer.all()
+        
+    def save(self):
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while Book.objects.filter(book_id=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        self.book_id = rand_id
+        super(Book, self).save()
+
+
     
     def __str__(self):
         return str(self.book_id) + ": " + str(self.book_name)
