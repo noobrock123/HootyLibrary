@@ -3,7 +3,6 @@ from .models import CustomAccountManager, User, Genre, Book, Favorite, Review, I
 from django.contrib.auth.admin import UserAdmin
 
 class UserAdminConfig(UserAdmin):
-    model = User
     search_fields = ('user_id', 'username', 'email',)
     list_filter = ('is_active', 'is_superuser')
     ordering = ('date_joined',)
@@ -16,7 +15,6 @@ class UserAdminConfig(UserAdmin):
     )
 
 class BookAdminConfig(admin.ModelAdmin):
-    model = Book
     search_fields = ('book_id', 'book_name', 'date_created', 'book_type')
     ordering = ('book_id', 'date_created')
     list_display = ('book_id', 'book_name', 'book_type', 'genres','date_created')
@@ -27,14 +25,12 @@ class BookAdminConfig(admin.ModelAdmin):
     )
 
 class GenreAdminConfig(admin.ModelAdmin):
-    model = Genre
     list_display = ('genre_list',)
     fieldsets = (
         (None, {'fields': ('genre_list',)}),
     )
 
 class ReviewsAdminConfig(admin.ModelAdmin):
-    model = Review
     search_fields = ('reviewer', 'book_refer', 'review_date', 'title')
     ordering = ('reviewer', 'book_refer', 'review_date')
     list_display = ('reviewer', 'book_refer', 'review_date', 'score', 'title')
@@ -44,7 +40,6 @@ class ReviewsAdminConfig(admin.ModelAdmin):
     )
 
 class IssuesAdminView(admin.ModelAdmin):
-    model = Issue
     search_fields = ('issuer', 'book_refer', 'issue_date', 'title')
     ordering = ('issuer', 'book_refer', 'issue_date')
     list_display = ('issuer', 'book_refer', 'issue_date', 'title')
@@ -54,7 +49,6 @@ class IssuesAdminView(admin.ModelAdmin):
     )
 
 class ReportAdmin(admin.ModelAdmin):
-    model = Report
     search_fields = ('reporter', 'book_refer', 'report_date', 'title')
     ordering = ('reporter', 'book_refer', 'report_date')
     list_display = ('reporter', 'book_refer', 'report_date', 'title')
