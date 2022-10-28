@@ -1,1 +1,1 @@
-from django.contrimport admin
+from django.contrib import admin
