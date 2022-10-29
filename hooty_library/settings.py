@@ -130,7 +130,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'register' / 'static',
 ]
-#AUTH_USER_MODEL = 'database_models.User'
+AUTH_USER_MODEL = 'database_models.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
