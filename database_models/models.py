@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
@@ -12,7 +13,11 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(_('You must provide an email address'))
 
         email = self.normalize_email(email)
-        user = self.model(user_id=user_id_gen(), username=username, email=email, **other_fields)
+        
+        id = user_id_gen()
+        if len(username) == 0:
+            username = id
+        user = self.model(user_id=id, username=username, email=email, **other_fields)
         user.set_password(password)
         user.save()
         return user
@@ -29,16 +34,11 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError('Admin must be assigned to is_superuser=True.')
         
         return self.create_user(username, email, password, **other_fields)
-    
-def user_id_gen():
-    rand_id = hex(rand.randint(0, pow(16, 8)))
-    while len(User.objects.filter(pk=rand_id)) != 0:
-        rand_id = hex(rand.randint(0, pow(16, 8))) 
-    return rand_id
 
 class User(AbstractBaseUser, PermissionsMixin):
-    user_id = models.TextField(primary_key=True, max_length=10, default=0)
+    user_id = models.TextField(primary_key=True, max_length=12, default=0)
     username = models.CharField(unique=True, max_length=32)
+    alias_name = models.CharField(max_length= 40, blank=True)
     email = models.EmailField(_('Email'), unique=True)
     date_joined = models.DateTimeField(default=timezone.now)
     gender = models.CharField(max_length=16, null=True, blank=True)
@@ -47,18 +47,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     bio = models.CharField(_('bio'), blank=True, max_length=300)
     social_link = models.TextField(null=True, blank=True)
     donation_link = models.TextField(null=True, blank=True)
-    profile_pic = models.ImageField(upload_to="profile_pic/" + str(username), null=True, blank=True)
+    profile_pic = models.ImageField(upload_to="profile_pic/" + str(username) + "/", null=True, blank=True)
 
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
     
+    def get_user_id(self):
+        return str(self.user_id)
     def get_username(self):
         return self.username
+    def get_alias_name(self):
+        return self.alias_name
     def get_about_self(self):
         return (self.gender, self.age, self.occupation)
     def get_bio(self):
@@ -67,36 +71,51 @@ class User(AbstractBaseUser, PermissionsMixin):
         return (self.social_link, self.donation_link)
     def get_profile_pic(self):
         return self.profile_pic
-
+    
     def __str__(self):
         return str(self.user_id) + ": " + str(self.username)
 
-def user_id_gen():
-    rand_id = hex(rand.randint(0, pow(16, 8)))
-    while len(User.objects.filter(pk=rand_id)) != 0:
-        rand_id = hex(rand.randint(0, pow(16, 8))) 
-    return rand_id
+def pre_save_user_random_id(sender, instance, *args, **kwargs):
+    if not instance.user_id:
+        klass = instance.__class__
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while klass.objects.filter(pk=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        instance.user_id = rand_id
+
+pre_save.connect(pre_save_user_random_id, sender=User)
  
 class Genre(models.Model):
     genre_list = models.CharField(primary_key=True, max_length=20)
 
-class Book(models.Model):
+    def __str__(self):
+        return str(self.genre_list)
 
-    book_id = models.TextField(primary_key=True)
+class Book(models.Model):
+    book_id = models.TextField(primary_key=True, max_length=10)
     book_name = models.CharField(max_length=60,default='Untitled')
     description = models.CharField(max_length=120, blank=True)
-    date_created = models.DateField(default=timezone.now)
+    date_created = models.DateTimeField(default=timezone.now)
     book_type = models.IntegerField(default=1)
-    genres = models.ForeignKey(Genre, on_delete=models.SET_NULL, blank=True, null=True)
-    author = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    thumbnail = models.ImageField(upload_to="book/" + str(book_id), blank=True, null=True)
     # It was return something like book/<django.db.models.fields.TextField>
     # Book wasn't created
-    pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs", blank=True, null=True)
+
+    genres = models.ManyToManyField(Genre)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    thumbnail = models.ImageField(upload_to="book/" + str(book_id) + "/", blank=True, null=True)
+    # It was return something like book/<django.db.models.fields.TextField>
+    # Book wasn't created
+    pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs/", blank=True, null=True)
     # It was return something like book/<django.db.models.fields.TextField>/pdfs
     # Book wasn't created
 
+    '''
+    def __init__(self):
+        super(Book, self).__init__()
+    '''
 
+    def get_book_id(self):
+        return str(self.book_id)
     def get_book_name(self):
         return self.book_name
     def get_description(self):
@@ -127,11 +146,41 @@ class Book(models.Model):
         for review in book_reviews:
             score_sum += review.get_score()
         return score_sum / len(book_reviews) if len(book_reviews) != 0 else 0
-        # error when len(book_reviews) == 0
-        
 
+    def get_views(self):
+        book = Read.objects.filter(book_refer=self)
+        return book.user_refer.all()
+        
+    def save(self):
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while Book.objects.filter(book_id=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        self.book_id = rand_id
+        super(Book, self).save()
+
+
+    
     def __str__(self):
         return str(self.book_id) + ": " + str(self.book_name)
+
+def pre_save_book_random_id(sender, instance, *args, **kwargs):
+    if not instance.book_id:
+        klass = instance.__class__
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while klass.objects.filter(book_id=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        instance.book_id = rand_id
+
+pre_save.connect(pre_save_book_random_id, sender=Book)
+ 
+class Read(models.Model):
+    user_refer = models.OneToOneField(User, on_delete=models.CASCADE)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book_read_latest_time = models.DateTimeField(default=timezone.now)
+
+    def get_recent_read_books(self, user):
+        books = self.user_refer.get(user).order_by('-book_read_latest_time')
+        return books.book_refer.all()
 
 class Favorite(models.Model):
     user_refer = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -140,10 +189,13 @@ class Favorite(models.Model):
 class Review(models.Model):
     reviewer = models.OneToOneField(User, on_delete=models.CASCADE)
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
-    review_date = models.DateField(default=timezone.now)
+    review_date = models.DateTimeField(default=timezone.now)
     score = models.FloatField()
     title = models.CharField(max_length=40)
     msg = models.CharField(max_length=500)
+
+    is_edited = models.BooleanField(default=False)
+    last_edited = models.DateTimeField(null=True)
 
     def get_reviewer(self):
         return self.reviewer
@@ -158,7 +210,7 @@ class Review(models.Model):
 
 class Issue(models.Model):
     issuer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, models.SET_NULL, blank=True, null=True)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
     issue_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
     msg = models.CharField(max_length=500)
@@ -172,7 +224,7 @@ class Issue(models.Model):
 
 class Report(models.Model):
     reporter = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, models.SET_NULL, blank=True, null=True)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
     report_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
     msg = models.CharField(max_length=100, blank=True)
@@ -183,4 +235,3 @@ class Report(models.Model):
         return self.book_refer
     def get_attribs(self):
         return (self.issue_date, self.title, self.msg)
-
