@@ -3,10 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
-def home(request):
-    if not request.user.is_authenticated:
-        return redirect('/login')   
-    return render(request, 'homepage/homepage.html')
+# def home(request):
+#     if not request.user.is_authenticated:
+#         return redirect('/login')   
+#     return render(request, 'homepage/homepage.html')
 
 def user_login(request):
     if request.method == "POST":
