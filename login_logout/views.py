@@ -1,14 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 
 # Create your views here.
 
-def index(request):
+def home(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('login'))
-    return render(request, 'templates/templates.html')
+        return redirect('/login')   
+    return render(request, 'homepage/homepage.html')
 
 def user_login(request):
     if request.method == "POST":
@@ -17,15 +15,11 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('index'))
+            return redirect('/')   
         else:
-            return render(request, 'login_logout/login.html', {
-                'message': 'Invalid credentials.'
-            })
-    return render(request, 'login_logout/home.html')
+            return render(request, 'login_logout/login.html')
+    return render(request, 'homepage/homepage.html')
 
 def user_logout(request):
     logout(request)
-    return render(request, 'login_logout/login.html', {
-        'message': 'You are logged out.'
-    })
+    return redirect('/') 
