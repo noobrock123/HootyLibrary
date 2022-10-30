@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('userProfile.urls')),
     #path('', include('register.urls')),
+    #path('', include('login_logout.urls)),
     path('', include('MAIN_APP.urls')),
     path('',include('book_views.urls')),
     path('',include('login_via_google.urls')),

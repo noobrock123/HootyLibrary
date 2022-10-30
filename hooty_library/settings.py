@@ -141,15 +141,6 @@ CSRF_TRUSTED_ORIGINS = [
         'http://127.0.0.1:8000/', 'https://appcoursetu.herokuapp.com',
 ]
 
-import os
-if os.environ.get('GITHUB_ACTIONS') != 'true':
-    import django_heroku
-    django_heroku.settings(locals())
-
-import dj_database_url
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
-
 MEDIA_ROOT = './'
 
 AUTHENTICATION_BACKENDS = (
@@ -171,3 +162,11 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+# SMTP Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIl_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ''       # your host gmail
+EMAIL_HOST_PASSWORD = ''   # your host gmail password
