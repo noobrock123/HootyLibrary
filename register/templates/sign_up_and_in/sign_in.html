@@ -4,14 +4,16 @@
 <html>
     <head>
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href={% static "sign_up/style.css" %}>
         <script src="https://kit.fontawesome.com/9ecd69c030.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <section >
             <div class="container">
                 <div class="user singinBx">
-                    <div class="imgBx"><img src="images/img1.jpg"></div>
+                    <div class="imgBx">
+                        <img src={% static "sign_up/images/img1.jpg" %}>
+                    </div>
                     <div class="formBx">
                         <form method="POST" action="">
                             {% csrf_token %}
