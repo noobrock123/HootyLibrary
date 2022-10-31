@@ -3,23 +3,19 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
-def index(request):
-    if not request.user.is_authenticated:
-        return redirect('log_in/')  
-    else:
-        return render(request, 'MAIN_APP/templates/homepage/homepage.html')
-
 def user_login(request):
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect('/')  
+    
     if request.method == 'POST':
-        username = request.POST('username')
-        password = request.POST('password')
+        username = request.POST['username']
+        password = request.POST['password']
         user = authenticate(username=username, password=password)
         
         if user is not None:
             login(request, user)
             return redirect('/')
+        
     return render(request, 'register/templates/sign_up_and_in/sign_in.html', {})
 
 def user_logout(request):
