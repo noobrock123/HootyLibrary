@@ -1,29 +1,30 @@
 <!doctype html>
+{% load static %}
 <html>
     <head>
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{% static "about/style.css" %}">
     </head>
     <body>
-        <header>
-            <a href="{% url "MAIN_APP:home" %}" class="logo">HootyLibraly</a>
-        </header>
         <section>
             <img src="{% static "about/images/stars.png" %}" id="stars">
             <img src="{% static "about/images/moon.png" %}" id="moon">
             <img src="{% static "about/images/mountains_behind.png" %}" id="mountains_behind">
             <img src="{% static "about/images/mountains_front.png" %}" id="mountains_front">
-        </section> 
+            <img src="{% static "about/images/logo.png" %}" id="logo">
+        </section>
         <div class="sec" id="sec">
             <h2>ABOUT US</h2>
-            <p>hahahahahahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahh
-                hahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahh
-                hahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahh
-                hahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahh
-                ahahahahh<br><br>hahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahh
-                hahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahh
-                hahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahhhahahahahahahahahhahahahahh
-                </p>
+            <p>6310530016 นายศุภชัย มาตรสุวรรณกิจ</p>
+            <p>6310682726 นายณัฐนนท์ บุญเขตต์</p>
+            <p>6310682742 นายชัยวัตร กลั่นเรืองแสง</p>
+            <p>6310682825 นายธัญญวัฒน์ ธนัครสมบัติ</p>
+            <p>6310682767 นายวิชยุตม์ ทับทิม</p>
+            <br><br>
+            <div class="link">
+                <p><a href="https://github.com/noobrock123/HootyLibrary">Github</a></p>
+                <p><a href="https://www.pivotaltracker.com/n/projects/2606749">pivotaltracker</a></p>
+            </div>
         </div>
 
         <script> 
