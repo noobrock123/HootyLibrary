@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
     'book_views.apps.BookViewsConfig',
+    'django.contrib.sites',
     'allauth', 
     'allauth.account', 
     'allauth.socialaccount', 
@@ -150,7 +151,7 @@ import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
-MEDIA_ROOT = './'
+MEDIA_ROOT = 'media/'
 
 AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',
