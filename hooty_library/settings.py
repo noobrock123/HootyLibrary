@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
     'book_views.apps.BookViewsConfig',
+    'django.contrib.sites',
     'allauth', 
     'allauth.account', 
     'allauth.socialaccount', 
@@ -141,7 +142,16 @@ CSRF_TRUSTED_ORIGINS = [
         'http://127.0.0.1:8000/', 'https://appcoursetu.herokuapp.com',
 ]
 
-MEDIA_ROOT = './'
+import os
+if os.environ.get('GITHUB_ACTIONS') != 'true':
+    import django_heroku
+    django_heroku.settings(locals())
+
+import dj_database_url
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
+
+MEDIA_ROOT = 'media/'
 
 AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',

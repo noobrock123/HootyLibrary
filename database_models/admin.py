@@ -8,11 +8,11 @@ class UserAdminConfig(UserAdmin):
     list_filter = ('is_active', 'is_superuser')
     ordering = ('date_joined',)
     list_display = ('user_id','username', 'email', 'date_joined',
-                    'is_active', 'is_staff')
+                    'is_active', 'is_staff','profile_pic')
     fieldsets = (
         (None, {'fields': ('user_id', 'username', 'email', )}),
         ('Permission', {'fields': ('is_staff', 'is_active')}),
-        ('Personal', {'fields': ('gender', 'age', 'occupation')}),
+        ('Personal', {'fields': ('gender', 'age', 'occupation','profile_pic')}),
     )
 
 class BookAdminConfig(admin.ModelAdmin):
