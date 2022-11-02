@@ -90,24 +90,21 @@ class Genre(models.Model):
 
     def __str__(self):
         return str(self.genre_list)
-
+def get_thumbnail_path(instance, file):
+    return f"book/{instance.book_id}/{file}"
+def get_pdf_files_path(instance, file):
+    return f"book/{instance.book_id}/pdfs/{file}"
 class Book(models.Model):
-    book_id = models.TextField(primary_key=True, max_length=10)
+    book_id = models.CharField(primary_key=True, max_length=10)
     book_name = models.CharField(max_length=60,default='Untitled')
-    description = models.CharField(max_length=120, blank=True)
+    description = models.TextField(max_length=120, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
     book_type = models.IntegerField(default=1)
-    # It was return something like book/<django.db.models.fields.TextField>
-    # Book wasn't created
-
     genres = models.ManyToManyField(Genre)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    thumbnail = models.ImageField(upload_to="book/" + str(book_id) + "/", blank=True, null=True)
-    # It was return something like book/<django.db.models.fields.TextField>
-    # Book wasn't created
-    pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs/", blank=True, null=True)
-    # It was return something like book/<django.db.models.fields.TextField>/pdfs
-    # Book wasn't created
+    thumbnail = models.ImageField(upload_to=get_thumbnail_path, blank=True, null=True)
+
+    pdf_files = models.FileField(upload_to=get_pdf_files_path, blank=True, null=True)
 
     '''
     def __init__(self):
@@ -137,7 +134,6 @@ class Book(models.Model):
     def get_issues(self):
         return Issue.objects.filter(book_refer=self)
     def get_favorite_books(self):
-        # Does not work
         return Favorite.objects.filter(user_refer=self)
     
     def get_avg_score(self):
