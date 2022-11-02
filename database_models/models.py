@@ -180,8 +180,14 @@ class Read(models.Model):
         return books.book_refer.all()
 
 class Favorite(models.Model):
-    user_refer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    user_refer = models.ForeignKey(User, on_delete=models.CASCADE)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user_refer', 'book_refer',)
+        
+    def __str__(self) -> str:
+        return f"{self.user_refer} -> {self.book_refer} "
 
 class Review(models.Model):
     reviewer = models.OneToOneField(User, on_delete=models.CASCADE)
