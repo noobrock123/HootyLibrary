@@ -190,16 +190,17 @@ class Favorite(models.Model):
         return f"{self.user_refer} -> {self.book_refer} "
 
 class Review(models.Model):
-    reviewer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     review_date = models.DateTimeField(default=timezone.now)
-    score = models.FloatField()
+    score = models.FloatField(default=0)
     title = models.CharField(max_length=40)
-    msg = models.CharField(max_length=500)
+    msg = models.TextField(max_length=500)
 
     is_edited = models.BooleanField(default=False)
     last_edited = models.DateTimeField(null=True)
-
+    class Meta:
+        unique_together = ('reviewer', 'book_refer',)
     def get_reviewer(self):
         return self.reviewer
     def get_book(self):
