@@ -228,11 +228,11 @@ class Issue(models.Model):
         return (self.issue_date, self.title, self.msg)
 
 class Report(models.Model):
-    reporter = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    reporter = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     report_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
-    msg = models.CharField(max_length=100, blank=True)
+    msg = models.TextField(max_length=100, blank=True)
 
     def get_reporter(self):
         return self.issuer
