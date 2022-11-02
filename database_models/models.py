@@ -34,7 +34,8 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError('Admin must be assigned to is_superuser=True.')
         
         return self.create_user(username, email, password, **other_fields)
-
+def get_profile_pic_path(instance, file):
+    return f"profile_pic/{instance.username}/{file}"
 class User(AbstractBaseUser, PermissionsMixin):
     user_id = models.TextField(primary_key=True, max_length=12, default=0)
     username = models.CharField(unique=True, max_length=32)
@@ -47,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     bio = models.TextField(_('bio'), blank=True, max_length=300)
     social_link = models.TextField(null=True, blank=True)
     donation_link = models.TextField(null=True, blank=True)
-    profile_pic = models.ImageField(upload_to="profile_pic/" + str(username) + "/", null=True, blank=True)
+    profile_pic = models.ImageField(upload_to=get_profile_pic_path, null=True, blank=True)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
