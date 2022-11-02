@@ -171,10 +171,11 @@ def pre_save_book_random_id(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_book_random_id, sender=Book)
  
 class Read(models.Model):
-    user_refer = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_refer = models.ForeignKey(User, on_delete=models.CASCADE)
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     book_read_latest_time = models.DateTimeField(default=timezone.now)
-
+    class Meta:
+        unique_together = ('user_refer', 'book_refer',)
     def get_recent_read_books(self, user):
         books = self.user_refer.get(user).order_by('-book_read_latest_time')
         return books.book_refer.all()
@@ -185,7 +186,7 @@ class Favorite(models.Model):
 
     class Meta:
         unique_together = ('user_refer', 'book_refer',)
-        
+
     def __str__(self) -> str:
         return f"{self.user_refer} -> {self.book_refer} "
 
