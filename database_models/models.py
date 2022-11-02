@@ -14,10 +14,10 @@ class CustomAccountManager(BaseUserManager):
 
         email = self.normalize_email(email)
         
-        id = user_id_gen()
-        if len(username) == 0:
-            username = id
-        user = self.model(user_id=id, username=username, email=email, **other_fields)
+        # id = user_id_gen()
+        # if len(username) == 0:
+        #     username = id
+        user = self.model(username=username, email=email, **other_fields)
         user.set_password(password)
         user.save()
         return user
@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=16, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     occupation = models.CharField(max_length=32, null=True, blank=True)
-    bio = models.CharField(_('bio'), blank=True, max_length=300)
+    bio = models.TextField(_('bio'), blank=True, max_length=300)
     social_link = models.TextField(null=True, blank=True)
     donation_link = models.TextField(null=True, blank=True)
     profile_pic = models.ImageField(upload_to="profile_pic/" + str(username) + "/", null=True, blank=True)

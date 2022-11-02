@@ -9,10 +9,10 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 # Create your views here.
 
 
-def book_thumnail(request, book_id):
+def book_thumbnail(request, book_id):
     try:
-        with open(f'{Book.objects.get(book_id=book_id).get_thumbnail()}', 'rb') as thumnail:
-            return HttpResponse(thumnail.read(), content_type="image/jpeg")
+        with open(f'{Book.objects.get(book_id=book_id).thumbnail.path}', 'rb') as thumbnail:
+            return HttpResponse(thumbnail.read(), content_type="image/jpeg")
     except:
         return HttpResponse('Not found')
 
@@ -20,7 +20,7 @@ def book_thumnail(request, book_id):
 @xframe_options_exempt
 def book_pdf(request, book_id):
     try:
-        with open(f'{Book.objects.get(book_id=book_id).get_pdf_files()}', 'rb') as pdf:
+        with open(f'{Book.objects.get(book_id=book_id).pdf_files.path}', 'rb') as pdf:
             return HttpResponse(pdf.read(), content_type="application/pdf")
     except:
         return HttpResponse('Not found')

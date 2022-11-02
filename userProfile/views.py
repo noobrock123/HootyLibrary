@@ -6,7 +6,7 @@ from database_models.models import *
 
 def user_picture(request, user_id):
     try:
-        with open(f'{User.objects.get(user_id=user_id).get_profile_pic()}', 'rb') as picture:
+        with open(f'{User.objects.get(user_id=user_id).profile_pic.path}', 'rb') as picture:
             return HttpResponse(picture.read(), content_type="image/jpeg")
     except:
         return HttpResponse('Not found')

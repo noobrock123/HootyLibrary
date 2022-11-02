@@ -10,9 +10,9 @@ class UserAdminConfig(UserAdmin):
     list_display = ('user_id','username', 'email', 'date_joined',
                     'is_active', 'is_staff')
     fieldsets = (
-        (None, {'fields': ('user_id', 'username', 'email', )}),
+        (None, {'fields': ( 'username','alias_name', 'email', )}),
         ('Permission', {'fields': ('is_staff', 'is_active')}),
-        ('Personal', {'fields': ('gender', 'age', 'occupation')}),
+        ('Personal', {'fields': ('profile_pic','gender', 'age', 'occupation','bio')}),
     )
 
 class BookAdminConfig(admin.ModelAdmin):
