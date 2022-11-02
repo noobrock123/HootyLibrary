@@ -148,7 +148,7 @@ class Book(models.Model):
         book = Read.objects.filter(book_refer=self)
         return book.user_refer.all()
         
-    def save(self):
+    def save(self,*args, **kwargs):
         rand_id = hex(rand.randint(0, pow(16, 8)))
         while Book.objects.filter(book_id=rand_id).exists():
             rand_id = hex(rand.randint(0, pow(16, 8)))
