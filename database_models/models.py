@@ -214,11 +214,11 @@ class Review(models.Model):
         return self.msg
 
 class Issue(models.Model):
-    issuer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    issuer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     issue_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
-    msg = models.CharField(max_length=500)
+    msg = models.TextField(max_length=500)
 
     def get_issuer(self):
         return self.issuer
