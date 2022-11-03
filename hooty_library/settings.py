@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'allauth.account', 
     'allauth.socialaccount', 
     'allauth.socialaccount.providers.google', 
-    'heroku',
 ]
 
 MIDDLEWARE = [
@@ -140,7 +139,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-        'http://127.0.0.1:8000/', 'https://appcoursetu.herokuapp.com',
+        'http://127.0.0.1:8000/',
 ]
 
 import os
