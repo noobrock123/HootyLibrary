@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "homepage/style.css" %}">
+</head>
+<body>
+    <header>
+        {% if book %}
+        {% for book in book %}
+        <form action="{% url 'search' %}" class="container" method="get" role="search">
+            <div class="search_wrap">
+                <div class="search_box">
+                    <input name="q" type="search" class="input" placeholder="Search..." aria-label="Search">
+                    <button class="btn" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
+        {% else %}
+            <p>no book</p>
+        {% endif %}
+        
+    </header>
+    <section class="banner"></section>
+    <script type="text/javascript">
+        window.addEventListener("scroll", function(){
+            var header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
+        })
+    </script>
+</html>
