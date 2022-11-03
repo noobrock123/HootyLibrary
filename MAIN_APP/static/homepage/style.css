@@ -146,9 +146,9 @@ header .container .search_wrap .search_box .btn {
 }
 
 .dropdown-menu {
-     --#{$prefix}dropdown-zindex: #{$zindex-dropdown}; 
-     --#{$prefix}dropdown-min-width: #{$dropdown-min-width}; 
-     --#{$prefix}dropdown-padding-x: #{$dropdown-padding-x};
+     {$prefix}dropdown-zindex: {$zindex-dropdown}; 
+     {$prefix}dropdown-min-width: #{$dropdown-min-width}; 
+     --#{$prefix}dropdown-padding-x: {$dropdown-padding-x};
      --#{$prefix}dropdown-padding-y: #{$dropdown-padding-y}; 
      --#{$prefix}dropdown-spacer: #{$dropdown-spacer}; 
      @include rfs($dropdown-font-size, 
