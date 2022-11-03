@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-bg3cr-$z$6_8&p7*!%gl3@*4^3#$t61x**ler+9!y00&rgo41x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'hootylibrary.herokuapp.com']
 
 
 # Application definition
@@ -131,7 +131,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'register' / 'static',
 ]
-#AUTH_USER_MODEL = 'database_models.User'
+AUTH_USER_MODEL = 'database_models.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
