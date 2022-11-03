@@ -1,3 +1,13 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+
 <h1>This is book views</h1>
 <p>book_name: {{book_name}}</p>
 <p>description: {{description}}</p>
@@ -17,7 +27,6 @@
 <p>favorite: {{favorite_book.user_refer}}</p>
 {% endfor %}
 <p>avg_score: {{avg_score}}</p>
-<p>book_thumnail: <a href={% url 'book_thumbnail' book.book_id%}>book</a></p>
-<p>book_pdf: <a href={% url 'book_pdf' book.book_id %}>book</a></p>
-<img src={% url 'book_thumbnail' book.book_id %} width="500" height="600"> 
-<embed type="application/pdf" src={% url 'book_pdf' book.book_id %} width="800" height="500">
+
+</body>
+</html>
