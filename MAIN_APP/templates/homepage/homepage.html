@@ -23,40 +23,36 @@
                 </div>
             </div>
         </form>
+
         <div class="sidenav">
+          <button class="dropdown-btn">Menu
+          <i class="fa fa-caret-down"></i>
+          </button>
+        <div class="dropdown-container">
+        <a href="#">Undiscovered</a>
+        <a href="#">Popular today</a>
+        <a href="#">Popular this week</a> 
+        <a href="#">Highest rating today</a> 
+        <a href="#">Highest rating this week</a> 
+        <a href="#">Recently update</a> 
 
-  <a href="#about">About</a>
-
-  <button class="dropdown-btn">Dropdown
-
-    <i class="fa fa-caret-down"></i>
-
-  </button>
-
-  <div class="dropdown-container">
-
-    <a href="#">Link 1</a>
-
-    <a href="#">Link 2</a>
-
-    <a href="#">Link 3</a> 
     </header>
+
     <section class="banner"></section>
     <script type="text/javascript">
         var dropdown = document.getElementsByClassName("dropdown-btn");
-
-var i;
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
-  });
-}
+        var i;
+        for (i = 0; i < dropdown.length; i++) {
+          dropdown[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+          });
+        }
         window.addEventListener("scroll", function(){
             var header = document.querySelector("header");
             header.classList.toggle("sticky", window.scrollY > 0);

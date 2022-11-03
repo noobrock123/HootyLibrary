@@ -92,7 +92,7 @@ class Genre(models.Model):
         return str(self.genre_list)
 
 class Book(models.Model):
-    book_id = models.TextField(primary_key=True, max_length=10)
+    book_id = models.TextField(primary_key=True, max_length=10, blank= True)
     book_name = models.CharField(max_length=60,default='Untitled')
     description = models.CharField(max_length=120, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
