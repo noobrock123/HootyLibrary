@@ -149,7 +149,7 @@ if os.environ.get('GITHUB_ACTIONS') != 'true':
 
 import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
-#DATABASES['default'].update(prod_db)
+DATABASES['default'].update(prod_db)
 
 MEDIA_ROOT = 'media/'
 
@@ -158,7 +158,7 @@ AUTHENTICATION_BACKENDS = (
  'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-SITE_ID = 1
+SITE_ID = 5
 LOGIN_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = {
