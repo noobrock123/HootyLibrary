@@ -15,15 +15,15 @@
             <li><a href="#">Follow</a></li>
             <li><a href="{% url 'MAIN_APP:about' %}">About</a></li>
         </ul>
-        <div class="container">
+        <form action="{% url 'MAIN_APP:search' %}" class="container" method="get" role="search">
             <div class="search_wrap">
                 <div class="search_box">
-                    <input type="text" class="input" placeholder="Search...">
-                    <div class="btn btn_common">
-                        Search
-                    </div>
+                    <input name="q" type="text" class="input" placeholder="Search..." aria-label="Search">
+                    <button class="btn" type="submit">Search</button>
                 </div>
-        </div>
+            </div>
+        </form>
+        
     </header>
     <section class="banner"></section>
     <script type="text/javascript">
@@ -33,3 +33,4 @@
         })
     </script>
 </html>
+
