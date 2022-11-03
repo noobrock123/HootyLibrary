@@ -18,7 +18,7 @@ def searchbar(request):
         q = request.GET.get('q')
         if q:
             book = Book.objects.filter(book_name__icontains=q)
-            return render(request, 'homepage/homepage.html', {'book':book})
+            return render(request, 'book_views/index.html', {'book':book})
         else:
             book = Book.objects.all()
             print("no information")
