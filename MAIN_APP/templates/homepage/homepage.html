@@ -1,62 +1,492 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static "homepage/style.css" %}">
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "homepage/style.css" %}">
 </head>
 <body>
-    <header>
-        <a href="#" class="logo">Logo</a>
-        <ul>
-            <li><a href="../registeration">Sign-in/Signup</a></li>
-            <li><a href="#">Follow</a></li>
-            <li><a href="{% url 'MAIN_APP:about' %}">About</a></li>
-        </ul>
-        <form action="{% url 'MAIN_APP:search' %}" class="container" method="get" role="search">
-            <div class="search_wrap">
-                <div class="search_box">
-                    <input name="q" type="text" class="input" placeholder="Search..." aria-label="Search">
-                    <button class="btn" type="submit">Search</button>
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <img src="images/menu.png" class="menu-icon" onclick="toggleTab()">
+            <img src="images/logo.png" class="logo">
+        </div>
+        <div class="sub-tab-wrap" id="subTab">
+            <div class="sub-tab">
+                <a href="#" class="sub-menu-link">
+                    <p>Undiscovered</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="sub-menu-link">
+                    <p>Popular today</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="sub-menu-link">
+                    <p>Popular this week</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="sub-menu-link">
+                    <p>Highest rating today</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="sub-menu-link">
+                    <p>Highest rating this week</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="sub-menu-link">
+                    <p>Recently update</p>
+                    <span>></span>
+                </a>
+            </div>
+        </div>
+        <div class="nav-middle flex-div">
+            <div action="{% url 'MAIN_APP:search' %}" class="search-box flex-div">
+                <input type="text" placeholder="Search">
+                <img src="images/search.png">
+            </div>
+            <img src="images/filter.png" class="filter" onclick="toggleFilter()">
+        </div>
+        <div class="sub-filter-wrap" id="subFilter">
+            <div class="sub-filter">
+                <a class="sub-filter-link">
+                    <input type="checkbox" name="">
+                    <p>Oldest to Latest</p>
+                </a>
+                <a class="sub-filter-link">
+                    <input type="checkbox" name="">
+                    <p>Z to A</p>
+                </a>
+                <a class="sub-filter-link">
+                    <input type="checkbox" name="">
+                    <p>lowest rating to Highest rating</p>
+                </a>
+                <a class="sub-filter-link">
+                    <input type="checkbox" name="">
+                    <p>lowest rating to Highest view</p>
+                </a>
+                <input type="submit" value="Confirm">
+            </div>
+        </div>
+        <div class="nav-right flex-div">
+            <img src="images/addbook.png" class="addbook">
+            <img src="images/img1.jpg" class="user-icon" onclick="toggleMenu()">
+        </div>
+        <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+               <div class="user-info">
+                   <img src="images/user.png">
+                   <h3>PumPuy</h3>
+               </div>
+               <hr>
+    
+               <a href="#" class="sub-menu-link">
+                   <img src="images/profile.png">
+                   <p>Edit Profile</p>
+                   <span>></span>
+               </a>
+               <a href="#" class="sub-menu-link">
+                    <img src="images/sign in.png">
+                    <p>Sign In</p>
+                    <span>></span>
+                </a>
+               <a href="#" class="sub-menu-link">
+                   <img src="images/sign up.png">
+                   <p>Sign Up</p>
+                   <span>></span>
+               </a>
+               <a href="#" class="sub-menu-link">
+                   <img src="images/sign out.png">
+                   <p>Sign Out</p>
+                   <span>></span>
+               </a>
+               <a href="{% url 'MAIN_APP:about' %}" class="sub-menu-link">
+                    <img src="images/about.png">
+                    <p>About</p>
+                    <span>></span>
+                </a>
+                <a href="#" class="sub-menu-link">
+                    <img src="images/setting.png">
+                    <p>Settings & Support</p>
+                    <span>></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="banner">
+            <img src="images/banner.png">
+        </div>
+    </div>
+    
+    <section class="product"> 
+        <h2 class="product-category">Popular Today</h2>
+        <button class="pre-btn"><img src="images/arrow.png"></button>
+        <button class="nxt-btn"><img src="images/arrow.png"></button>
+        <div class="product-container">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card1.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
                 </div>
             </div>
-        </form>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card2.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card3.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card4.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card5.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card6.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card7.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card8.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card9.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card10.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">a short line about the cloth..</p>
+                </div>
+            </div>
+        </div>
 
-        <div class="sidenav">
-          <button class="dropdown-btn">Menu
-          <i class="fa fa-caret-down"></i>
-          </button>
-        <div class="dropdown-container">
-        <a href="#">Undiscovered</a>
-        <a href="#">Popular today</a>
-        <a href="#">Popular this week</a> 
-        <a href="#">Highest rating today</a> 
-        <a href="#">Highest rating this week</a> 
-        <a href="#">Recently update</a> 
+    </section>
 
-    </header>
+    <section class="product"> 
+        <h2 class="product-category">Latest Book</h2>
+        <button class="pre-btn"><img src="images/arrow.png"></button>
+        <button class="nxt-btn"><img src="images/arrow.png"></button>
+        <div class="product-container">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card1.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card2.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card3.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card4.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card5.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card6.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card7.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card8.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card9.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card10.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">a short line about the cloth..</p>
+                </div>
+            </div>
+        </div>
 
-    <section class="banner"></section>
-    <script type="text/javascript">
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
-        for (i = 0; i < dropdown.length; i++) {
-          dropdown[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var dropdownContent = this.nextElementSibling;
-          if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-          } else {
-            dropdownContent.style.display = "block";
-          }
-          });
-        }
-        window.addEventListener("scroll", function(){
-            var header = document.querySelector("header");
-            header.classList.toggle("sticky", window.scrollY > 0);
+    </section>
+
+    <section class="product"> 
+        <h2 class="product-category">Undiscovered Book</h2>
+        <button class="pre-btn"><img src="images/arrow.png"></button>
+        <button class="nxt-btn"><img src="images/arrow.png"></button>
+        <div class="product-container">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card1.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card2.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card3.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card4.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card5.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card6.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card7.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card8.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card9.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card10.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">a short line about the cloth..</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    
+    <script>
+        const productContainers = [...document.querySelectorAll('.product-container')];
+        const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
+        const preBtn = [...document.querySelectorAll('.pre-btn')];
+
+        productContainers.forEach((item, i) => {
+            let containerDimensions = item.getBoundingClientRect();
+            let containerWidth = containerDimensions.width;
+
+            nxtBtn[i].addEventListener('click', () => {
+                item.scrollLeft += containerWidth;
+            })
+
+            preBtn[i].addEventListener('click', () => {
+                item.scrollLeft -= containerWidth;
+            })
         })
     </script>
-</html>
 
+
+<script>
+    let subMenu = document.getElementById("subMenu");
+    let subTab = document.getElementById("subTab");
+    let subFilter = document.getElementById("subFilter");
+    
+    function toggleMenu() {
+        subMenu.classList.toggle("open-menu");
+    }
+
+    function toggleTab() {
+        subTab.classList.toggle("open-tab");
+    }
+
+    function toggleFilter() {
+        subFilter.classList.toggle("open-filter");
+    }
+</script>
+
+
+</body>
+</html>
