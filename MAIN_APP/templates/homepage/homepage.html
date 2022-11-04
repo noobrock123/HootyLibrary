@@ -11,8 +11,8 @@
 <body>
     <nav class="flex-div">
         <div class="nav-left flex-div">
-            <img src="images/menu.png" class="menu-icon" onclick="toggleTab()">
-            <img src="images/logo.png" class="logo">
+            <img src="{% static "homepage/images/menu.png" %}" class="menu-icon" onclick="toggleTab()">
+            <img src="{% static "homepage/images/logo.png" %}" class="logo">
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
@@ -47,7 +47,7 @@
                 <input type="text" placeholder="Search">
                 <img src="images/search.png">
             </div>
-            <img src="images/filter.png" class="filter" onclick="toggleFilter()">
+            <img src="{% static "homepage/images/filter.png" %}" class="filter" onclick="toggleFilter()">
         </div>
         <div class="sub-filter-wrap" id="subFilter">
             <div class="sub-filter">
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="nav-right flex-div">
-            <img src="images/addbook.png" class="addbook">
+            <img src="{% static "homepage/images/addbook.png" %}" class="addbook">
             <img src="images/img1.jpg" class="user-icon" onclick="toggleMenu()">
         </div>
         <div class="sub-menu-wrap" id="subMenu">
@@ -118,18 +118,18 @@
 
     <div class="container">
         <div class="banner">
-            <img src="images/banner.png">
+            <img src="{% static "homepage/images/banner.png" %}">
         </div>
     </div>
     
     <section class="product"> 
         <h2 class="product-category">Popular Today</h2>
-        <button class="pre-btn"><img src="images/arrow.png"></button>
-        <button class="nxt-btn"><img src="images/arrow.png"></button>
+        <button class="pre-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
+        <button class="nxt-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card1.jpg" class="product-thumb">
+                    <img src="{% static "homepage/images/card1.jpg" %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -233,8 +233,8 @@
 
     <section class="product"> 
         <h2 class="product-category">Latest Book</h2>
-        <button class="pre-btn"><img src="images/arrow.png"></button>
-        <button class="nxt-btn"><img src="images/arrow.png"></button>
+        <button class="pre-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
+        <button class="nxt-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
@@ -342,8 +342,8 @@
 
     <section class="product"> 
         <h2 class="product-category">Undiscovered Book</h2>
-        <button class="pre-btn"><img src="images/arrow.png"></button>
-        <button class="nxt-btn"><img src="images/arrow.png"></button>
+        <button class="pre-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
+        <button class="nxt-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
