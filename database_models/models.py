@@ -192,7 +192,7 @@ class Book(models.Model):
         rand_id = hex(rand.randint(0, pow(16, 8)))
         while Book.objects.filter(book_id=rand_id).exists():
             rand_id = hex(rand.randint(0, pow(16, 8)))
-        self.book_id = rand_id
+            self.book_id = rand_id
         super(Book, self).save()
 
     def __str__(self):
@@ -200,6 +200,7 @@ class Book(models.Model):
 
 
 def pre_save_book_random_id(sender, instance, *args, **kwargs):
+    print(not instance.book_id)
     if not instance.book_id:
         klass = instance.__class__
         rand_id = hex(rand.randint(0, pow(16, 8)))
