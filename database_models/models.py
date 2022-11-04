@@ -34,7 +34,8 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError('Admin must be assigned to is_superuser=True.')
         
         return self.create_user(username, email, password, **other_fields)
-
+def get_profile_pic_path(instance, file):
+    return f"profile_pic/{instance.username}/{file}"
 class User(AbstractBaseUser, PermissionsMixin):
     user_id = models.TextField(primary_key=True, max_length=12, default=0)
     username = models.CharField(unique=True, max_length=32)
@@ -47,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     bio = models.TextField(_('bio'), blank=True, max_length=300)
     social_link = models.TextField(null=True, blank=True)
     donation_link = models.TextField(null=True, blank=True)
-    profile_pic = models.ImageField(upload_to="profile_pic/" + str(username) + "/", null=True, blank=True)
+    profile_pic = models.ImageField(upload_to=get_profile_pic_path, null=True, blank=True)
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -90,24 +91,21 @@ class Genre(models.Model):
 
     def __str__(self):
         return str(self.genre_list)
-
+def get_thumbnail_path(instance, file):
+    return f"book/{instance.book_id}/{file}"
+def get_pdf_files_path(instance, file):
+    return f"book/{instance.book_id}/pdfs/{file}"
 class Book(models.Model):
-    book_id = models.TextField(primary_key=True, max_length=10)
+    book_id = models.CharField(primary_key=True, max_length=10)
     book_name = models.CharField(max_length=60,default='Untitled')
-    description = models.CharField(max_length=120, blank=True)
+    description = models.TextField(max_length=120, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
     book_type = models.IntegerField(default=1)
-    # It was return something like book/<django.db.models.fields.TextField>
-    # Book wasn't created
-
     genres = models.ManyToManyField(Genre)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    thumbnail = models.ImageField(upload_to="book/" + str(book_id) + "/", blank=True, null=True)
-    # It was return something like book/<django.db.models.fields.TextField>
-    # Book wasn't created
-    pdf_files = models.FileField(upload_to="book/" + str(book_id) + "/pdfs/", blank=True, null=True)
-    # It was return something like book/<django.db.models.fields.TextField>/pdfs
-    # Book wasn't created
+    thumbnail = models.ImageField(upload_to=get_thumbnail_path, blank=True, null=True)
+
+    pdf_files = models.FileField(upload_to=get_pdf_files_path, blank=True, null=True)
 
     '''
     def __init__(self):
@@ -137,7 +135,6 @@ class Book(models.Model):
     def get_issues(self):
         return Issue.objects.filter(book_refer=self)
     def get_favorite_books(self):
-        # Does not work
         return Favorite.objects.filter(user_refer=self)
     
     def get_avg_score(self):
@@ -174,29 +171,37 @@ def pre_save_book_random_id(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_book_random_id, sender=Book)
  
 class Read(models.Model):
-    user_refer = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_refer = models.ForeignKey(User, on_delete=models.CASCADE)
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     book_read_latest_time = models.DateTimeField(default=timezone.now)
-
+    class Meta:
+        unique_together = ('user_refer', 'book_refer',)
     def get_recent_read_books(self, user):
         books = self.user_refer.get(user).order_by('-book_read_latest_time')
         return books.book_refer.all()
 
 class Favorite(models.Model):
-    user_refer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    user_refer = models.ForeignKey(User, on_delete=models.CASCADE)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user_refer', 'book_refer',)
+
+    def __str__(self) -> str:
+        return f"{self.user_refer} -> {self.book_refer} "
 
 class Review(models.Model):
-    reviewer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     review_date = models.DateTimeField(default=timezone.now)
-    score = models.FloatField()
+    score = models.FloatField(default=0)
     title = models.CharField(max_length=40)
-    msg = models.CharField(max_length=500)
+    msg = models.TextField(max_length=500)
 
     is_edited = models.BooleanField(default=False)
     last_edited = models.DateTimeField(null=True)
-
+    class Meta:
+        unique_together = ('reviewer', 'book_refer',)
     def get_reviewer(self):
         return self.reviewer
     def get_book(self):
@@ -209,11 +214,11 @@ class Review(models.Model):
         return self.msg
 
 class Issue(models.Model):
-    issuer = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    issuer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     issue_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
-    msg = models.CharField(max_length=500)
+    msg = models.TextField(max_length=500)
 
     def get_issuer(self):
         return self.issuer
@@ -223,11 +228,11 @@ class Issue(models.Model):
         return (self.issue_date, self.title, self.msg)
 
 class Report(models.Model):
-    reporter = models.OneToOneField(User, on_delete=models.CASCADE)
-    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    reporter = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     report_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
-    msg = models.CharField(max_length=100, blank=True)
+    msg = models.TextField(max_length=100, blank=True)
 
     def get_reporter(self):
         return self.issuer
