@@ -1,0 +1,31 @@
+<h1>This is editProfile page</h1>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>alias_name</p>
+    <input type="text" name="alias_name" value="{{user.alias_name}}" id="">
+    <p>email</p>
+    <input type="email" name="email" value="{{user.email}}" id="">
+    <p>gender</p>
+    <input type="text" name="gender" value="{{user.gender}}" id="">
+    <p>age</p>
+    <input type="number" name="age" value="{{user.age}}" id="">
+    <p>occupation</p>
+    <input type="text" name="occupation" value="{{user.occupation}}" id="">
+    <p>bio</p>
+    <textarea rows = "5" cols = "60" name = "bio" value="{{user.bio}}" ></textarea>
+    <p>social_link</p>
+    <input type="text" name="social_link" id="" value="{{user.social_link}}" >
+    <p>donation_link</p>
+    <input type="text" name="donation_link" id="" value="{{donation_link.alias_name}}" >
+    <p><img id="output" width="200" /></p>
+    <p>profile_pic</p>
+    <input type="file" name="profile_pic" id="" accept="image/png, image/jpeg" onchange="loadFile(event)" >
+    <input type="submit" value="submit" name="" id="">
+</form>
+
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script>
