@@ -10,9 +10,9 @@ class UserAdminConfig(UserAdmin):
     list_display = ('user_id','username', 'email', 'date_joined',
                     'is_active', 'is_staff')
     fieldsets = (
-        (None, {'fields': ('user_id', 'username', 'email', )}),
+        (None, {'fields': ( 'username','alias_name', 'email', )}),
         ('Permission', {'fields': ('is_staff', 'is_active')}),
-        ('Personal', {'fields': ('gender', 'age', 'occupation')}),
+        ('Personal', {'fields': ('profile_pic','gender', 'age', 'occupation','bio')}),
     )
 
 class BookAdminConfig(admin.ModelAdmin):
@@ -63,6 +63,12 @@ class ReportAdmin(admin.ModelAdmin):
         ('Content', {'fields': ('title', 'msg')})
     )
 
+class FavoriteAdmin(admin.ModelAdmin):
+    model = models.Favorite
+    search_fields = ('id', 'user_refer', 'book_refer')
+    ordering = ('id', 'user_refer', 'book_refer')
+    list_display = ('id', 'user_refer', 'book_refer')
+    
 
 admin.site.register(models.User, UserAdminConfig)
 admin.site.register(models.Book, BookAdminConfig)
@@ -70,4 +76,5 @@ admin.site.register(models.Genre, GenreAdminConfig)
 admin.site.register(models.Review, ReviewsAdminConfig)
 admin.site.register(models.Issue, IssuesAdminView)
 admin.site.register(models.Report, ReportAdmin)
+admin.site.register(models.Favorite, FavoriteAdmin)
 
