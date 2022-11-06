@@ -1,16 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
 </head>
 <body>
     <nav class="flex-div">
         <div class="nav-left flex-div">
-            <img src="images/menu.png" class="menu-icon" onclick="toggleTab()">
-            <img src="images/logo.png" class="logo">
+            <img src="{% static 'homepage/images/menu.png' %}" class="menu-icon" onclick="toggleTab()">
+            <img src="{% static 'homepage/images/logo.png' %}" class="logo">
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
@@ -43,9 +44,9 @@
         <div class="nav-middle flex-div">
             <div action="{% url 'MAIN_APP:search' %}" class="search">
                 <input class="srch" type="search" name="" placeholder="Search">
-                <a href="#"> <button class="btn"><img src="images/search.png"></button></a>
+                <a href="#"> <button class="btn"><img src="{% static 'homepage/images/search.png' %}"></button></a>
             </div>
-            <img src="images/filter.png" class="filter" onclick="toggleFilter()">
+            <img src="{% static 'homepage/images/filter.png' %}" class="filter" onclick="toggleFilter()">
         </div>
         <div class="sub-filter-wrap" id="subFilter">
             <div class="sub-filter">
@@ -70,7 +71,7 @@
         </div>
         <div class="nav-right flex-div">
             <img src="{% static "homepage/images/addbook.png" %}" class="addbook">
-            <img src="{% static 'images/img1.jpg' %}" class="user-icon" onclick="toggleMenu()">
+            <img src="{% static 'homepage/images/img1.jpg' %}" class="user-icon" onclick="toggleMenu()">
         </div>
         <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu">
@@ -90,29 +91,29 @@
                    <span>></span>
                </a>
                <a href="{% url 'MAIN_APP:sign_out' %}" class="sub-menu-link">
-                   <img src="images/sign out.png">
+                   <img src="{% static 'homepage/images/sign out.png' %}">
                    <p>Sign Out</p>
                    <span>></span>
                </a>
                {% else %}
                <a href="{% url 'register:log_in' %}" class="sub-menu-link">
-                    <img src="images/sign in.png">
+                    <img src="{% static 'homepage/images/sign in.png' %}">
                     <p>Sign In</p>
                     <span>></span>
                 </a>
                <a href="{% url 'register:regis' %}" class="sub-menu-link">
-                   <img src="images/sign up.png">
+                   <img src="{% static 'homepage/images/sign up.png' %}">
                    <p>Sign Up</p>
                    <span>></span>
                </a>
                {% endif %}
                <a href="{% url 'MAIN_APP:about' %}" class="sub-menu-link">
-                    <img src="images/about.png">
+                    <img src="{% static 'homepage/images/about.png' %}">
                     <p>About</p>
                     <span>></span>
                 </a>
                 <a href="#" class="sub-menu-link">
-                    <img src="images/setting.png">
+                    <img src="{% static 'homepage/images/setting.png' %}">
                     <p>Settings & Support</p>
                     <span>></span>
                 </a>
@@ -128,7 +129,7 @@
             <input type="radio" name="radio-btn" id="radio4">
             
             <div class="slide first">
-                <img src="images/banner.png" alt="">
+                <img src="{% static 'homepage/images/banner.png' %}" alt="">
               </div>
               <div class="slide">
                 <img src="images/banner.png" alt="">
@@ -162,7 +163,7 @@
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card1.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card1.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -482,7 +483,7 @@
 
     </section>
 
-    <script src="script.js"></script>
+    <script type="text/javascript" src="{% static 'homepage/script.js' %}"></script>
 
 </body>
 </html>
