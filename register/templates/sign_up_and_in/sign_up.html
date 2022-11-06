@@ -1,35 +1,38 @@
 {% load static %}
-
+{% load socialaccount %}
 <!DOCTYPE html>
 <html>
+
 <head>
-	
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/9ecd69c030.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href={% static "sign_up/style.css" %}>
 </head>
+
 <body>
     <div class="center">
         <h1>Sign Up</h1>
         <form method="post">
+            {% csrf_token %}
             <div class="txt_field">
-                <input type="text" required>
+                <input type="text" name='username' required>
                 <span></span>
                 <label>Username</label>
             </div>
             <div class="txt_field">
-                <input type="text" required>
+                <input type="text" name='email' required>
                 <span></span>
                 <label>Email</label>
             </div>
             <div class="txt_field">
-                <input type="password" required>
+                <input type="password" name='password' required>
                 <span></span>
                 <label>Create Password</label>
             </div>
             <div class="txt_field">
-                <input type="password" required>
+                <input type="password" name='confirm_password' required>
                 <span></span>
                 <label>Confirm Password</label>
             </div>
@@ -44,12 +47,20 @@
             <div class="line"></div>
             <div class="social">
                 <ul>
-                    <li><img src={% static "sign_up/images/images/gmail.png" %}></li>
-                    <li><img src={% static "sign_up/images/images/outlook.png" %}></li>
-                    <li><img src={% static "sign_up/images/images/facebook.png" %}></li>
+                    <a href="{% provider_login_url 'google' %}">
+                        <li><img src={% static "sign_up/images/gmail.png" %}></li>
+                    </a>
+                    <a href="">
+                        <li><img src={% static "sign_up/images/outlook.png" %}></li>
+                    </a>
+                    <a href="">
+                        <li><img src={% static "sign_up/images/facebook.png" %}></li>
+                    </a>
+
                 </ul>
             </div>
         </form>
-    </div>         
+    </div>
 </body>
+
 </html>
