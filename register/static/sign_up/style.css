@@ -23,6 +23,7 @@ body {
     text-align: center;
     padding: 0 0 20px 0;
     border-bottom: 1px solid silver;
+    margin-bottom: 40px;
 }
 
 #button {
@@ -37,7 +38,8 @@ body {
 form .txt_field {
     position: relative;
     border-bottom: 2px solid #adadad;
-    margin: 30px 0;
+    margin: 20px 0;
+    margin-bottom: 0;
 }
 
 .txt_field input {
@@ -102,6 +104,7 @@ form .txt_field {
 .terms {
     margin: -5px 0 20px 5px;
     color: #a6a6a6;
+    margin-top: 10px;
 }
 
 input[type="submit"] {
@@ -155,6 +158,37 @@ input[type="submit"]:hover {
     background-color: #fff;
     color: #666666;
     padding: 0 15px;
+}
+
+.center .email_error .error-icon img {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    padding: 0;
+    margin-top: 4px;
+}
+
+.center .email_error {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #c62828;
+    margin-bottom: 0;
+}
+
+.center .email_error .error-text {
+    margin-bottom: 0;
+    margin-top: 2px;
+    margin-left: 3px;
+}
+
+.center .pass_error {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #c62828;
+    margin-bottom: 10px;
+
 }
 
 .social {
