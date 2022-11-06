@@ -10,7 +10,7 @@ from MAIN_APP import views as main_app
 def register(request):
     print(request.method)
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect('MAIN_APP:home')
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -25,5 +25,5 @@ def register(request):
             password=password,
         )
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        return redirect('/')
+        return redirect('MAIN_APP:home')
     return render(request, 'register/templates/sign_up_and_in/sign_up.html', {})
