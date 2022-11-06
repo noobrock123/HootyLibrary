@@ -21,11 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('userProfile.urls')),
     path('registeration/', include('register.urls')),
-<<<<<<< HEAD
-    #path('', include('login_logout.urls)),
-=======
     path('user_profile/', include('userProfile.urls')),
->>>>>>> dev
     path('', include('MAIN_APP.urls')),
     path('',include('book_views.urls')),
     path('',include('login_via_google.urls')),

@@ -29,7 +29,7 @@ def register(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('MAIN_APP:home')
-    return render(request, 'sign_up_and_in/signup.html', {})
+    return render(request, 'sign_up_and_in/sign_up.html', {})
 
 def log_in(request):
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def log_in(request):
         if user is not None:
             login(request, user)
         return redirect('MAIN_APP:home')
-    return render(request, 'sign_up_and_in/signin.html')
+    return render(request, 'sign_up_and_in/sign_in.html')
 
 # def home(request):
 #     print(request.user)
