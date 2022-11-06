@@ -116,15 +116,7 @@ nav {
 }
 
 .sub-menu-wrap.open-menu {
-<<<<<<< HEAD
-<<<<<<< HEAD
   max-height: 450px;
-=======
-  max-height: 400px;
->>>>>>> edb444a (Ed homepage.html, style.css in homepage file and Added images in home/images file)
-=======
-  max-height: 400px;
->>>>>>> edb444a (Ed homepage.html, style.css in homepage file and Added images in home/images file)
 }
 
 .sub-menu {
@@ -249,15 +241,7 @@ nav {
 .sub-menu-link img {
   width: 40px;
   background: #e5e5e5;
-<<<<<<< HEAD
-<<<<<<< HEAD
   border-radius: 35%;
-=======
-  border-radius: 50%;
->>>>>>> edb444a (Ed homepage.html, style.css in homepage file and Added images in home/images file)
-=======
-  border-radius: 50%;
->>>>>>> edb444a (Ed homepage.html, style.css in homepage file and Added images in home/images file)
   padding: 8px;
   margin-right: 15px;
 }
