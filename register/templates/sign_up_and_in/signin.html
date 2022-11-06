@@ -1,3 +1,6 @@
+{% load static %}
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up Form</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="{% static 'sign_up/style.css' %}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -27,9 +30,9 @@
         <div class="green-bg">
           <div class="social">
             <ul>
-                <li><img src="images/gmail.png"></li>
-                <li><img src="images/outlook.png"></li>
-                <li><img src="images/facebook.png"></li>
+                <li><img src="{% static 'images/gmail.png' %}"></li>
+                <li><img src="{% static 'images/outlook.png' %}"></li>
+                <li><img src="{% static 'images/facebook.png' %}"></li>
             </ul>
         </div>
         </div>
@@ -37,11 +40,11 @@
             <h1>Create Account</h1>
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="UserName Or Email" />
+                <input type="text" name="username" placeholder="UserName Or Email" />
             </div>
             <div class="input-group">
                 <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
+                <input type="password" name="password" placeholder="Password" />
             </div>
             <div class="terms">
                 <input type="checkbox" id="terms">
@@ -50,7 +53,7 @@
             <div class="pass">Forgot Password?<a href="#">Click Me.</a></div>
             <button type="button">Sign In</button>
             <div class="signup_link">
-                Don't have an account? <a href="#">Sign up.</a>
+                Don't have an account? <a href="{% url 'register:regis' %}">Sign up.</a>
             </div>
         </form>
       </div>

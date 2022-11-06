@@ -69,37 +69,43 @@
             </div>
         </div>
         <div class="nav-right flex-div">
-            <img src="images/addbook.png" class="addbook">
-            <img src="images/img1.jpg" class="user-icon" onclick="toggleMenu()">
+            <img src="{% static "homepage/images/addbook.png" %}" class="addbook">
+            <img src="{% static 'images/img1.jpg' %}" class="user-icon" onclick="toggleMenu()">
         </div>
         <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu">
                <div class="user-info">
                    <img src="images/user.png">
-                   <h3>PumPuy</h3>
+                    {% if not is_user_authenticated %} 
+                    <h3>Annoymous</h3>
+                    {% else %}
+                    <h3>{{ user.username }}</h3>
+                    {% endif %}
                </div>
                <hr>
-    
+                {% if is_user_authenticated %} 
                <a href="#" class="sub-menu-link">
                    <img src="images/profile.png">
                    <p>Edit Profile</p>
                    <span>></span>
                </a>
-               <a href="#" class="sub-menu-link">
-                    <img src="images/sign in.png">
-                    <p>Sign In</p>
-                    <span>></span>
-                </a>
-               <a href="#" class="sub-menu-link">
-                   <img src="images/sign up.png">
-                   <p>Sign Up</p>
-                   <span>></span>
-               </a>
-               <a href="#" class="sub-menu-link">
+               <a href="{% url 'MAIN_APP:sign_out' %}" class="sub-menu-link">
                    <img src="images/sign out.png">
                    <p>Sign Out</p>
                    <span>></span>
                </a>
+               {% else %}
+               <a href="{% url 'register:log_in' %}" class="sub-menu-link">
+                    <img src="images/sign in.png">
+                    <p>Sign In</p>
+                    <span>></span>
+                </a>
+               <a href="{% url 'register:regis' %}" class="sub-menu-link">
+                   <img src="images/sign up.png">
+                   <p>Sign Up</p>
+                   <span>></span>
+               </a>
+               {% endif %}
                <a href="{% url 'MAIN_APP:about' %}" class="sub-menu-link">
                     <img src="images/about.png">
                     <p>About</p>

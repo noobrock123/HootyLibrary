@@ -1,5 +1,6 @@
 {% load static %}
 {% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,19 +40,19 @@
           <h1>Create Account</h1>
           <div class="input-group">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="UserName" />
+            <input type="text" name="username" placeholder="UserName" />
           </div>
           <div class="input-group">
             <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" />
+            <input type="email" name="email" placeholder="Email" />
           </div>
           <div class="input-group">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" />
+            <input type="password" name="password" placeholder="Password" />
           </div>
           <div class="input-group">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Comfirm Password" />
+            <input type="password" name="confirm_password" placeholder="Comfirm Password" />
           </div>
           <div class="terms">
             <input type="checkbox" id="terms">
