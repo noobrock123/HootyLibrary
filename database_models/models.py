@@ -3,12 +3,22 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from django.core.validators import validate_email
+from django.core.validators import validate_email, EmailValidator
 from django.core.exceptions import ValidationError
 import random as rand
 
 
 class CustomAccountManager(BaseUserManager):
+    def user_random_id(self, **other_fields):
+        if 'user_id' in other_fields and other_fields['user_id']:
+            return other_fields['user_id']
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while User.objects.filter(pk=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        return rand_id
+
+    def create(self, username, email, password, **other_fields):
+        self.create_user(username, email, password, **other_fields)
 
     def create_user(self, username, email, password, **other_fields):
         # if len(username) == 0 or len(username) > 32:
@@ -24,8 +34,12 @@ class CustomAccountManager(BaseUserManager):
         #     if User.objects.filter(user_id=other_fields['user_id']).exists():
         #         raise ValueError(_('Your user_id already used'))
         email = self.normalize_email(email)
+        # if not 'user_id' in other_fields:
+        other_fields['user_id'] = self.user_random_id(**other_fields)
+
         user = self.model(username=username, email=email, **other_fields)
         user.set_password(password)
+
         user.save()
         return user
 
@@ -48,10 +62,11 @@ def get_profile_pic_path(instance, file):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    user_id = models.TextField(primary_key=True, max_length=12, default=0)
+    user_id = models.TextField(primary_key=True, max_length=12)
     username = models.CharField(unique=True, max_length=32)
     alias_name = models.CharField(max_length=40, blank=True)
-    email = models.EmailField(_('Email'), unique=True)
+    email = models.EmailField(_('Email'), unique=True,
+                              validators=[validate_email])
     date_joined = models.DateTimeField(default=timezone.now)
     gender = models.CharField(max_length=16, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
@@ -80,40 +95,36 @@ class User(AbstractBaseUser, PermissionsMixin):
     #         raise
     #     if not self.email:
     #         raise ValueError(_('You must provide an email address'))
-        # if 'user_id' in self.other_fields and self.other_fields['user_id']:
-        #     if User.objects.filter(user_id=self.other_fields['user_id']).exists():
-        #         raise ValueError(_('Your user_id already used'))
-    
+    # if 'user_id' in self.other_fields and self.other_fields['user_id']:
+    #     if User.objects.filter(user_id=self.other_fields['user_id']).exists():
+    #         raise ValueError(_('Your user_id already used'))
+
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save()
-    
-
-    
 
     def get_about_self(self):
         return (self.gender, self.age, self.occupation)
 
-    
     def get_links(self):
         return (self.social_link, self.donation_link)
-
-    
 
     def __str__(self):
         return str(self.user_id) + ": " + str(self.username)
 
 
-def pre_save_user_random_id(sender, instance, *args, **kwargs):
-    if not instance.user_id:
-        klass = instance.__class__
-        rand_id = hex(rand.randint(0, pow(16, 8)))
-        while klass.objects.filter(pk=rand_id).exists():
-            rand_id = hex(rand.randint(0, pow(16, 8)))
-        instance.user_id = rand_id
+# def pre_save_user_random_id(sender, instance, *args, **kwargs):
+#     # print('run signal')
+#     if not instance.user_id:
+#         klass = instance.__class__
+#         rand_id = hex(rand.randint(0, pow(16, 8)))
+#         while klass.objects.filter(pk=rand_id).exists():
+#             rand_id = hex(rand.randint(0, pow(16, 8)))
+#         print(rand_id)
+#         instance.user_id = rand_id
 
 
-pre_save.connect(pre_save_user_random_id, sender=User)
+# pre_save.connect(pre_save_user_random_id, sender=User)
 
 
 class Genre(models.Model):
@@ -150,32 +161,32 @@ class Book(models.Model):
         super(Book, self).__init__()
     '''
 
-    def get_book_id(self):
-        return str(self.book_id)
+    # def get_book_id(self):
+    #     return str(self.book_id)
 
-    def get_book_name(self):
-        return self.book_name
+    # def get_book_name(self):
+    #     return self.book_name
 
-    def get_description(self):
-        return self.description
+    # def get_description(self):
+    #     return self.description
 
-    def get_date_created(self):
-        return self.date_created
+    # def get_date_created(self):
+    #     return self.date_created
 
-    def get_book_type(self):
-        return self.book_type
+    # def get_book_type(self):
+    #     return self.book_type
 
-    def get_genres(self):
-        return self.genres
+    # def get_genres(self):
+    #     return self.genres
 
-    def get_author(self):
-        return self.author
+    # def get_author(self):
+    #     return self.author
 
-    def get_thumbnail(self):
-        return self.thumbnail
+    # def get_thumbnail(self):
+    #     return self.thumbnail
 
-    def get_pdf_files(self):
-        return self.pdf_files
+    # def get_pdf_files(self):
+    #     return self.pdf_files
 
     def get_reviews(self):
         return Review.objects.filter(book_refer=self)
