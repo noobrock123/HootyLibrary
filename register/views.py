@@ -1,7 +1,8 @@
 
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from database_models.models import *
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 
 from MAIN_APP import views as main_app
 # Create your views here.
@@ -37,9 +38,21 @@ def register(request):
             is_active=is_active if is_active else User._meta.get_field('is_active').get_default(),
             profile_pic=profile_pic,
         )
+        user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('/')
     return render(request, 'register/templates/sign_up_and_in/sign_up.html', {})
+
+def log_in(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+        return redirect('MAIN_APP:home')
+    return render(request, 'sign_up_and_in/sign_in.html')
+
 # def home(request):
 #     print(request.user)
 #     context={'user':request.user}
