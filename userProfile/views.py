@@ -1,6 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from database_models.models import *
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views here.
 
 
@@ -32,3 +34,47 @@ def userProfile(request, user_id):
 
     }
     return render(request, 'userProfile/templates/userProfile/userProfile.html', context)
+
+
+@login_required()
+def editProfile(request, user_id):
+
+    try:
+        user = User.objects.get(user_id=user_id)
+    except:
+        return HttpResponse('Not Found')
+    if request.user != user:
+        return HttpResponse('You are not allowed to edit this user')
+    else:
+        context = {
+            'user': user,
+        }
+        if request.method == 'POST':
+            alias_name = request.POST.get('alias_name')
+            email = request.POST.get('email')
+            gender = request.POST.get('gender')
+            age = request.POST.get('age')
+            occupation = request.POST.get('occupation')
+            bio = request.POST.get('bio')
+            social_link = request.POST.get('social_link')
+            donation_link = request.POST.get('donation_link')
+            profile_pic = request.FILES.get('profile_pic')
+            try:
+                if user != User.objects.get(email=email):
+                    messages.error('This email is already exist ! ! !')
+                    return render(request, 'userProfile/templates/userProfile/editProfile.html', context)
+            except:
+                pass
+            user.alias_name = alias_name
+            user.email = email if email != '' else user.email
+            user.gender = gender
+            user.age = age
+            user.occupation = occupation
+            user.bio = bio
+            user.social_link = social_link
+            user.donation_link = donation_link
+            user.profile_pic = profile_pic if profile_pic != None else user.profile_pic
+            user.save()
+            return redirect('userProfile', user_id=user.user_id)
+
+    return render(request, 'userProfile/templates/userProfile/editProfile.html', context)
