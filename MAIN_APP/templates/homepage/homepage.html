@@ -1,18 +1,16 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static "homepage/style.css" %}">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="flex-div">
         <div class="nav-left flex-div">
-            <img src="{% static "homepage/images/menu.png" %}" class="menu-icon" onclick="toggleTab()">
-            <img src="{% static "homepage/images/logo.png" %}" class="logo">
+            <img src="images/menu.png" class="menu-icon" onclick="toggleTab()">
+            <img src="images/logo.png" class="logo">
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
@@ -43,11 +41,11 @@
             </div>
         </div>
         <div class="nav-middle flex-div">
-            <div action="{% url 'MAIN_APP:search' %}" class="search-box flex-div">
-                <input type="text" placeholder="Search">
-                <img src="images/search.png">
+            <div action="{% url 'MAIN_APP:search' %}" class="search">
+                <input class="srch" type="search" name="" placeholder="Search">
+                <a href="#"> <button class="btn"><img src="images/search.png"></button></a>
             </div>
-            <img src="{% static "homepage/images/filter.png" %}" class="filter" onclick="toggleFilter()">
+            <img src="images/filter.png" class="filter" onclick="toggleFilter()">
         </div>
         <div class="sub-filter-wrap" id="subFilter">
             <div class="sub-filter">
@@ -71,7 +69,7 @@
             </div>
         </div>
         <div class="nav-right flex-div">
-            <img src="{% static "homepage/images/addbook.png" %}" class="addbook">
+            <img src="images/addbook.png" class="addbook">
             <img src="images/img1.jpg" class="user-icon" onclick="toggleMenu()">
         </div>
         <div class="sub-menu-wrap" id="subMenu">
@@ -118,18 +116,47 @@
 
     <div class="container">
         <div class="banner">
-            <img src="{% static "homepage/images/banner.png" %}">
+            <input type="radio" name="radio-btn" id="radio1">
+            <input type="radio" name="radio-btn" id="radio2">
+            <input type="radio" name="radio-btn" id="radio3">
+            <input type="radio" name="radio-btn" id="radio4">
+            
+            <div class="slide first">
+                <img src="images/banner.png" alt="">
+              </div>
+              <div class="slide">
+                <img src="images/banner.png" alt="">
+              </div>
+              <div class="slide">
+                <img src="images/banner.png" alt="">
+              </div>
+              <div class="slide">
+                <img src="images/banner.png" alt="">
+              </div>
+
+              <div class="navigation-auto">
+                <div class="auto-btn1"></div>
+                <div class="auto-btn2"></div>
+                <div class="auto-btn3"></div>
+                <div class="auto-btn4"></div>
+              </div>
+        </div>
+        <div class="navigation-manual">
+            <label for="radio1" class="manual-btn"></label>
+            <label for="radio2" class="manual-btn"></label>
+            <label for="radio3" class="manual-btn"></label>
+            <label for="radio4" class="manual-btn"></label>
         </div>
     </div>
-    
+
     <section class="product"> 
         <h2 class="product-category">Popular Today</h2>
-        <button class="pre-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
-        <button class="nxt-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
+        <button class="pre-btn"><img src="images/arrow.png"></button>
+        <button class="nxt-btn"><img src="images/arrow.png"></button>
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static "homepage/images/card1.jpg" %}" class="product-thumb">
+                    <img src="images/card1.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -233,8 +260,8 @@
 
     <section class="product"> 
         <h2 class="product-category">Latest Book</h2>
-        <button class="pre-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
-        <button class="nxt-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
+        <button class="pre-btn"><img src="images/arrow.png"></button>
+        <button class="nxt-btn"><img src="images/arrow.png"></button>
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
@@ -342,8 +369,8 @@
 
     <section class="product"> 
         <h2 class="product-category">Undiscovered Book</h2>
-        <button class="pre-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
-        <button class="nxt-btn"><img src="{% static "homepage/images/arrow.png" %}"></button>
+        <button class="pre-btn"><img src="images/arrow.png"></button>
+        <button class="nxt-btn"><img src="images/arrow.png"></button>
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
@@ -448,45 +475,8 @@
         </div>
 
     </section>
-    
-    <script>
-        const productContainers = [...document.querySelectorAll('.product-container')];
-        const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
-        const preBtn = [...document.querySelectorAll('.pre-btn')];
 
-        productContainers.forEach((item, i) => {
-            let containerDimensions = item.getBoundingClientRect();
-            let containerWidth = containerDimensions.width;
-
-            nxtBtn[i].addEventListener('click', () => {
-                item.scrollLeft += containerWidth;
-            })
-
-            preBtn[i].addEventListener('click', () => {
-                item.scrollLeft -= containerWidth;
-            })
-        })
-    </script>
-
-
-<script>
-    let subMenu = document.getElementById("subMenu");
-    let subTab = document.getElementById("subTab");
-    let subFilter = document.getElementById("subFilter");
-    
-    function toggleMenu() {
-        subMenu.classList.toggle("open-menu");
-    }
-
-    function toggleTab() {
-        subTab.classList.toggle("open-tab");
-    }
-
-    function toggleFilter() {
-        subFilter.classList.toggle("open-filter");
-    }
-</script>
-
+    <script src="script.js"></script>
 
 </body>
 </html>
