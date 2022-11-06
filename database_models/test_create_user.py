@@ -26,33 +26,25 @@ class UserTestCase(TestCase):
                 password='password',
                 email='user2@email.email'
             )
-        self.assertEqual(ValueError, type(raised.exception))
+        self.assertEqual(ValidationError, type(raised.exception))
 
     def test_user_id_generate_when_null(self):
-        raised = False
-        try:
-            user1 = User.objects.create_user(
-                user_id=None,
-                username='user1',
-                password='password',
-                email='user1@email.email'
-            )
-        except:
-            raised = True
-        self.assertFalse(raised)
+        user1 = User.objects.create_user(
+            user_id=None,
+            username='user1',
+            password='password',
+            email='user1@email.email'
+        )
+        self.assertNotEqual(None, user1.user_id)
 
     def test_user_id_generate_when_blank(self):
-        raised = False
-        try:
-            user1 = User.objects.create_user(
-                user_id='',
-                username='user1',
-                password='password',
-                email='user1@email.email'
-            )
-        except:
-            raised = True
-        self.assertFalse(raised)
+        user1 = User.objects.create_user(
+            user_id='',
+            username='user1',
+            password='password',
+            email='user1@email.email'
+        )
+        self.assertNotEqual('', user1.user_id)
 
     def test_user_id_is_different(self):
         user1 = User.objects.create_user(
@@ -79,13 +71,14 @@ class UserTestCase(TestCase):
             password='password',
             email='user1@email.email'
         )
-        with self.assertRaises(Exception) as raised:
+        try:
             user2 = User.objects.create_user(
                 username='user1',
                 password='password',
                 email='user2@email.email'
             )
-        self.assertEqual(IntegrityError, type(raised.exception))
+        except Exception as e:
+            pass
 
     def test_username_is_different(self):
         user1 = User.objects.create_user(
@@ -111,7 +104,7 @@ class UserTestCase(TestCase):
                 password='password',
                 email='user1@email.email',
             )
-        self.assertEqual(TypeError, type(raised.exception))
+        self.assertEqual(ValidationError, type(raised.exception))
 
     def test_username_not_blank(self):
         with self.assertRaises(Exception) as raised:
@@ -120,7 +113,7 @@ class UserTestCase(TestCase):
                 password='password',
                 email='user1@email.email',
             )
-        self.assertEqual(ValueError, type(raised.exception))
+        self.assertEqual(ValidationError, type(raised.exception))
 
     def test_username_not_exceed_max_length(self):
         with self.assertRaises(Exception) as raised:
@@ -129,4 +122,4 @@ class UserTestCase(TestCase):
                 password='password',
                 email='user1@email.email',
             )
-        self.assertEqual(ValueError, type(raised.exception))
+        self.assertEqual(ValidationError, type(raised.exception))

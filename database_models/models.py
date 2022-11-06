@@ -11,18 +11,18 @@ import random as rand
 class CustomAccountManager(BaseUserManager):
 
     def create_user(self, username, email, password, **other_fields):
-        if len(username) == 0 or len(username) > 32:
-            raise ValueError(
-                _('Your username length can not be 0 or more than 32'))
-        try:
-            validate_email(email)
-        except ValidationError:
-            raise
-        if not email:
-            raise ValueError(_('You must provide an email address'))
-        if 'user_id' in other_fields and other_fields['user_id']:
-            if User.objects.filter(user_id=other_fields['user_id']).exists():
-                raise ValueError(_('Your user_id already used'))
+        # if len(username) == 0 or len(username) > 32:
+        #     raise ValueError(
+        #         _('Your username length can not be 0 or more than 32'))
+        # try:
+        #     validate_email(email)
+        # except ValidationError:
+        #     raise
+        # if not email:
+        #     raise ValueError(_('You must provide an email address'))
+        # if 'user_id' in other_fields and other_fields['user_id']:
+        #     if User.objects.filter(user_id=other_fields['user_id']).exists():
+        #         raise ValueError(_('Your user_id already used'))
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, **other_fields)
         user.set_password(password)
@@ -70,26 +70,35 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
-    def get_user_id(self):
-        return str(self.user_id)
+    # def clean(self) -> None:
+    #     if len(self.username) == 0 or len(self.username) > 32:
+    #         raise ValueError(
+    #             _('Your username length can not be 0 or more than 32'))
+    #     try:
+    #         validate_email(self.email)
+    #     except ValidationError:
+    #         raise
+    #     if not self.email:
+    #         raise ValueError(_('You must provide an email address'))
+        # if 'user_id' in self.other_fields and self.other_fields['user_id']:
+        #     if User.objects.filter(user_id=self.other_fields['user_id']).exists():
+        #         raise ValueError(_('Your user_id already used'))
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save()
+    
 
-    def get_username(self):
-        return self.username
-
-    def get_alias_name(self):
-        return self.alias_name
+    
 
     def get_about_self(self):
         return (self.gender, self.age, self.occupation)
 
-    def get_bio(self):
-        return self.bio
-
+    
     def get_links(self):
         return (self.social_link, self.donation_link)
 
-    def get_profile_pic(self):
-        return self.profile_pic
+    
 
     def __str__(self):
         return str(self.user_id) + ": " + str(self.username)
