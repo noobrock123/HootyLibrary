@@ -44,3 +44,4 @@ def register(request):
 #     print(request.user)
 #     context={'user':request.user}
 #     return render(request, 'templates.html',context)
+
