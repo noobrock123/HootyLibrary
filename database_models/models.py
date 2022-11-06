@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=16, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     occupation = models.CharField(max_length=32, null=True, blank=True)
-    bio = models.TextField(_('bio'), blank=True, max_length=300)
+    bio = models.TextField(_('bio'), blank=True, max_length=300, null=True)
     social_link = models.TextField(null=True, blank=True)
     donation_link = models.TextField(null=True, blank=True)
     profile_pic = models.ImageField(upload_to=get_profile_pic_path, null=True, blank=True)
