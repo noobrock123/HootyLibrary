@@ -21,23 +21,12 @@ class CustomAccountManager(BaseUserManager):
         self.create_user(username, email, password, **other_fields)
 
     def create_user(self, username, email, password, **other_fields):
-        # if len(username) == 0 or len(username) > 32:
-        #     raise ValueError(
-        #         _('Your username length can not be 0 or more than 32'))
-        # try:
-        #     validate_email(email)
-        # except ValidationError:
-        #     raise
-        # if not email:
-        #     raise ValueError(_('You must provide an email address'))
-        # if 'user_id' in other_fields and other_fields['user_id']:
-        #     if User.objects.filter(user_id=other_fields['user_id']).exists():
-        #         raise ValueError(_('Your user_id already used'))
+        
         email = self.normalize_email(email)
-        # if not 'user_id' in other_fields:
+        
         other_fields['user_id'] = self.user_random_id(**other_fields)
-
-        user = self.model(username=username, email=email, **other_fields)
+        print(other_fields['user_id'])
+        user = self.model(user_id=other_fields['user_id'],username=username, email=email, **other_fields)
         user.set_password(password)
 
         user.save()
@@ -53,7 +42,7 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError('Admin must be assigned to is_staff=True.')
         if other_fields.get('is_superuser') is not True:
             raise ValueError('Admin must be assigned to is_superuser=True.')
-
+    
         return self.create_user(username, email, password, **other_fields)
 
 
@@ -85,19 +74,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
-    # def clean(self) -> None:
-    #     if len(self.username) == 0 or len(self.username) > 32:
-    #         raise ValueError(
-    #             _('Your username length can not be 0 or more than 32'))
-    #     try:
-    #         validate_email(self.email)
-    #     except ValidationError:
-    #         raise
-    #     if not self.email:
-    #         raise ValueError(_('You must provide an email address'))
-    # if 'user_id' in self.other_fields and self.other_fields['user_id']:
-    #     if User.objects.filter(user_id=self.other_fields['user_id']).exists():
-    #         raise ValueError(_('Your user_id already used'))
+    
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -113,18 +90,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return str(self.user_id) + ": " + str(self.username)
 
 
-# def pre_save_user_random_id(sender, instance, *args, **kwargs):
-#     # print('run signal')
-#     if not instance.user_id:
-#         klass = instance.__class__
-#         rand_id = hex(rand.randint(0, pow(16, 8)))
-#         while klass.objects.filter(pk=rand_id).exists():
-#             rand_id = hex(rand.randint(0, pow(16, 8)))
-#         print(rand_id)
-#         instance.user_id = rand_id
 
-
-# pre_save.connect(pre_save_user_random_id, sender=User)
 
 
 class Genre(models.Model):
@@ -141,7 +107,18 @@ def get_thumbnail_path(instance, file):
 def get_pdf_files_path(instance, file):
     return f"book/{instance.book_id}/pdfs/{file}"
 
-
+class BookManager(models.Manager):
+    def get_generate_book_id(self, **other_fields):
+        if 'book_id' in other_fields and other_fields['book_id']:
+            return other_fields['book_id']
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while Book.objects.filter(pk=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        return rand_id
+    def create(self, **kwargs):
+        book = self.model(book_id=self.get_generate_book_id(kwargs),**kwargs)
+        book.save()
+        return book
 class Book(models.Model):
     book_id = models.CharField(primary_key=True, max_length=10)
     book_name = models.CharField(max_length=60, default='Untitled')
@@ -156,37 +133,13 @@ class Book(models.Model):
     pdf_files = models.FileField(
         upload_to=get_pdf_files_path, blank=True, null=True)
 
+    objects = BookManager()
     '''
     def __init__(self):
         super(Book, self).__init__()
     '''
 
-    # def get_book_id(self):
-    #     return str(self.book_id)
-
-    # def get_book_name(self):
-    #     return self.book_name
-
-    # def get_description(self):
-    #     return self.description
-
-    # def get_date_created(self):
-    #     return self.date_created
-
-    # def get_book_type(self):
-    #     return self.book_type
-
-    # def get_genres(self):
-    #     return self.genres
-
-    # def get_author(self):
-    #     return self.author
-
-    # def get_thumbnail(self):
-    #     return self.thumbnail
-
-    # def get_pdf_files(self):
-    #     return self.pdf_files
+    
 
     def get_reviews(self):
         return Review.objects.filter(book_refer=self)
@@ -209,10 +162,7 @@ class Book(models.Model):
         return book.user_refer.all()
 
     def save(self, *args, **kwargs):
-        rand_id = hex(rand.randint(0, pow(16, 8)))
-        while Book.objects.filter(book_id=rand_id).exists():
-            rand_id = hex(rand.randint(0, pow(16, 8)))
-        self.book_id = rand_id
+        self.full_clean()
         super(Book, self).save()
 
     def __str__(self):
