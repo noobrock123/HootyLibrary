@@ -7,7 +7,6 @@ from database_models.models import Book
 from django.contrib.auth import logout
 
 # Create your views here.
-
 def index(request):
     bookname = Book.objects.all().values()
     context = {

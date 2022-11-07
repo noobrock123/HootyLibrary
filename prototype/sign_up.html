@@ -5,7 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/9ecd69c030.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href=style.css>
+    <link rel="stylesheet" type="text/css" href={% static "sign_up/images/style.css" %}>
+
 </head>
 <body>
     <div class="center">
@@ -43,14 +44,20 @@
             </div>
             <input type="submit" value="Sign Up">
             <div class="signup_link">
-                Don't have an account? <a href="#">Sign in.</a>
+                Don't have an account? <a href="../login">Sign in.</a>
             </div>
             <div class="line"></div>
             <div class="social">
                 <ul>
+<<<<<<< HEAD:register/templates/sign_up_and_in/sign_up.html
+                    <li><img src={% static "sign_up/images/gmail.png" %}></li>
+                    <li><img src={% static "sign_up/images/outlook.png" %}></li>
+                    <li><img src={% static "sign_up/images/facebook.png" %}></li>
+=======
                     <li><img src="images/gmail.png"></li>
                     <li><img src="images/outlook.png"></li>
                     <li><img src="images/facebook.png"></li>
+>>>>>>> 5be57a726608029b04e5c21d82ad0f0342b4adb9:prototype/sign_up.html
                 </ul>
             </div>
         </form>

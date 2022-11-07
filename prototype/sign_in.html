@@ -6,8 +6,8 @@
 	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://kit.fontawesome.com/9ecd69c030.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href={% static "sign_up/style.css" %}>
+    <script src={% static "https://kit.fontawesome.com/9ecd69c030.js" %} crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href={% static "style.css" %}>
 </head>
 <body>
     <div class="center">
@@ -23,14 +23,14 @@
                 <span></span>
                 <label>Password</label>
             </div>
-            <div class="pass">Forgot Password?<a href="#">Click Me.</a></div>
+            <div class="pass">Forgot Password?<a href="reset_password">Click Me.</a></div>
             <div class="terms">
                 <input type="checkbox" id="terms">
                 <label for="terms">Remember Me</label>
             </div>
             <input type="submit" value="Login" id="button">
             <div class="signup_link">
-                Don't have an account? <a href="#">Sign up.</a>
+                Don't have an account? <a href="../registeration">Sign up.</a>
             </div>
             <div class="line"></div>
             <div class="social">
