@@ -133,13 +133,13 @@
                 <img src="{% static 'homepage/images/banner.png' %}" alt="">
               </div>
               <div class="slide">
-                <img src="images/banner.png" alt="">
+                <img src="{% static 'homepage/images/banner.png' %}" alt="">
               </div>
               <div class="slide">
-                <img src="images/banner.png" alt="">
+                <img src="{% static 'homepage/images/banner.png' %}" alt="">
               </div>
               <div class="slide">
-                <img src="images/banner.png" alt="">
+                <img src="{% static 'homepage/images/banner.png' %}" alt="">
               </div>
 
               <div class="navigation-auto">
@@ -172,7 +172,7 @@
                     <p class="product-short-description">Its long story..</p>
                 </div>
             </div>
-            {% for x in booknames %}
+            {% for x in bookname %}
                 <div class="product-card">
                     <div class="product-image">
                         <img src="{{ x.thumbnail }}" class="product-thumb"> {{ x.thumbnail }}
@@ -186,7 +186,7 @@
             {% endfor %}
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card3.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card3.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -196,7 +196,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card4.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card4.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -215,7 +215,7 @@
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card1.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card1.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -225,7 +225,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card2.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card2.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -235,7 +235,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card3.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card3.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -245,7 +245,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card4.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card4.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -255,7 +255,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card5.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card5.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -265,7 +265,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card6.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card6.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -284,7 +284,7 @@
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card1.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card1.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -294,7 +294,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card2.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card2.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -304,7 +304,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="images/card3.jpg" class="product-thumb">
+                    <img src="{% static 'homepage/images/card3.jpg' %}" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -319,5 +319,4 @@
     <script type="text/javascript" src="{% static 'homepage/script.js' %}"></script>
 
 </body>
->>>>>>> 5be57a726608029b04e5c21d82ad0f0342b4adb9
 </html>
