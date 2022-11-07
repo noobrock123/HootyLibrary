@@ -5,7 +5,7 @@ app_name = "MAIN_APP"
 urlpatterns = [
     path('', views.index, name='home'),
     path('sign_out/', views.sign_out, name='sign_out'),
-    path('login/', include('login_logout.urls')),
+    path('sign_in/', include('login_logout.urls')),
     path('about/', views.about, name='about'),
     path('book/', views.book, name='book'),
     path('book/create_book', views.create_book, name='crt_book'),
