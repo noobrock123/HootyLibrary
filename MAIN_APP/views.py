@@ -8,6 +8,11 @@ from django.contrib.auth import logout
 
 # Create your views here.
 def index(request):
+    bookname = Book.objects.all().values()
+    context = {
+        'booknames': bookname,
+    }
+    return render(request, 'homepage/homepage.html', context)
     if request.method == "GET":
         return render(request, 'homepage/homepage.html',
         {'is_user_authenticated': request.user.is_authenticated,
@@ -42,8 +47,15 @@ def sign_out(request):
 
 def testing(request):
   mybook = Book.objects.all().values()
-  template = loader.get_template('template.html')
+  template = loader.get_template('menu.html')
   context = {
     'mybooks': mybook,
   }
   return HttpResponse(template.render(context, request))
+
+def menu(request):
+    name = Book.objects.all().values().reverse()
+    context = {
+        'names': name,
+    }
+    return render(request, 'homepage/homepage.html', context)

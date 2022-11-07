@@ -11,7 +11,7 @@ from MAIN_APP import views as main_app
 def register(request):
     print(request.method)
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect('MAIN_APP:home')
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -28,8 +28,8 @@ def register(request):
 
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('/')
-    return render(request, 'register/templates/sign_up_and_in/sign_up.html', {})
+        return redirect('MAIN_APP:home')
+    return render(request, 'sign_up_and_in/sign_up.html', {})
 
 def log_in(request):
     if request.method == 'POST':
