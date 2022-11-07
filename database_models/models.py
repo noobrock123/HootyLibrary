@@ -9,41 +9,32 @@ import random as rand
 
 
 class CustomAccountManager(BaseUserManager):
-    def user_random_id(self, **other_fields):
-        if 'user_id' in other_fields and other_fields['user_id']:
-            return other_fields['user_id']
+    def user_random_id(self):
         rand_id = hex(rand.randint(0, pow(16, 8)))
         while User.objects.filter(pk=rand_id).exists():
             rand_id = hex(rand.randint(0, pow(16, 8)))
         return rand_id
 
-    def create(self, username, email, password, **other_fields):
-        self.create_user(username, email, password, **other_fields)
+    def create(self, username, email, password):
+        self.create_user(username, email, password)
 
-    def create_user(self, username, email, password, **other_fields):
+    def create_user(self, username, email, password):
         
         email = self.normalize_email(email)
         
-        other_fields['user_id'] = self.user_random_id(**other_fields)
-        print(other_fields['user_id'])
-        user = self.model(user_id=other_fields['user_id'],username=username, email=email, **other_fields)
+        user = self.model(user_id=self.user_random_id(),username=username, email=email)
         user.set_password(password)
 
         user.save()
         return user
 
-    def create_superuser(self, username, email, password, **other_fields):
-
-        other_fields.setdefault('is_staff', True)
-        other_fields.setdefault('is_superuser', True)
-        other_fields.setdefault('is_active', True)
-
-        if other_fields.get('is_staff') is not True:
-            raise ValueError('Admin must be assigned to is_staff=True.')
-        if other_fields.get('is_superuser') is not True:
-            raise ValueError('Admin must be assigned to is_superuser=True.')
-    
-        return self.create_user(username, email, password, **other_fields)
+    def create_superuser(self, username, email, password):
+        user = self.create_user(username, email, password)
+        user.is_staff = 1
+        user.is_staff = 1
+        user.is_superuser = 1
+        user.save()
+        return user
 
 
 def get_profile_pic_path(instance, file):

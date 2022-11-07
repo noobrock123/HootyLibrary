@@ -7,7 +7,6 @@ from .models import *
 class CreateUserTestCase(TestCase):
     def setUp(self) -> None:
         user1 = User.objects.create_user(
-            user_id='0x79521458',
             username='user1',
             password='password',
             email='user1@email.email'
@@ -67,36 +66,6 @@ class CreateUserTestCase(TestCase):
 
         )
 
-    def test_user_id_is_unique(self):
-        with self.assertRaises(Exception) as raised:
-            user2 = User.objects.create_user(
-                user_id='0x79521458',
-                username='user2',
-                password='password',
-                email='user2@email.email'
-            )
-        self.assertEqual(ValidationError, type(raised.exception))
-
-    def test_user_id_generate_when_null(self):
-
-        user2 = User.objects.create_user(
-            user_id=None,
-            username='user2',
-            password='password',
-            email='user2@email.email'
-        )
-        self.assertNotEqual(None, user2.user_id)
-
-    def test_user_id_generate_when_blank(self):
-
-        user2 = User.objects.create_user(
-            user_id='',
-            username='user2',
-            password='password',
-            email='user2@email.email'
-        )
-        self.assertNotEqual('', user2.user_id)
-
     def test_username_is_unique(self):
         with self.assertRaises(Exception) as raised:
             user2 = User.objects.create_user(
@@ -136,7 +105,7 @@ class CreateUserTestCase(TestCase):
     def test_email_is_unique(self):
         with self.assertRaises(Exception) as raised:
             User.objects.create_user(
-                user_id='0x79521457',
+                
                 username='user2',
                 password='password',
                 email='user1@email.email'
@@ -146,7 +115,7 @@ class CreateUserTestCase(TestCase):
     def test_email_is_in_email_form(self):
         with self.assertRaises(Exception) as raised:
             User.objects.create_user(
-                user_id='0x79521457',
+                
                 username='user2',
                 password='password',
                 email='user@email'
