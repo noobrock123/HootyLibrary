@@ -14,39 +14,41 @@
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
-                <a href="#" class="sub-menu-link">
+                <a href="../menu/" class="sub-menu-link">
                     <p>Undiscovered</p>
                     <span>></span>
                 </a>
-                <a href="#" class="sub-menu-link">
+                <a href="../menu/" class="sub-menu-link">
                     <p>Popular today</p>
                     <span>></span>
-                </a>
-                <a href="#" class="sub-menu-link">
+                </a>          
+                <a href="../menu/" class="sub-menu-link">
                     <p>Popular this week</p>
                     <span>></span>
-                </a>
-                <a href="#" class="sub-menu-link">
+                    </a>
+                <a href="../menu/" class="sub-menu-link">
                     <p>Highest rating today</p>
                     <span>></span>
                 </a>
-                <a href="#" class="sub-menu-link">
+                <a href="../menu/" class="sub-menu-link">
                     <p>Highest rating this week</p>
                     <span>></span>
                 </a>
-                <a href="#" class="sub-menu-link">
+                <a href="../menu/" class="sub-menu-link">
                     <p>Recently update</p>
                     <span>></span>
                 </a>
             </div>
         </div>
-        <div class="nav-middle flex-div">
-            <div action="{% url 'MAIN_APP:search' %}" class="search">
-                <input class="srch" type="search" name="" placeholder="Search">
-                <a href="#"> <button class="btn"><img src="{% static 'homepage/images/search.png' %}"></button></a>
+        <form action="{% url 'MAIN_APP:search' %}" class="" method="get" role="search">
+            <div class="nav-middle flex-div">
+                <div action="{% url 'MAIN_APP:search' %}" class="search">
+                    <input class="srch" type="search" name="q" placeholder="Search">
+                    <button class="btn"><img src="{% static 'homepage/images/search.png' %}"></button>
+                </div>
+                <img src="{% static 'homepage/images/filter.png' %}" class="filter" onclick="toggleFilter()">
             </div>
-            <img src="{% static 'homepage/images/filter.png' %}" class="filter" onclick="toggleFilter()">
-        </div>
+        </form>
         <div class="sub-filter-wrap" id="subFilter">
             <div class="sub-filter">
                 <a class="sub-filter-link">
@@ -170,16 +172,18 @@
                     <p class="product-short-description">Its long story..</p>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card2.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
+            {% for x in booknames %}
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ x.thumbnail }}" class="product-thumb"> {{ x.thumbnail }}
+                        <button class="card-btn">Open Me</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ x.book_name }}</h2>
+                        <p class="product-short-description">Its long story..</p>
+                    </div>
                 </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
+            {% endfor %}
             <div class="product-card">
                 <div class="product-image">
                     <img src="images/card3.jpg" class="product-thumb">
@@ -198,66 +202,6 @@
                 <div class="product-info">
                     <h2 class="product-brand">BOOK</h2>
                     <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card5.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card6.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card7.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card8.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card9.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card10.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">a short line about the cloth..</p>
                 </div>
             </div>
         </div>
@@ -329,46 +273,6 @@
                     <p class="product-short-description">Its long story..</p>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card7.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card8.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card9.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card10.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">a short line about the cloth..</p>
-                </div>
-            </div>
         </div>
 
     </section>
@@ -406,76 +310,6 @@
                 <div class="product-info">
                     <h2 class="product-brand">BOOK</h2>
                     <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card4.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card5.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card6.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card7.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card8.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card9.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card10.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">a short line about the cloth..</p>
                 </div>
             </div>
         </div>
