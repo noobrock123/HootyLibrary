@@ -12,7 +12,7 @@ def index(request):
     context = {
         'booknames': bookname,
     }
-    return render(request, 'homepage/homepage.html', context)
+    #return render(request, 'homepage/homepage.html', context)
     if request.method == "GET":
         return render(request, 'homepage/homepage.html',
         {'is_user_authenticated': request.user.is_authenticated,
@@ -39,6 +39,10 @@ def create_book(request):
     if request.method == "GET":
         if not request.user.is_authenticated:
             return redirect('regitser:log_in')
+
+def edit_profile(request):
+    user_id = request.user.user_id
+    return redirect('userProfile:editProfile', user_id)
 
 def sign_out(request):
     if request.method == "GET":

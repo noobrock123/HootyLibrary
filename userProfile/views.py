@@ -23,7 +23,7 @@ def userProfile(request, user_id):
     #     # in case user that access this profile is other user
     #     pass
     context = {
-        'my_books': Book.objects.filter(author=user.user_id),
+        'my_books': Book.objects.filter(author=user),
         'bio': user.get_bio(),
         'username': user.get_username(),
         'gender': user.get_about_self()[0],
@@ -33,7 +33,7 @@ def userProfile(request, user_id):
         'user_picture': user_picture(request, user_id)
 
     }
-    return render(request, 'userProfile/templates/userProfile/userProfile.html', context)
+    return render(request, 'userProfile/userProfile.html', context)
 
 
 @login_required()
@@ -75,6 +75,7 @@ def editProfile(request, user_id):
             user.donation_link = donation_link
             user.profile_pic = profile_pic if profile_pic != None else user.profile_pic
             user.save()
-            return redirect('userProfile', user_id=user.user_id)
+            #return redirect('userProfile', user_id=user.user_id)
+            return redirect('MAIN_APP:home')
 
     return render(request, 'userProfile/templates/userProfile/editProfile.html', context)

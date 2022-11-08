@@ -77,25 +77,35 @@
         <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu">
                <div class="user-info">
-                   <img src="{% static 'homepage/images/user.png' %}">
+                    {% if is_user_authenticated %}
+                    <a href="{% url 'userProfile:userProfile' user.user_id %}">
+                    <img onclick="#"src="{% static 'homepage/image/user.png' %}">
+                    </a>
+                    {% else %}
+                    <img src="{% static 'homepage/image/user.png' %}">
+                    {% endif %}
                     {% if not is_user_authenticated %} 
                     <h3>Annoymous</h3>
                     {% else %}
-                    <h3>{{ user.username }}</h3>
+                        {% if user.alias_name %}
+                        <h3>{{ user.alias_name }}</h3>
+                        {% else %}
+                        <h3>{{ user.username }}</h3>
+                        {% endif %}
                     {% endif %}
                </div>
                <hr>
                 {% if is_user_authenticated %} 
-               <a href="#" class="sub-menu-link">
+                <a href="{% url 'userProfile:editProfile' user.user_id %}" class="sub-menu-link">
                    <img src="{% static 'homepage/images/profile.png' %}">
                    <p>Edit Profile</p>
                    <span>></span>
-               </a>
-               <a href="{% url 'MAIN_APP:sign_out' %}" class="sub-menu-link">
+                </a>
+                <a href="{% url 'MAIN_APP:sign_out' %}" class="sub-menu-link">
                    <img src="{% static 'homepage/images/sign out.png' %}">
                    <p>Sign Out</p>
                    <span>></span>
-               </a>
+                </a>
                {% else %}
                <a href="{% url 'register:log_in' %}" class="sub-menu-link">
                     <img src="{% static 'homepage/images/sign in.png' %}">

@@ -38,7 +38,8 @@ def log_in(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-        return redirect('MAIN_APP:home')
+            return redirect('MAIN_APP:home')
+        
     return render(request, 'sign_up_and_in/sign_in.html')
 
 # def home(request):
