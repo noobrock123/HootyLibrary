@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.core.validators import validate_email, EmailValidator
 from django.core.exceptions import ValidationError
 import random as rand
-
+from django.dispatch import receiver
 
 class CustomAccountManager(BaseUserManager):
     def user_random_id(self):
@@ -16,13 +16,19 @@ class CustomAccountManager(BaseUserManager):
         return rand_id
 
     def create(self, username, email, password):
+
         self.create_user(username, email, password)
 
     def create_user(self, username, email, password):
         
         email = self.normalize_email(email)
         
-        user = self.model(user_id=self.user_random_id(),username=username, email=email)
+        user = self.model(
+            user_id=self.user_random_id(),
+            username=username, 
+            email=email,
+            date_joined=timezone.now()
+            )
         user.set_password(password)
 
         user.save()
@@ -47,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     alias_name = models.CharField(max_length=40, blank=True)
     email = models.EmailField(_('Email'), unique=True,
                               validators=[validate_email])
-    date_joined = models.DateTimeField(default=timezone.now)
+    date_joined = models.DateTimeField(default=timezone.now,editable=False)
     gender = models.CharField(max_length=16, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     occupation = models.CharField(max_length=32, null=True, blank=True)
@@ -64,10 +70,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
-
-    
+    __original_date_joined = None
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__original_date_joined = self.date_joined
+        # self.__original_user_id = self.user_id
 
     def save(self, *args, **kwargs):
+        # print(self.date_joined, self.__original_date_joined)
+        # self.user_id = self.__original_user_id
+        self.date_joined = self.__original_date_joined
         self.full_clean()
         super().save()
 
@@ -79,7 +91,13 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.user_id) + ": " + str(self.username)
-
+# @receiver(pre_save, sender=User)
+# def presave_user(sender, instance):
+#     if not instance.user_id is None:
+#         prev = User.objects.get(instance.user_id)
+#         if prev.date_joined != instance.date_joined:
+#             raise Exception(_('date_joined can not edit'))
+#             # instance.date_joined = prev.date_joined
 
 
 
@@ -99,15 +117,26 @@ def get_pdf_files_path(instance, file):
     return f"book/{instance.book_id}/pdfs/{file}"
 
 class BookManager(models.Manager):
-    def get_generate_book_id(self, **other_fields):
-        if 'book_id' in other_fields and other_fields['book_id']:
-            return other_fields['book_id']
+    def get_generate_book_id(self,):
         rand_id = hex(rand.randint(0, pow(16, 8)))
         while Book.objects.filter(pk=rand_id).exists():
             rand_id = hex(rand.randint(0, pow(16, 8)))
         return rand_id
-    def create(self, **kwargs):
-        book = self.model(book_id=self.get_generate_book_id(kwargs),**kwargs)
+    def create(self, book_name, author, book_type, genres, **others):
+        others.pop('date_created',None)
+        book = self.model(
+            book_id=self.get_generate_book_id(),
+            book_name=book_name,
+            author=author, 
+            book_type=book_type,
+            date_created=timezone.now(),
+            **others
+            )
+        for genre in genres:
+            if Genre.objects.filter(genre_list=genre).exists():
+                book.genres.add(genre)
+            else:
+                raise ValueError(_('Your genres does not exit'))
         book.save()
         return book
 class Book(models.Model):
@@ -129,7 +158,9 @@ class Book(models.Model):
     def __init__(self):
         super(Book, self).__init__()
     '''
-
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.__original_date_created = self.date_created
     
 
     def get_reviews(self):
@@ -153,23 +184,12 @@ class Book(models.Model):
         return book.user_refer.all()
 
     def save(self, *args, **kwargs):
+        self.date_created = self.__original_date_created
         self.full_clean()
         super(Book, self).save()
 
     def __str__(self):
         return str(self.book_id) + ": " + str(self.book_name)
-
-
-def pre_save_book_random_id(sender, instance, *args, **kwargs):
-    if not instance.book_id:
-        klass = instance.__class__
-        rand_id = hex(rand.randint(0, pow(16, 8)))
-        while klass.objects.filter(book_id=rand_id).exists():
-            rand_id = hex(rand.randint(0, pow(16, 8)))
-        instance.book_id = rand_id
-
-
-pre_save.connect(pre_save_book_random_id, sender=Book)
 
 
 class Read(models.Model):
