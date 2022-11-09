@@ -53,15 +53,16 @@ def create_book(request):
         'genres': Genre.objects.all(),
     }
     if request.method == 'POST':
-        print(request.FILES)
-        print(request.POST)
+        # print(request.FILES)
+        # print(request.POST)
         book_name = request.POST.get('book_name')
         description = request.POST.get('description')
         book_type = request.POST.get('book_type')
         genres = request.POST.getlist('genres')
         thumbnail = request.FILES.get('thumbnail')
         pdf_files = request.FILES.get('pdf_files')
-        print(thumbnail)
+        # print(thumbnail)
+        print(type(pdf_files))
         create=True
         if not book_name:
             create=False
@@ -78,11 +79,9 @@ def create_book(request):
             author=request.user,
             thumbnail = thumbnail,
             pdf_files = pdf_files,
+            genres=genres,
         )
-
-        print(genres)
-        for i in genres:
-            book.genres.add(Genre.objects.get(genre_list=i))
+        # print(book.pdf_files)
         return redirect('/')
             
     return render(request, 'book_views/templates/book_views/create_book.html', context)

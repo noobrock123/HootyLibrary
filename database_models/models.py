@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 import random as rand
 from django.dispatch import receiver
 
+
 class CustomAccountManager(BaseUserManager):
     def user_random_id(self):
         rand_id = hex(rand.randint(0, pow(16, 8)))
@@ -20,15 +21,15 @@ class CustomAccountManager(BaseUserManager):
         self.create_user(username, email, password)
 
     def create_user(self, username, email, password):
-        
+
         email = self.normalize_email(email)
-        
+
         user = self.model(
             user_id=self.user_random_id(),
-            username=username, 
+            username=username,
             email=email,
             date_joined=timezone.now()
-            )
+        )
         user.set_password(password)
 
         user.save()
@@ -53,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     alias_name = models.CharField(max_length=40, blank=True)
     email = models.EmailField(_('Email'), unique=True,
                               validators=[validate_email])
-    date_joined = models.DateTimeField(default=timezone.now,editable=False)
+    date_joined = models.DateTimeField(default=timezone.now, editable=False)
     gender = models.CharField(max_length=16, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     occupation = models.CharField(max_length=32, null=True, blank=True)
@@ -71,6 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
     __original_date_joined = None
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__original_date_joined = self.date_joined
@@ -100,8 +102,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 #             # instance.date_joined = prev.date_joined
 
 
-
-
 class Genre(models.Model):
     genre_list = models.CharField(primary_key=True, max_length=20)
 
@@ -116,29 +116,37 @@ def get_thumbnail_path(instance, file):
 def get_pdf_files_path(instance, file):
     return f"book/{instance.book_id}/pdfs/{file}"
 
+
 class BookManager(models.Manager):
     def get_generate_book_id(self,):
         rand_id = hex(rand.randint(0, pow(16, 8)))
         while Book.objects.filter(pk=rand_id).exists():
             rand_id = hex(rand.randint(0, pow(16, 8)))
         return rand_id
+
     def create(self, book_name, author, book_type, genres, **others):
-        others.pop('date_created',None)
         book = self.model(
             book_id=self.get_generate_book_id(),
-            book_name=book_name,
-            author=author, 
-            book_type=book_type,
+            description=others.get('description', ''),
             date_created=timezone.now(),
-            **others
-            )
+            book_type=book_type,
+            author=author,
+            book_name=book_name,
+            thumbnail=others.get('thumbnail', None),
+            pdf_files=others.get('pdf_files', None)
+        )
+        book.save()
+        # print(book.thumbnail)
+        book.genres.add(Genre.objects.first())
         for genre in genres:
+
             if Genre.objects.filter(genre_list=genre).exists():
                 book.genres.add(genre)
             else:
                 raise ValueError(_('Your genres does not exit'))
-        book.save()
         return book
+
+
 class Book(models.Model):
     book_id = models.CharField(primary_key=True, max_length=10)
     book_name = models.CharField(max_length=60, default='Untitled')
@@ -158,10 +166,10 @@ class Book(models.Model):
     def __init__(self):
         super(Book, self).__init__()
     '''
+
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.__original_date_created = self.date_created
-    
 
     def get_reviews(self):
         return Review.objects.filter(book_refer=self)
