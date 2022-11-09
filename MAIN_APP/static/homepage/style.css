@@ -397,6 +397,21 @@ nav {
   margin: 15px 0 10px;
 }
 
+.btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #575757;
+  margin: 12px 0;
+}
+
+.btn:hover {background: #eee;}
+
 .sub-menu-link {
   display: flex;
   align-items: center;

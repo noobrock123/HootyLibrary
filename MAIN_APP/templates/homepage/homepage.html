@@ -14,27 +14,27 @@
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
-                <a href="../menu/" class="sub-menu-link">
+                <a href="{% url 'MAIN_APP:menu' id=0 %}" class="sub-menu-link" name>
                     <p>Undiscovered</p>
                     <span>></span>
                 </a>
-                <a href="../menu/" class="sub-menu-link">
+                <a href="{% url 'MAIN_APP:menu' id=1 %}" class="sub-menu-link">
                     <p>Popular today</p>
                     <span>></span>
                 </a>          
-                <a href="../menu/" class="sub-menu-link">
+                <a href="{% url 'MAIN_APP:menu' id=2 %}" class="sub-menu-link">
                     <p>Popular this week</p>
                     <span>></span>
                     </a>
-                <a href="../menu/" class="sub-menu-link">
+                <a href="{% url 'MAIN_APP:menu' id=3 %}" class="sub-menu-link">
                     <p>Highest rating today</p>
                     <span>></span>
                 </a>
-                <a href="../menu/" class="sub-menu-link">
+                <a href="{% url 'MAIN_APP:menu' id=4 %}" class="sub-menu-link">
                     <p>Highest rating this week</p>
                     <span>></span>
                 </a>
-                <a href="../menu/" class="sub-menu-link">
+                <a href="{% url 'MAIN_APP:menu' id=5 %}" class="sub-menu-link">
                     <p>Recently update</p>
                     <span>></span>
                 </a>

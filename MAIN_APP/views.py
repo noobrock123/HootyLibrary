@@ -53,9 +53,21 @@ def testing(request):
   }
   return HttpResponse(template.render(context, request))
 
-def menu(request):
-    name = Book.objects.all().values().reverse()
+def menu(request, id):
+    name = Book.objects.all().values()
     context = {
         'names': name,
     }
-    return render(request, 'homepage/homepage.html', context)
+    if id == 0:
+        return render(request, 'homepage/menu.html', {'m':'Undiscoveredy'})
+    if id == 1:
+        return render(request, 'homepage/menu.html', {'m':'Popular today'})
+    if id == 2:
+        return render(request, 'homepage/menu.html', {'m':'Popular this week'})
+    if id == 3:
+        return render(request, 'homepage/menu.html', {'m':'Highest rating today'})
+    if id == 4:
+        return render(request, 'homepage/menu.html', {'m':'Highest rating this week'})
+    if id == 5:
+        return render(request, 'homepage/menu.html', {'m':'Recently update'})
+    return render(request, 'homepage/menu.html', context)
