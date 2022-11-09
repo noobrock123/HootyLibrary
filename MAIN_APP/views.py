@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 
 # Create your views here.
 def index(request):
+    img = Book.objects.values_list('thumbnail')
     bookname = Book.objects.all().values()
     context = {
         'booknames': bookname,
@@ -22,7 +23,7 @@ def about(request):
     return render(request, 'about/about.html')
 
 def book(request):
-    return render(request, )
+    return render(request, 'book_views/index.html')
 
 def searchbar(request):
     if request.method == "GET":
@@ -39,6 +40,8 @@ def create_book(request):
     if request.method == "GET":
         if not request.user.is_authenticated:
             return redirect('regitser:log_in')
+        else:
+            return render(request, 'book_views/create_book.html' )
 
 def sign_out(request):
     if request.method == "GET":
@@ -47,7 +50,7 @@ def sign_out(request):
 
 def testing(request):
   mybook = Book.objects.all().values()
-  template = loader.get_template('menu.html')
+  template = loader.get_template('test.html')
   context = {
     'mybooks': mybook,
   }
