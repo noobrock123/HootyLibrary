@@ -71,7 +71,9 @@
             </div>
         </div>
         <div class="nav-right flex-div">
-            <img src="{% static "homepage/images/addbook.png" %}" class="addbook">
+            <a href="{% url 'MAIN_APP:crt_book' %}" >
+            <img src="{% static 'homepage/images/addbook.png' %}" class="addbook">
+            </a>
             <img src="{% static 'homepage/images/img1.jpg' %}" class="user-icon" onclick="toggleMenu()">
         </div>
         <div class="sub-menu-wrap" id="subMenu">
@@ -165,7 +167,8 @@
             <div class="product-card">
                 <div class="product-image">
                     <img src="{% static 'homepage/images/card1.jpg' %}" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
+                    <a href="{% url 'MAIN_APP:book' %}">
+                    <button class="card-btn">Open Me</button></a>
                 </div>
                 <div class="product-info">
                     <h2 class="product-brand">BOOK</h2>
