@@ -73,11 +73,11 @@ class BookTestCase(TestCase):
             )
 
     def test_book_create_correct_by_others(self):
+        with open('database_models/data_test/RH_StudyGuide_V2.pdf', 'rb') as pdf_files_content, open(
+            'database_models/data_test/RH_StudyGuide.jpg', 'rb') as thumbnail_content:
 
-        pdf_files = SimpleUploadedFile(name='RH_StudyGuide_V2.pdf', content=open(
-            'database_models/data_test/RH_StudyGuide_V2.pdf', 'rb').read(), content_type='application/pdf')
-        thumbnail = SimpleUploadedFile(name='RH_StudyGuide.jpg', content=open(
-            'database_models/data_test/RH_StudyGuide.jpg', 'rb').read(), content_type='image/jpeg')
+            pdf_files = SimpleUploadedFile(name='RH_StudyGuide_V2.pdf', content=pdf_files_content.read(), content_type='application/pdf')
+            thumbnail = SimpleUploadedFile(name='RH_StudyGuide.jpg', content=thumbnail_content.read(), content_type='image/jpeg')
 
         book4 = Book.objects.create(
             book_name='book4',
@@ -88,12 +88,11 @@ class BookTestCase(TestCase):
             thumbnail=thumbnail,
             pdf_files=pdf_files,
         )
-        with self.subTest():
-            with open(book4.thumbnail.path, 'rb') as thumbnail1, open('database_models/data_test/RH_StudyGuide.jpg', 'rb').read() as thumbnail2:
-                self.assertEqual(thumbnail1.read(), thumbnail2.read())
-        with self.subTest():
-            with open(book4.pdf_files.path, 'rb') as pdf_files1, open('database_models/data_test/RH_StudyGuide.jpg', 'rb').read() as pdf_files2:
-                self.assertEqual(pdf_files1.read(), pdf_files2.read())
+        with self.subTest(),open(book4.thumbnail.path, 'rb') as thumbnail1, open('database_models/data_test/RH_StudyGuide.jpg', 'rb') as thumbnail2:
+            pass
+            self.assertEqual(thumbnail1.read(), thumbnail2.read())
+        with self.subTest(),open(book4.pdf_files.path, 'rb') as pdf_files1, open('database_models/data_test/RH_StudyGuide_V2.pdf', 'rb') as pdf_files2:
+            self.assertEqual(pdf_files1.read(), pdf_files2.read())
 
         with self.subTest():
             self.assertQuerysetEqual(self.book1.genres.all(), [

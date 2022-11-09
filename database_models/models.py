@@ -76,11 +76,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__original_date_joined = self.date_joined
-        # self.__original_user_id = self.user_id
 
     def save(self, *args, **kwargs):
-        # print(self.date_joined, self.__original_date_joined)
-        # self.user_id = self.__original_user_id
+
         self.date_joined = self.__original_date_joined
         self.full_clean()
         super().save()
@@ -93,13 +91,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.user_id) + ": " + str(self.username)
-# @receiver(pre_save, sender=User)
-# def presave_user(sender, instance):
-#     if not instance.user_id is None:
-#         prev = User.objects.get(instance.user_id)
-#         if prev.date_joined != instance.date_joined:
-#             raise Exception(_('date_joined can not edit'))
-#             # instance.date_joined = prev.date_joined
 
 
 class Genre(models.Model):
@@ -233,10 +224,19 @@ class Review(models.Model):
     msg = models.TextField(max_length=500)
 
     is_edited = models.BooleanField(default=False)
-    last_edited = models.DateTimeField(null=True)
+    last_edited = models.DateTimeField(null=True, blank=True)
+
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.__original_review_date = self.review_date
 
     class Meta:
         unique_together = ('reviewer', 'book_refer',)
+
+    def save(self, *args, **kwargs):
+        self.review_date = self.__original_review_date
+        self.full_clean()
+        super().save()
 
     def get_reviewer(self):
         return self.reviewer
