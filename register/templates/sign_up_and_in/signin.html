@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up Form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'sign_up/style.css' %}">
 </head>
 <body>
     <div class="screen">
@@ -18,11 +19,11 @@
             <div class="right-box">
                 <form>
                     <h1>Sign In</h1>
-                    <input type="text" placeholder="Username Or E-mail" required class="input-box">
-                    <input type="text" placeholder="Password" required class="input-box">
+                    <input type="text" placeholder="Username Or E-mail" name="name_email" required class="input-box">
+                    <input type="text" placeholder="Password" name="password" required class="input-box">
                     <div class="link-signup">Forgot Password? <a href="#">Click Me.</a></div>
                     <button type="submit">Sign In</button>
-                    <p class="link-signup">Don't have an account? <a href="#">Sign up.</a></p>
+                    <p class="link-signup">Don't have an account? <a href="{% url 'registeration:log_in' %}">Sign up.</a></p>
                 </form>
             </div>
         </div>
