@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
@@ -14,43 +15,50 @@
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
-                <a href="../menu/" class="sub-menu-link">
+                <a href="../menu/" class="sub-tab-link">
                     <p>Undiscovered</p>
-                    <span>></span>
                 </a>
-                <a href="../menu/" class="sub-menu-link">
+                <a href="../menu/" class="sub-tab-link">
                     <p>Popular today</p>
-                    <span>></span>
-                </a>          
-                <a href="../menu/" class="sub-menu-link">
+                </a>
+                <a href="../menu/" class="sub-tab-link">
                     <p>Popular this week</p>
-                    <span>></span>
-                    </a>
-                <a href="../menu/" class="sub-menu-link">
+                </a>
+                <a href="../menu/" class="sub-tab-link">
                     <p>Highest rating today</p>
-                    <span>></span>
                 </a>
-                <a href="../menu/" class="sub-menu-link">
+                <a href="#" class="sub-tab-link">
                     <p>Highest rating this week</p>
-                    <span>></span>
                 </a>
-                <a href="../menu/" class="sub-menu-link">
+                <a href="#" class="sub-tab-link">
                     <p>Recently update</p>
-                    <span>></span>
                 </a>
             </div>
         </div>
-        <form action="{% url 'MAIN_APP:search' %}" class="" method="get" role="search">
-            <div class="nav-middle flex-div">
-                <div action="{% url 'MAIN_APP:search' %}" class="search">
-                    <input class="srch" type="search" name="q" placeholder="Search">
-                    <button class="btn"><img src="{% static 'homepage/images/search.png' %}"></button>
-                </div>
-                <img src="{% static 'homepage/images/filter.png' %}" class="filter" onclick="toggleFilter()">
+        <div class="nav-middle flex-div">
+            <div class="search-box flex-div">
+                <input class="search" type="text" placeholder="Search">
+                <a href="#"> <button class="button"><img src="{% static 'homepage/images/search.png' %}" ></button></a>
             </div>
-        </form>
+            <img src="{% static 'homepage/images/filter.png' %}" class="filter-icon" onclick="toggleFilter()">
+        </div>
         <div class="sub-filter-wrap" id="subFilter">
             <div class="sub-filter">
+                <div class="select-menu">
+                    <div class="select-btn">
+                        <span class="sBtn-text">Select your option</span>
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+            
+                    <ul class="options">
+                        <li class="option">
+                            <span class="option-text">Education</span>
+                        </li>
+                        <li class="option">
+                            <span class="option-text">Entertain</span>
+                        </li>
+                    </ul>
+                </div>
                 <a class="sub-filter-link">
                     <input type="checkbox" name="">
                     <p>Oldest to Latest</p>
@@ -70,103 +78,61 @@
                 <input type="submit" value="Confirm">
             </div>
         </div>
-        <div class="nav-right flex-div">
-            <img src="{% static "homepage/images/addbook.png" %}" class="addbook">
+        <div class="nav-right ">
+            <img src="{% static 'homepage/images/addbook.png' %}" class="addbook-icon">
             <img src="{% static 'homepage/images/img1.jpg' %}" class="user-icon" onclick="toggleMenu()">
         </div>
         <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu">
                <div class="user-info">
-                    {% if is_user_authenticated %}
-                    <a href="{% url 'userProfile:userProfile' user.user_id %}">
-                    <img onclick="#"src="{% static 'homepage/image/user.png' %}">
-                    </a>
-                    {% else %}
-                    <img src="{% static 'homepage/image/user.png' %}">
-                    {% endif %}
                     {% if not is_user_authenticated %} 
+                    <img src="{% static 'homepage/images/img1.jpg' %}">
+                    {% else %}
+                    <img src="{% static 'homepage/images/img1.jpg' %}">
+                    {% endif %}
+                    {% if not is_user_authenticated %}
                     <h3>Annoymous</h3>
                     {% else %}
                         {% if user.alias_name %}
-                        <h3>{{ user.alias_name }}</h3>
+                        <h3>{{user.alias_name}}</h3>
                         {% else %}
-                        <h3>{{ user.username }}</h3>
+                        <h3>{{user.username}}</h3>
                         {% endif %}
                     {% endif %}
-               </div>
-               <hr>
-                {% if is_user_authenticated %} 
+                </div>
+                <hr>
+                {% if is_user_authenticated %}
                 <a href="{% url 'userProfile:editProfile' user.user_id %}" class="sub-menu-link">
                    <img src="{% static 'homepage/images/profile.png' %}">
                    <p>Edit Profile</p>
-                   <span>></span>
                 </a>
-                <a href="{% url 'MAIN_APP:sign_out' %}" class="sub-menu-link">
-                   <img src="{% static 'homepage/images/sign out.png' %}">
-                   <p>Sign Out</p>
-                   <span>></span>
-                </a>
-               {% else %}
-               <a href="{% url 'register:log_in' %}" class="sub-menu-link">
-                    <img src="{% static 'homepage/images/sign in.png' %}">
-                    <p>Sign In</p>
-                    <span>></span>
-                </a>
-               <a href="{% url 'register:regis' %}" class="sub-menu-link">
+                {% else %}
+                <a href="{% url 'register:regis' %}" class="sub-menu-link">
                    <img src="{% static 'homepage/images/sign up.png' %}">
                    <p>Sign Up</p>
-                   <span>></span>
                </a>
                {% endif %}
                <a href="{% url 'MAIN_APP:about' %}" class="sub-menu-link">
                     <img src="{% static 'homepage/images/about.png' %}">
                     <p>About</p>
-                    <span>></span>
                 </a>
                 <a href="#" class="sub-menu-link">
                     <img src="{% static 'homepage/images/setting.png' %}">
                     <p>Settings & Support</p>
-                    <span>></span>
+
                 </a>
+                {% if is_user_authenticated %}
+                <form action="{% url 'MAIN_APP:sign_out' %}">
+                    <button type="submit" class="out-button">Sign Out</button>
+                </form>
+                {% else %}
+                <form action="{% url 'register:log_in' %}">
+                    <button type="submit" class="in-button">Sign In</button>
+                </form>
+                {% endif %}
             </div>
         </div>
     </nav>
-
-    <div class="container">
-        <div class="banner">
-            <input type="radio" name="radio-btn" id="radio1">
-            <input type="radio" name="radio-btn" id="radio2">
-            <input type="radio" name="radio-btn" id="radio3">
-            <input type="radio" name="radio-btn" id="radio4">
-            
-            <div class="slide first">
-                <img src="{% static 'homepage/images/banner.png' %}" alt="">
-              </div>
-              <div class="slide">
-                <img src="{% static 'homepage/images/banner.png' %}" alt="">
-              </div>
-              <div class="slide">
-                <img src="{% static 'homepage/images/banner.png' %}" alt="">
-              </div>
-              <div class="slide">
-                <img src="{% static 'homepage/images/banner.png' %}" alt="">
-              </div>
-
-              <div class="navigation-auto">
-                <div class="auto-btn1"></div>
-                <div class="auto-btn2"></div>
-                <div class="auto-btn3"></div>
-                <div class="auto-btn4"></div>
-              </div>
-        </div>
-        <div class="navigation-manual">
-            <label for="radio1" class="manual-btn"></label>
-            <label for="radio2" class="manual-btn"></label>
-            <label for="radio3" class="manual-btn"></label>
-            <label for="radio4" class="manual-btn"></label>
-        </div>
-    </div>
-
     <section class="product"> 
         <h2 class="product-category">Popular Today</h2>
         <button class="pre-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
@@ -182,21 +148,9 @@
                     <p class="product-short-description">Its long story..</p>
                 </div>
             </div>
-            {% for x in bookname %}
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ x.thumbnail }}" class="product-thumb"> {{ x.thumbnail }}
-                        <button class="card-btn">Open Me</button>
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-brand">{{ x.book_name }}</h2>
-                        <p class="product-short-description">Its long story..</p>
-                    </div>
-                </div>
-            {% endfor %}
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card3.jpg' %}" class="product-thumb">
+                    <img src="images/card2.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -206,12 +160,82 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card4.jpg' %}" class="product-thumb">
+                    <img src="images/card3.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
                     <h2 class="product-brand">BOOK</h2>
                     <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card4.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card5.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card6.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card7.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card8.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card9.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card10.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">a short line about the cloth..</p>
                 </div>
             </div>
         </div>
@@ -220,12 +244,12 @@
 
     <section class="product"> 
         <h2 class="product-category">Latest Book</h2>
-        <button class="pre-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
-        <button class="nxt-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
+        <button class="pre-btn"><img src="images/arrow.png"></button>
+        <button class="nxt-btn"><img src="images/arrow.png"></button>
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card1.jpg' %}" class="product-thumb">
+                    <img src="images/card1.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -235,7 +259,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card2.jpg' %}" class="product-thumb">
+                    <img src="images/card2.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -245,7 +269,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card3.jpg' %}" class="product-thumb">
+                    <img src="images/card3.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -255,7 +279,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card4.jpg' %}" class="product-thumb">
+                    <img src="images/card4.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -265,7 +289,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card5.jpg' %}" class="product-thumb">
+                    <img src="images/card5.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -275,12 +299,52 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card6.jpg' %}" class="product-thumb">
+                    <img src="images/card6.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
                     <h2 class="product-brand">BOOK</h2>
                     <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card7.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card8.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card9.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card10.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">a short line about the cloth..</p>
                 </div>
             </div>
         </div>
@@ -289,12 +353,12 @@
 
     <section class="product"> 
         <h2 class="product-category">Undiscovered Book</h2>
-        <button class="pre-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
-        <button class="nxt-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
+        <button class="pre-btn"><img src="images/arrow.png"></button>
+        <button class="nxt-btn"><img src="images/arrow.png"></button>
         <div class="product-container">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card1.jpg' %}" class="product-thumb">
+                    <img src="images/card1.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -304,7 +368,7 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card2.jpg' %}" class="product-thumb">
+                    <img src="images/card2.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
@@ -314,19 +378,89 @@
             </div>
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{% static 'homepage/images/card3.jpg' %}" class="product-thumb">
+                    <img src="images/card3.jpg" class="product-thumb">
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
                     <h2 class="product-brand">BOOK</h2>
                     <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card4.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card5.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card6.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card7.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card8.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card9.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/card10.jpg" class="product-thumb">
+                    <button class="card-btn">Open Me</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">BOOK</h2>
+                    <p class="product-short-description">a short line about the cloth..</p>
                 </div>
             </div>
         </div>
 
     </section>
 
-    <script type="text/javascript" src="{% static 'homepage/script.js' %}"></script>
+    <script src="{% static 'homepage/script.js' %}"></script>
 
 </body>
 </html>
