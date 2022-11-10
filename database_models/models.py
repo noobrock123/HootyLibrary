@@ -196,7 +196,9 @@ class Read(models.Model):
     user_refer = models.ForeignKey(User, on_delete=models.CASCADE)
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     book_read_latest_time = models.DateTimeField(default=timezone.now)
-
+    def save(self, *args, **kwargs):
+        self.book_read_latest_time = timezone.now()
+        super().save()
     class Meta:
         unique_together = ('user_refer', 'book_refer',)
 
@@ -246,6 +248,12 @@ class Issue(models.Model):
     title = models.CharField(max_length=40)
     msg = models.TextField(max_length=500)
 
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.__original_issue_date = self.issue_date
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save()
 
     def get_attribs(self):
         return (self.issue_date, self.title, self.msg)

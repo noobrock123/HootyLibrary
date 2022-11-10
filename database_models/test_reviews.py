@@ -65,3 +65,5 @@ class ReviewTestCase(TestCase):
                     msg='This is message review2'
                 )
             self.assertEqual(ValidationError, type(raised.exception))
+
+    # def test_review_user_on_delete(self):

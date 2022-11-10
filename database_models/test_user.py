@@ -134,3 +134,19 @@ class UserTestCase(TestCase):
         user1.save()
         post = user1.date_joined
         self.assertEqual(prev, post)
+    def test_user_email_not_empty(self):
+        with self.assertRaises(Exception) as raised:
+            user1 = User.objects.create(
+                username = 'user2',
+                passowrd='password',
+                email=''
+            )
+        self.assertEqual(TypeError, type(raised.exception))
+    def test_user_email_not_None(self):
+        with self.assertRaises(Exception) as raised:
+            user1 = User.objects.create(
+                username = 'user2',
+                passowrd='password',
+                email=None
+            )
+        self.assertEqual(TypeError, type(raised.exception))
