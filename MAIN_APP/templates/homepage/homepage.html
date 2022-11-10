@@ -15,9 +15,14 @@
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
+<<<<<<< HEAD
                 <a href="../menu/" class="sub-tab-link">
+=======
+                <a href="{% url 'MAIN_APP:menu' id=0 %}" class="sub-menu-link" name>
+>>>>>>> origin/main
                     <p>Undiscovered</p>
                 </a>
+<<<<<<< HEAD
                 <a href="../menu/" class="sub-tab-link">
                     <p>Popular today</p>
                 </a>
@@ -25,12 +30,31 @@
                     <p>Popular this week</p>
                 </a>
                 <a href="../menu/" class="sub-tab-link">
+=======
+                <a href="{% url 'MAIN_APP:menu' id=1 %}" class="sub-menu-link">
+                    <p>Popular today</p>
+                    <span>></span>
+                </a>          
+                <a href="{% url 'MAIN_APP:menu' id=2 %}" class="sub-menu-link">
+                    <p>Popular this week</p>
+                    <span>></span>
+                    </a>
+                <a href="{% url 'MAIN_APP:menu' id=3 %}" class="sub-menu-link">
+>>>>>>> origin/main
                     <p>Highest rating today</p>
                 </a>
+<<<<<<< HEAD
                 <a href="#" class="sub-tab-link">
+=======
+                <a href="{% url 'MAIN_APP:menu' id=4 %}" class="sub-menu-link">
+>>>>>>> origin/main
                     <p>Highest rating this week</p>
                 </a>
+<<<<<<< HEAD
                 <a href="#" class="sub-tab-link">
+=======
+                <a href="{% url 'MAIN_APP:menu' id=5 %}" class="sub-menu-link">
+>>>>>>> origin/main
                     <p>Recently update</p>
                 </a>
             </div>
@@ -78,8 +102,10 @@
                 <input type="submit" value="Confirm">
             </div>
         </div>
-        <div class="nav-right ">
-            <img src="{% static 'homepage/images/addbook.png' %}" class="addbook-icon">
+        <div class="nav-right flex-div">
+            <a href="{% url 'MAIN_APP:crt_book' %}" >
+            <img src="{% static 'homepage/images/addbook.png' %}" class="addbook">
+            </a>
             <img src="{% static 'homepage/images/img1.jpg' %}" class="user-icon" onclick="toggleMenu()">
         </div>
         <div class="sub-menu-wrap" id="subMenu">
@@ -141,21 +167,24 @@
             <div class="product-card">
                 <div class="product-image">
                     <img src="{% static 'homepage/images/card1.jpg' %}" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
+                    <a href="{% url 'MAIN_APP:book' %}">
+                    <button class="card-btn">Open Me</button></a>
                 </div>
                 <div class="product-info">
                     <h2 class="product-brand">BOOK</h2>
                     <p class="product-short-description">Its long story..</p>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/card2.jpg" class="product-thumb">
-                    <button class="card-btn">Open Me</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">BOOK</h2>
-                    <p class="product-short-description">Its long story..</p>
+           {% for x in booknames %}
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/media/{{ x.id }}/{{ x.thumbnail }}" class="product-thumb">
+                        <button class="card-btn">Open Me</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">{{ x.book_name }}</h2>
+                        <p class="product-short-description">Its long story..</p>
+                    </div>
                 </div>
             </div>
             <div class="product-card">
