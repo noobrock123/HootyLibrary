@@ -29,18 +29,19 @@ def register(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('MAIN_APP:home')
-    return render(request, 'sign_up_and_in/sign_up.html', {})
+    return render(request, 'sign_up_and_in/signup.html', {})
 
 def log_in(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
+        username = request.POST.get('name_email')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
+            print("logged in!")
             login(request, user)
             return redirect('MAIN_APP:home')
-        
-    return render(request, 'sign_up_and_in/sign_in.html')
+    if request.method == 'GET':
+        return render(request, 'sign_up_and_in/signin.html')
 
 # def home(request):
 #     print(request.user)
