@@ -16,11 +16,11 @@ class CustomAccountManager(BaseUserManager):
             rand_id = hex(rand.randint(0, pow(16, 8)))
         return rand_id
 
-    def create(self, username, email, password):
+    def create(self, username, email, password, **others):
 
-        self.create_user(username, email, password)
+        self.create_user(username, email, password,**others)
 
-    def create_user(self, username, email, password):
+    def create_user(self, username, email, password, **others):
 
         email = self.normalize_email(email)
 
@@ -28,15 +28,16 @@ class CustomAccountManager(BaseUserManager):
             user_id=self.user_random_id(),
             username=username,
             email=email,
-            date_joined=timezone.now()
+            date_joined=timezone.now(),
+            **others
         )
         user.set_password(password)
 
         user.save()
         return user
 
-    def create_superuser(self, username, email, password):
-        user = self.create_user(username, email, password)
+    def create_superuser(self, username, email, password, **others):
+        user = self.create_user(username, email, password, **others)
         user.is_staff = 1
         user.is_staff = 1
         user.is_superuser = 1
