@@ -239,22 +239,6 @@ class Review(models.Model):
         self.full_clean()
         super().save()
 
-    def get_reviewer(self):
-        return self.reviewer
-
-    def get_book(self):
-        return self.book_refer
-
-    def get_score(self):
-        return self.score
-
-    def get_title(self):
-        return self.title
-
-    def get_msg(self):
-        return self.msg
-
-
 class Issue(models.Model):
     issuer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
@@ -262,11 +246,6 @@ class Issue(models.Model):
     title = models.CharField(max_length=40)
     msg = models.TextField(max_length=500)
 
-    def get_issuer(self):
-        return self.issuer
-
-    def get_book_refer(self):
-        return self.book_refer
 
     def get_attribs(self):
         return (self.issue_date, self.title, self.msg)
@@ -279,11 +258,6 @@ class Report(models.Model):
     title = models.CharField(max_length=40)
     msg = models.TextField(max_length=100, blank=True)
 
-    def get_reporter(self):
-        return self.issuer
-
-    def get_book_refer(self):
-        return self.book_refer
 
     def get_attribs(self):
         return (self.issue_date, self.title, self.msg)

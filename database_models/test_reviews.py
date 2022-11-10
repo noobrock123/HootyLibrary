@@ -53,3 +53,15 @@ class ReviewTestCase(TestCase):
             self.assertEqual(self.review1.title, 'This is title review1')
         with self.subTest():
             self.assertEqual(self.review1.msg, 'This is message review1')
+    def test_pair_of_user_book_is_unique(self):
+        with self.subTest():
+            with self.assertRaises(Exception) as raised:
+        
+                self.review2 = Review.objects.create(
+                    reviewer=self.user1,
+                    book_refer=self.book1,
+                    score=11,
+                    title='This is title review2',
+                    msg='This is message review2'
+                )
+            self.assertEqual(ValidationError, type(raised.exception))
