@@ -62,7 +62,7 @@ def editProfile(request, user_id):
             try:
                 if user != User.objects.get(email=email):
                     messages.error('This email is already exist ! ! !')
-                    return render(request, 'userProfile/templates/userProfile/editProfile.html', context)
+                    return render(request, 'editProfile/editProfile.html', context)
             except:
                 pass
             user.alias_name = alias_name
@@ -78,4 +78,4 @@ def editProfile(request, user_id):
             #return redirect('userProfile', user_id=user.user_id)
             return redirect('MAIN_APP:home')
 
-    return render(request, 'userProfile/templates/userProfile/editProfile.html', context)
+    return render(request, 'editProfile/editProfile.html', context)

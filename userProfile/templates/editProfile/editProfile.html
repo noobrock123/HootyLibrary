@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'editProfile/style.css' %}">
+</head>
+<body>
+    <form class="card" method="post">
+        {% csrf_token %}
+        <div class="card-profile">
+            <div class="image-profile">
+                <img src="{% static 'editProfile/images/img1.jpg' %}">
+                <button type="submit" class="browse">Browse ...</button>
+            </div>
+            <div class="name">
+                <input type="text" placeholder="Alias Name" name="alias_name"
+                value="{{user.alias_name}}" required class="input-edit">
+            </div>
+        </div>
+        <div class="card-content">
+            <h2>Bio</h2>
+            <textarea cols="40" rows="5" placeholder="Enter your bio..." name="bio"
+            value="{{user.bio}}"></textarea>
+        </div>
+        <div class="my-choise">
+            <input type="text" placeholder="E-mail" name="email"
+            value="{{user.email}}" required class="edit-choise">
+            <input type="text" placeholder="Age" name="age"
+            value="{{user.age}}" required class="edit-choise">
+            <input type="text" placeholder="Gender" name="gender"
+            value="{{user.gender}}" required class="edit-choise">
+            <input type="text" placeholder="Occupation" name="occupation"
+            value="{{user.occupation}}" required class="edit-choise">
+        </div>
+    <!--
+    <p>social_link</p>
+    <input type="text" name="social_link" id="" value="{{user.social_link}}" >
+    <p>donation_link</p>
+    <input type="text" name="donation_link" id="" value="{{donation_link.alias_name}}" >
+    <p><img id="output" width="200" /></p>
+    <p>profile_pic</p>
+    <input type="file" name="profile_pic" id="" accept="image/png, image/jpeg" onchange="loadFile(event)" >
+    <input type="submit" value="submit" name="" id="">
+    -->
+        <div class="icons">
+            <a href="#"><img src="{% static 'editProfile/images/facebook.png' %}"></a>
+            <a href="#"><img src="{% static 'editProfile/images/instagram.png' %}"></a>
+            <a href="#"><img src="{% static 'editProfile/images/patreon.png' %}"></a>
+            <a href="#"><img src="{% static 'editProfile/images/tiktok.png' %}"></a>
+            <a href="#"><img src="{% static 'editProfile/images/youtube.png' %}"></a>
+        </div>
+        <button class="confirm" type="submit">Confirm</button>
+        <button class="cancle" type="submit">Cancle</button>
+    <!--
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script>
+    -->
+    </form>
+</body>
+</html>
