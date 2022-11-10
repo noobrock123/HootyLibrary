@@ -78,7 +78,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__original_date_joined = self.date_joined
-
+    def get_my_book(self):
+        return Book.objects.filter(author=self)
     def save(self, *args, **kwargs):
 
         self.date_joined = self.__original_date_joined
