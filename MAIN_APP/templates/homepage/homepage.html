@@ -175,10 +175,10 @@
                     <p class="product-short-description">Its long story..</p>
                 </div>
             </div>
-            {% for x in bookname %}
+            {% for x in booknames %}
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="{{ x.thumbnail }}" class="product-thumb"> {{ x.thumbnail }}
+                        <img src="/media/{{ x.id }}/{{ x.thumbnail }}" class="product-thumb">
                         <button class="card-btn">Open Me</button>
                     </div>
                     <div class="product-info">

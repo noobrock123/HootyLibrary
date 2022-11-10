@@ -17,7 +17,7 @@ def index(request):
     if request.method == "GET":
         return render(request, 'homepage/homepage.html',
         {'is_user_authenticated': request.user.is_authenticated,
-        'user': request.user})
+        'user': request.user, 'booknames': bookname},)
 
 def about(request):
     return render(request, 'about/about.html')
