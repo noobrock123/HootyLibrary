@@ -8,27 +8,25 @@ from django.contrib.auth import logout
 
 # Create your views here.
 def index(request):
-    img = Book.objects.values_list('thumbnail')
     books = Book.objects.all()
-    latest_book = books.order_by('-date_created')[:8]
+    latest_book = books.order_by('-date_created').values()[:8]
     topics = {
         'Latest Books':latest_book,
     }
-    #return render(request, 'homepage/homepage.html', context)
+    
     if request.method == "GET":
-        q = request.GET.get('q')
-        checkbook = Book.objects.filter(book_name__iexact=q)
+        query = request.GET.get('query')
+        checkbook = Book.objects.filter(book_name__iexact=query)
+
         if checkbook:
-            book = Book.objects.get(book_name=q)
-            return render(request, 'book_views/index.html', {'book':book, 'message': '',})
-        else:
-            return render(request, 'homepage/homepage.html', {
-                'message': 'no information', 'is_user_authenticated': request.user.is_authenticated,
-                'user': request.user, 'booknames': bookname})
+            book = Book.objects.get(book_name=query)
+            return render(request, 'book_views/index.html', {'book':book,})
+
         return render(request, 'homepage/homepage.html',
-        {'is_user_authenticated': request.user.is_authenticated,
-        'user': request.user, #'books': latest_book,
-        'topics': topics,},)
+            {'is_user_authenticated': request.user.is_authenticated,
+            'user': request.user, #'books': latest_book,
+            'topics': topics,},)
+
 
 def about(request):
     return render(request, 'about/about.html')

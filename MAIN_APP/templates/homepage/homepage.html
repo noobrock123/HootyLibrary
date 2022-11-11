@@ -41,12 +41,9 @@
         <div class="nav-middle flex-div">
             <div class="search-box flex-div">
                 <form action="" method="get" >
-                <input name="q" class="search" type="text" placeholder="Search" >
+                <input name="query"  class="search" type="text" placeholder="Search" >
                 <button class="button"><img src="{% static 'homepage/images/search.png' %}" ></button>
-                {% if message %}
-                    <div style="color:red">{{ message }}</div>
-                {% endif %}
-            </form>
+                </form>
             </div>
             <img src="{% static 'homepage/images/filter.png' %}" class="filter-icon" onclick="toggleFilter()">
         </div>
@@ -166,8 +163,8 @@
             {% for book in books %}
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{{ book.thumbnail }}" class="product-thumb">
-                    <a href="{% url 'book_views:book' book.book_id %}">
+                    <img src="/media/{{ book.id }}/{{ book.thumbnail }}" class="product-thumb">
+                    <a href="{% url 'book_views:book' book.book_id %}" class="sub-menu-link">
                     <button class="card-btn">Read</button></a>
                 </div>
                 <div class="product-info">
