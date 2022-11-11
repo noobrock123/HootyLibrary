@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 
@@ -39,8 +40,10 @@
         </div>
         <div class="nav-middle flex-div">
             <div class="search-box flex-div">
-                <input class="search" type="text" placeholder="Search">
-                <a href="#"> <button class="button"><img src="{% static 'homepage/images/search.png' %}" ></button></a>
+                <form action="" method="get" name='q'>
+                <input class="search" type="text" placeholder="Search" name='q'>
+                <button class="button"><img src="{% static 'homepage/images/search.png' %}" ></button>
+            </form>
             </div>
             <img src="{% static 'homepage/images/filter.png' %}" class="filter-icon" onclick="toggleFilter()">
         </div>
@@ -157,14 +160,16 @@
                 <div class="product-card">
                     <div class="product-image">
                         <img src="/media/{{ x.id }}/{{ x.thumbnail }}" class="product-thumb">
+                        <a href="{% url 'MAIN_APP:book' %}" class="sub-menu-link" name>
                         <button class="card-btn">Open Me</button>
+                        </a>
                     </div>
                     <div class="product-info">
                         <h2 class="product-brand">{{ x.book_name }}</h2>
                         <p class="product-short-description">Its long story..</p>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
             <div class="product-card">
                 <div class="product-image">
                     <img src="images/card3.jpg" class="product-thumb">
