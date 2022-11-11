@@ -9,9 +9,10 @@ from django.contrib.auth import logout
 # Create your views here.
 def index(request):
     img = Book.objects.values_list('thumbnail')
-    bookname = Book.objects.all().values()
-    context = {
-        'booknames': bookname,
+    books = Book.objects.all()
+    latest_book = books.order_by('-date_created')[:8]
+    topics = {
+        'Latest Books':latest_book,
     }
     #return render(request, 'homepage/homepage.html', context)
     if request.method == "GET":
@@ -26,7 +27,8 @@ def index(request):
                 'user': request.user, 'booknames': bookname})
         return render(request, 'homepage/homepage.html',
         {'is_user_authenticated': request.user.is_authenticated,
-        'user': request.user, 'booknames': bookname},)
+        'user': request.user, #'books': latest_book,
+        'topics': topics,},)
 
 def about(request):
     return render(request, 'about/about.html')
