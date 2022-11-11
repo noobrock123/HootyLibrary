@@ -40,9 +40,12 @@
         </div>
         <div class="nav-middle flex-div">
             <div class="search-box flex-div">
-                <form action="" method="get" name='q'>
-                <input class="search" type="text" placeholder="Search" name='q'>
+                <form action="" method="get" >
+                <input name="q" class="search" type="text" placeholder="Search" >
                 <button class="button"><img src="{% static 'homepage/images/search.png' %}" ></button>
+                {% if message %}
+                    <div style="color:red">{{ message }}</div>
+                {% endif %}
             </form>
             </div>
             <img src="{% static 'homepage/images/filter.png' %}" class="filter-icon" onclick="toggleFilter()">

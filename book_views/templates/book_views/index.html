@@ -5,18 +5,18 @@
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'book/style.css' %}">
+    <link rel="stylesheet" href="{% static 'bookpage/style.css' %}">
 </head>
 
 <body>
-
 <h1>This is book views</h1>
-<p>book_name: {{book_name}}</p>
-<p>description: {{description}}</p>
-<p>date_created: {{date_created}}</p> 
-<p>book_type: {{book_type}}</p>
-<p>genres: {{genres}}</p>
-<p>author: {{author}}</p>
+<img src="/media/{{ book.id }}/{{ book.thumbnail }}" class="product-thumb">
+<p>book_name: {{book.book_name}}</p>
+<p>description: {{book.description}}</p>
+<p>date_created: {{book.date_created}}</p> 
+<p>book_type: {{book.book_type}}</p>
+<p>genres: {{book.genres}}</p>
+<p>author: {{book.author}}</p>
 <hr>
 {% for review in reviews%}
 <p>reviewer: {{ review.reviewer.username}}</p>

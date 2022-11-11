@@ -29,9 +29,8 @@ def book_pdf(request, book_id):
         return HttpResponse('Not found')
 
 
-def book_views(request, book_id):
-    book = Book.objects.get(book_id=book_id)
-    
+def book_views(request, book_id, book_name):
+    book = Book.objects.get(book_id=book_id , book_name=book_name)
     context = {
         # 'book_id':book.(),
         'book_name': book.get_book_name(),

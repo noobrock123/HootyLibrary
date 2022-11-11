@@ -15,6 +15,15 @@ def index(request):
     }
     #return render(request, 'homepage/homepage.html', context)
     if request.method == "GET":
+        q = request.GET.get('q')
+        checkbook = Book.objects.filter(book_name__iexact=q)
+        if checkbook:
+            book = Book.objects.get(book_name=q)
+            return render(request, 'book_views/index.html', {'book':book, 'message': '',})
+        else:
+            return render(request, 'homepage/homepage.html', {
+                'message': 'no information', 'is_user_authenticated': request.user.is_authenticated,
+                'user': request.user, 'booknames': bookname})
         return render(request, 'homepage/homepage.html',
         {'is_user_authenticated': request.user.is_authenticated,
         'user': request.user, 'booknames': bookname},)
@@ -28,13 +37,13 @@ def book(request):
 def searchbar(request):
     if request.method == "GET":
         q = request.GET.get('q')
-        if q:
-            book = Book.objects.filter(book_name__icontains=q)
+        checkbook = Book.objects.filter(book_name__iexact=q)
+        if checkbook:
+            book = Book.objects.get(book_name=q)
             return render(request, 'book_views/index.html', {'book':book})
         else:
-            book = Book.objects.all()
             print("no information")
-            return render(request, 'homepage/homepage.html')
+            return render(request, 'homepage/homepage.html', {'message': 'no information'})
 
 def create_book(request):
     if request.method == "GET":
