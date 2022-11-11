@@ -9,6 +9,14 @@ class UserAdminConfig(UserAdmin):
     ordering = ('date_joined',)
     list_display = ('user_id','username', 'email', 'date_joined',
                     'is_active', 'is_staff')
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (None, {'fields': ('email',)}),
+    )
+    def save_model(self, request, obj, form, change):
+        if not obj.user_id:
+            obj.user_id = models.CustomAccountManager.user_random_id(self)
+        super().save_model(request, obj, form, change)
+
     fieldsets = (
         (None, {'fields': ( 'username','alias_name', 'email', )}),
         ('Permission', {'fields': ('is_staff', 'is_active')}),
@@ -20,6 +28,11 @@ class BookAdminConfig(admin.ModelAdmin):
     search_fields = ('book_id', 'book_name', 'date_created', 'book_type')
     ordering = ('book_id', 'date_created')
     list_display = ('book_id', 'book_name', 'book_type','date_created')
+    def save_model(self, request, obj, form, change):
+        if not obj.book_id:
+            obj.book_id = models.BookManager.get_generate_book_id(self)
+        super().save_model(request, obj, form, change)
+
     fieldsets = (
         (None, {'fields': ('book_name', 'author')}),
         ('Attributes', {'fields': ('book_type', 'genres', 'description')}),
