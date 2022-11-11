@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
-class ReadTestCase(TestCase):
+class IssueTestCase(TestCase):
     def setUp(self):
         self.user1 = User.objects.create_user(
             username='user1',
@@ -34,46 +34,38 @@ class ReadTestCase(TestCase):
             pdf_files=SimpleUploadedFile(name='RH_StudyGuide_V2.pdf', content=open(
                 'database_models/data_test/RH_StudyGuide_V2.pdf', 'rb').read(), content_type='application/pdf'),
         )
-        self.read1 = Read.objects.create(
-            user_refer=self.user1,
+        self.report1 = Report.objects.create(
+            reporter=self.user1,
             book_refer=self.book1,
+            title='This is report1 title',
+            msg='This is report1 message'
         )
 
-    def test_create_read_correct(self):
-        # test read was created correctly
+    def test_create_report_correct(self):
+        # test report was created correctly
         with self.subTest():
-            self.assertEqual(self.read1.user_refer, self.user1)
+            self.assertEqual(self.report1.reporter, self.user1)
         with self.subTest():
-            self.assertEqual(self.read1.book_refer, self.book1)
-
-    def test_pair_of_user_book_is_unique(self):
-        # test pair of user_refer, book_refer is uniquely
+            self.assertEqual(self.report1.book_refer, self.book1)
         with self.subTest():
-            with self.assertRaises(Exception) as raised:
+            self.assertEqual(self.report1.title, 'This is report1 title')
+        with self.subTest():
+            self.assertEqual(self.report1.msg, 'This is report1 message')
 
-                self.read2 = Read.objects.create(
-                    user_refer=self.user1,
-                    book_refer=self.book1,
-                )
-            self.assertEqual(IntegrityError, type(raised.exception))
-
-    def test_read_on_user_refer_deleted(self):
-        # test read when user_refer was deleted
+    def test_report_on_reporter_deleted(self):
+        # test report when reporter was deleted
         self.user1.delete()
-        with self.assertRaises(Exception) as raised:
-            Read.objects.get(user_refer=self.user1, book_refer=self.book1)
-        self.assertEqual(Read.DoesNotExist, type(raised.exception))
+        self.report1.refresh_from_db()
+        self.assertEqual(self.report1.reporter, None)
 
-    def test_read_on_book_refer_deleted(self):
-        # test read when book_refer was deleted
+    def test_report_on_book_refer_deleted(self):
+        # test report when book_refer was deleted
         self.book1.delete()
         with self.assertRaises(Exception) as raised:
-            Read.objects.get(user_refer=self.user1, book_refer=self.book1)
-        self.assertEqual(Read.DoesNotExist, type(raised.exception))
+            Report.objects.get(reporter=self.user1, book_refer=self.book1)
+        self.assertEqual(Report.DoesNotExist, type(raised.exception))
 
-    def test_read_get_recent_read_books(self):
-        # test read function get_recent_read_books()
-        self.assertEqual(
-            self.read1.get_recent_read_books(self.user1),
-            self.book1
-        )
+    def test_report_get_attribs(self):
+        # test report function get_attribs()
+        self.assertEqual(self.report1.get_attribs()[
+                         1:], ('This is report1 title', 'This is report1 message'))

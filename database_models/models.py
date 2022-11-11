@@ -18,7 +18,7 @@ class CustomAccountManager(BaseUserManager):
 
     def create(self, username, email, password, **others):
 
-        self.create_user(username, email, password,**others)
+        self.create_user(username, email, password, **others)
 
     def create_user(self, username, email, password, **others):
 
@@ -128,7 +128,6 @@ class BookManager(models.Manager):
             pdf_files=others.get('pdf_files', None)
         )
         book.save()
-        # print(book.thumbnail)
         book.genres.add(Genre.objects.first())
         for genre in genres:
 
@@ -170,18 +169,18 @@ class Book(models.Model):
         return Issue.objects.filter(book_refer=self)
 
     def get_favorite_books(self):
-        return Favorite.objects.filter(user_refer=self)
+        return [favorite.user_refer for favorite in Favorite.objects.filter(book_refer=self)]
 
     def get_avg_score(self):
         book_reviews = Review.objects.filter(book_refer=self)
         score_sum = 0
         for review in book_reviews:
-            score_sum += review.get_score()
+            score_sum += review.score
         return score_sum / len(book_reviews) if len(book_reviews) != 0 else 0
 
     def get_views(self):
         book = Read.objects.filter(book_refer=self)
-        return book.user_refer.all()
+        return [read.user_refer for read in book]
 
     def save(self, *args, **kwargs):
         self.date_created = self.__original_date_created
@@ -196,15 +195,21 @@ class Read(models.Model):
     user_refer = models.ForeignKey(User, on_delete=models.CASCADE)
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     book_read_latest_time = models.DateTimeField(default=timezone.now)
+
     def save(self, *args, **kwargs):
         self.book_read_latest_time = timezone.now()
         super().save()
+
     class Meta:
         unique_together = ('user_refer', 'book_refer',)
 
     def get_recent_read_books(self, user):
-        books = self.user_refer.get(user).order_by('-book_read_latest_time')
-        return books.book_refer.all()
+        # Read.objects.filter(user).order_by('book_read_latest_time')
+        # books = self.user_refer.order_by('-book_read_latest_time')
+        return Read.objects.filter(user_refer=user).order_by('-book_read_latest_time')[0].book_refer
+
+    def __str__(self) -> str:
+        return f'{super().__str__()}{{{self.user_refer.username}-> {self.book_refer.book_name}}}'
 
 
 class Favorite(models.Model):
@@ -241,6 +246,7 @@ class Review(models.Model):
         self.full_clean()
         super().save()
 
+
 class Issue(models.Model):
     issuer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
@@ -251,12 +257,17 @@ class Issue(models.Model):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.__original_issue_date = self.issue_date
+
     def save(self, *args, **kwargs):
+        self.issue_date = self.__original_issue_date
         self.full_clean()
         super().save()
 
     def get_attribs(self):
         return (self.issue_date, self.title, self.msg)
+
+    def __str__(self) -> str:
+        return super().__str__() + f'{self.issuer} -> {self.book_refer}'
 
 
 class Report(models.Model):
@@ -266,6 +277,17 @@ class Report(models.Model):
     title = models.CharField(max_length=40)
     msg = models.TextField(max_length=100, blank=True)
 
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.__original_report_date = self.report_date
+
+    def save(self, *args, **kwargs):
+        self.report_date = self.__original_report_date
+        self.full_clean()
+        super().save()
+
+    def __str__(self) -> str:
+        return super().__str__() + f'{self.reporter} -> {self.book_refer}'
 
     def get_attribs(self):
-        return (self.issue_date, self.title, self.msg)
+        return (self.report_date, self.title, self.msg)

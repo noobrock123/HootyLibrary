@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
-class ReadTestCase(TestCase):
+class FavoriteTestCase(TestCase):
     def setUp(self):
         self.user1 = User.objects.create_user(
             username='user1',
@@ -34,46 +34,39 @@ class ReadTestCase(TestCase):
             pdf_files=SimpleUploadedFile(name='RH_StudyGuide_V2.pdf', content=open(
                 'database_models/data_test/RH_StudyGuide_V2.pdf', 'rb').read(), content_type='application/pdf'),
         )
-        self.read1 = Read.objects.create(
+        self.favorite1 = Favorite.objects.create(
             user_refer=self.user1,
             book_refer=self.book1,
         )
 
-    def test_create_read_correct(self):
-        # test read was created correctly
+    def test_create_favorite_correct(self):
+        # test favorite created correctly
         with self.subTest():
-            self.assertEqual(self.read1.user_refer, self.user1)
+            self.assertEqual(self.favorite1.user_refer, self.user1)
         with self.subTest():
-            self.assertEqual(self.read1.book_refer, self.book1)
+            self.assertEqual(self.favorite1.book_refer, self.book1)
 
     def test_pair_of_user_book_is_unique(self):
-        # test pair of user_refer, book_refer is uniquely
+        # test favorite has pair of user_refer, book_refer uniquely
         with self.subTest():
             with self.assertRaises(Exception) as raised:
 
-                self.read2 = Read.objects.create(
+                self.read2 = Favorite.objects.create(
                     user_refer=self.user1,
                     book_refer=self.book1,
                 )
             self.assertEqual(IntegrityError, type(raised.exception))
 
-    def test_read_on_user_refer_deleted(self):
-        # test read when user_refer was deleted
+    def test_favorite_on_user_refer_deleted(self):
+        # test favorite when user_refer was deleted
         self.user1.delete()
         with self.assertRaises(Exception) as raised:
-            Read.objects.get(user_refer=self.user1, book_refer=self.book1)
-        self.assertEqual(Read.DoesNotExist, type(raised.exception))
+            Favorite.objects.get(user_refer=self.user1, book_refer=self.book1)
+        self.assertEqual(Favorite.DoesNotExist, type(raised.exception))
 
     def test_read_on_book_refer_deleted(self):
-        # test read when book_refer was deleted
+        # test favorite when book_refer was deleted
         self.book1.delete()
         with self.assertRaises(Exception) as raised:
-            Read.objects.get(user_refer=self.user1, book_refer=self.book1)
-        self.assertEqual(Read.DoesNotExist, type(raised.exception))
-
-    def test_read_get_recent_read_books(self):
-        # test read function get_recent_read_books()
-        self.assertEqual(
-            self.read1.get_recent_read_books(self.user1),
-            self.book1
-        )
+            Favorite.objects.get(user_refer=self.user1, book_refer=self.book1)
+        self.assertEqual(Favorite.DoesNotExist, type(raised.exception))
