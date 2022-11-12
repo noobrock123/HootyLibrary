@@ -15,13 +15,6 @@ def index(request):
     }
     
     if request.method == "GET":
-        query = request.GET.get('query')
-        checkbook = Book.objects.filter(book_name__iexact=query)
-
-        if checkbook:
-            book = Book.objects.get(book_name=query)
-            return render(request, 'book_views/index.html', {'book':book,})
-
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
             'user': request.user, #'books': latest_book,
@@ -36,11 +29,11 @@ def book(request):
 
 def searchbar(request):
     if request.method == "GET":
-        q = request.GET.get('q')
-        checkbook = Book.objects.filter(book_name__iexact=q)
+        query = request.GET.get('query')
+        checkbook = Book.objects.filter(book_name__iexact=query)
         if checkbook:
-            book = Book.objects.get(book_name=q)
-            return render(request, 'book_views/index.html', {'book':book})
+            book = Book.objects.filter(book_name__startswith=query).values()
+            return render(request, 'search.html', {'book':book})
         else:
             print("no information")
             return render(request, 'homepage/homepage.html', {'message': 'no information'})
@@ -60,14 +53,6 @@ def sign_out(request):
     if request.method == "GET":
         logout(request)
         return HttpResponseRedirect(reverse('MAIN_APP:home'))
-
-def testing(request):
-  mybook = Book.objects.all().values()
-  template = loader.get_template('test.html')
-  context = {
-    'mybooks': mybook,
-  }
-  return HttpResponse(template.render(context, request))
 
 def menu(request, id):
     name = Book.objects.all().values()

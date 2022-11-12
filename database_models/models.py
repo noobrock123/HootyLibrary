@@ -130,7 +130,7 @@ class BookManager(models.Manager):
             else:
                 raise ValueError(_('Your genres does not exit'))
         return book
-def get_generate_book_id(self,):
+def get_generate_book_id():
         rand_id = hex(rand.randint(0, pow(16, 8)))
         while Book.objects.filter(pk=rand_id).exists():
             rand_id = hex(rand.randint(0, pow(16, 8)))

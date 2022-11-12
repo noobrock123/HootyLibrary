@@ -154,13 +154,12 @@
             </div>
         </div>
     </nav>
-    {% for topic, books in topics.items %}
     <section class="product"> 
-        <h2 class="product-category">{{ topic }}</h2>
+        <h2 class="product-category">search-box</h2>
         <button class="pre-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
         <button class="nxt-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
         <div class="product-container">
-            {% for book in books %}
+            {% for book in book %}
             <div class="product-card">
                 <div class="product-image">
                     <img src="/media/{{ book.id }}/{{ book.thumbnail }}" class="product-thumb">
@@ -177,7 +176,6 @@
         </div>
 
     </section>
-    {% endfor %}
 
     <script src="{% static 'homepage/script.js' %}"></script>
 
