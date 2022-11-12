@@ -9,7 +9,7 @@ from MAIN_APP import views as main_app
 
 
 def register(request):
-    print(request.method)
+    # print(request.method)
     if request.user.is_authenticated:
         return redirect('MAIN_APP:home')
     if request.method == 'POST':
@@ -17,19 +17,31 @@ def register(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
+        try:
+            User.objects.get(username=username)
+            messages.error(request,'This username is already exists')
+            return render(request, 'register/templates/sign_up_and_in/signup.html', {})
+        except:
+            pass
+        try:
+            User.objects.get(email=email)
+            messages.error(request, 'This email is already exists')
+            return render(request, 'register/templates/sign_up_and_in/signup.html', {})
+        except:
+            pass
         if password != confirm_password:
-            messages.error('password do not match')
-            return render(request, 'register/templates/sign_up_and_in/sign_up.html', {})
+            messages.error(request, 'Password do not match')
+            return render(request, 'register/templates/sign_up_and_in/signup.html', {})
         user = User.objects.create_user(
             username=username,
             email=email,
             password=password,
         )
-
         user = authenticate(username=username, password=password)
         login(request, user)
+        messages.success(request,f'{user.username}:{user.alias_name} successful to log in')
         return redirect('MAIN_APP:home')
-    return render(request, 'sign_up_and_in/signup.html', {})
+    return render(request, 'register/templates/sign_up_and_in/signup.html', {})
 
 def log_in(request):
     if request.method == 'POST':
@@ -43,7 +55,3 @@ def log_in(request):
     if request.method == 'GET':
         return render(request, 'sign_up_and_in/signin.html')
 
-# def home(request):
-#     print(request.user)
-#     context={'user':request.user}
-#     return render(request, 'templates.html',context)
