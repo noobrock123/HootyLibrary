@@ -32,7 +32,6 @@ def book_pdf(request, book_id):
 def book_views(request, book_id):
     book = Book.objects.get(book_id=book_id)
     context = {
-        # 'book_id':book.(),
         'book_name': book.book_id,
         'description': book.description,
         'date_created': book.date_created,
@@ -46,42 +45,38 @@ def book_views(request, book_id):
 
     }
     return render(request, 'book_views/templates/book_views/index.html', context)
-@login_required()
+
+
+@login_required(login_url='register:log_in')
 def create_book(request):
-    context={
+    context = {
         'genres': Genre.objects.all(),
     }
     if request.method == 'POST':
-        print(request.FILES)
-        print(request.POST)
         book_name = request.POST.get('book_name')
         description = request.POST.get('description')
         book_type = request.POST.get('book_type')
         genres = request.POST.getlist('genres')
         thumbnail = request.FILES.get('thumbnail')
         pdf_files = request.FILES.get('pdf_files')
-        print(thumbnail)
-        create=True
+        create = True
         if not book_name:
-            create=False
+            create = False
             messages.error(request, 'book_name is required ! ! ! ')
         if not book_type:
-            create=False
+            create = False
             messages.error(request, 'book_type is required ! ! ! ')
         if not create:
             return render(request, 'book_views/templates/book_views/create_book.html', context)
         book = Book.objects.create(
-            book_name = book_name,
-            description = description,
-            book_type = book_type,
+            book_name=book_name,
+            description=description,
+            book_type=book_type,
             author=request.user,
-            thumbnail = thumbnail,
-            pdf_files = pdf_files,
+            thumbnail=thumbnail,
+            pdf_files=pdf_files,
+            genres=genres,
         )
+        return redirect('book_views:book', book.book_id)
 
-        print(genres)
-        for i in genres:
-            book.genres.add(Genre.objects.get(genre_list=i))
-        return redirect('/')
-            
     return render(request, 'book_views/templates/book_views/create_book.html', context)
