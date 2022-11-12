@@ -161,7 +161,7 @@ AUTHENTICATION_BACKENDS = (
  'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-SITE_ID = 9
+SITE_ID = 11
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_LOGIN_ON_GET=True
 SOCIALACCOUNT_PROVIDERS = {
@@ -182,23 +182,13 @@ SOCIALACCOUNT_PROVIDERS = {
             'id',
             'email',
             'name',
-            'first_name',
-            'last_name',
             'verified',
-            'locale',
-            'timezone',
-            'link',
-            'gender',
-            'updated_time'],
+            ],
         'EXCHANGE_TOKEN': True,
         'LOCALE_FUNC': lambda request: 'kr_KR',
         'VERIFIED_EMAIL': False,
         'VERSION': 'v2.4'}
 }
-#facebook
-SOCIAL_AUTH_FACEBOOK_KEY = '1253885681845430!'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET ='d5354efca2fef07e78de4c0cd219b92d!' #app key
-
 # SMTP Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
