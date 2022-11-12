@@ -41,7 +41,7 @@ def searchbar(request):
 def create_book(request):
     if request.method == "GET":
         if not request.user.is_authenticated:
-            return redirect('regitser:log_in')
+            return redirect('register:log_in')
         else:
             return render(request, 'book_views/create_book.html' )
 
