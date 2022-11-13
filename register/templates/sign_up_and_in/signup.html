@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +13,14 @@
         <div class="signup-box">
             <div class="left-box">
                 <div class="line"></div>
-                <button type="button"><img src="{% static 'sign_up/images/gmail.png' %}">Create with Google</button>
-                <button type="button"><img src="{% static 'sign_up/images/outlook.png' %}">Create with Outlook</button>
+                <form action="{% provider_login_url 'google' %}" method="post">
+                    <button type="button"><img src="{% static 'sign_up/images/gmail.png' %}">Create with Google</button>
+                </form>
                 <button type="button"><img src="{% static 'sign_up/images/facebook.png' %}">Create with facebook</button>
             </div>
             <div class="right-box">
                 <form method="post">
+                    {% csrf_token %}
                     <h1>Sign Up</h1>
                     <input type="text" placeholder="Username" name="username" required class="input-box">
                     <input type="text" placeholder="E-mail" name="email" required class="input-box">
