@@ -1,10 +1,15 @@
-from django.shortcuts import render, redirect
-from django.urls import path, include, reverse
-from database_models.models import Book
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
-from database_models.models import Book
 from django.contrib.auth import logout
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.template import loader
+from django.urls import include, path, reverse
+
+from database_models.models import *
+from database_models.models import Book
+from django.utils import timezone
+from datetime import datetime, timedelta
+
+
 
 # Create your views here.
 def index(request):
@@ -48,6 +53,7 @@ def sign_out(request):
         return HttpResponseRedirect(reverse('MAIN_APP:home'))
 
 def menu(request, id):
+    print(get_Popular_today())
     books = Book.objects.all()
     Undiscoveredy = books.order_by('-date_created').values()[:8]
     Popular_today = books.order_by('-date_created').values()[:8]
@@ -67,4 +73,20 @@ def menu(request, id):
         return render(request, 'homepage/menu.html', {'m':'Highest rating this week', 'context':Highest_rating_week, })
     if id == 5:
         return render(request, 'homepage/menu.html', {'m':'Recently update', 'context':Recently, })
+    context = {}
     return render(request, 'homepage/menu.html', context)
+def get_Undiscoveredy():
+    all_book = Book.objects.values_list('book_id',flat=True).distinct()
+    readed_book = Read.objects.values_list('book_refer_id',flat=True).distinct()
+    no_read_book = all_book.difference(readed_book)
+    return no_read_book.first()
+def get_Popular_today():
+    read_today = Read.objects.filter(book_read_latest_time__gte=timezone.now() - timedelta(days=1))
+    book_today = read_today.values_list('book_refer_id',flat=True).distinct()
+    popular_today = sorted([(i ,read_today.filter(book_refer=i).count()) for i in book_today], key= lambda x: x[1])
+    return popular_today
+def get_Popular_week():
+    read_today = Read.objects.filter(book_read_latest_time__gte=timezone.now() - timedelta(weeks=1))
+    book_today = read_today.values_list('book_refer_id',flat=True).distinct()
+    popular_today = sorted([(i ,read_today.filter(book_refer=i).count()) for i in book_today], key= lambda x: x[1])
+    return popular_today
