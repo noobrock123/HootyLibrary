@@ -9,5 +9,10 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('book/', views.book, name='book'),
     path('book/create_book', views.create_book, name='crt_book'),
-    path('menu/<int:id>', views.menu, name='menu'),
+    path('Undiscoveredy/', views.Undiscoveredy, name='Undiscoveredy'),
+    path('Popular_today/', views.Popular_today, name='Popular_today'),
+    path('Popular_week/', views.Popular_week, name='Popular_week'),
+    path('Highest_rating_today/', views.Highest_rating_today, name='Highest_rating_today'),
+    path('Highest_rating_week/', views.Highest_rating_week, name='Highest_rating_week'),
+    path('Recently/', views.Recently, name='Recently'),
 ]

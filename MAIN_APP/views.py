@@ -14,14 +14,16 @@ def index(request):
         'Latest Books':latest_book,
     }
     
-    if request.method == "GET":
+    if request.method == "GET":  
         search_query = request.GET.get('query')
         if search_query:
-            book = Book.objects.all().filter(book_name__startswith=search_query)
-            topics = {
-                'search':book,
-            }
-            return render(request, 'homepage/homepage.html', {'topics':topics})
+            SearchCheck = Book.objects.filter(book_name__contains=search_query)
+            if SearchCheck:
+                book = Book.objects.all().filter(book_name__startswith=search_query)
+                topics = {
+                    'search':book,
+                }
+                return render(request, 'homepage/homepage.html', {'topics':topics})
 
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
@@ -51,24 +53,110 @@ def sign_out(request):
         logout(request)
         return HttpResponseRedirect(reverse('MAIN_APP:home'))
 
-def menu(request, id):
+def Undiscoveredy(request):
     books = Book.objects.all()
     Undiscoveredy = books.order_by('-date_created').values()[:8]
+    topics = {
+        'Undiscoveredy':Undiscoveredy,
+    }
+    if request.method == "GET":  
+        search_query = request.GET.get('query')
+        if search_query:
+            SearchCheck = Book.objects.filter(book_name__contains=search_query)
+            if SearchCheck:
+                book = Book.objects.all().filter(book_name__startswith=search_query)
+                topics = {
+                    'search':book,
+                }
+                return render(request, 'homepage/homepage.html', {'topics':topics})
+    return render(request, 'homepage/homepage.html', {'topics':topics})
+
+def Popular_today(request):
+    books = Book.objects.all()
     Popular_today = books.order_by('-date_created').values()[:8]
+    topics = {
+        'Popular today':Popular_today,
+    }
+    if request.method == "GET":  
+        search_query = request.GET.get('query')
+        if search_query:
+            SearchCheck = Book.objects.filter(book_name__contains=search_query)
+            if SearchCheck:
+                book = Book.objects.all().filter(book_name__startswith=search_query)
+                topics = {
+                    'search':book,
+                }
+                return render(request, 'homepage/homepage.html', {'topics':topics})
+    return render(request, 'homepage/homepage.html', {'topics':topics})
+
+def Popular_week(request):
+    books = Book.objects.all()
     Popular_week = books.order_by('-date_created').values()[:8]
+    topics = {
+        'Popular this week':Popular_week,
+    }
+    if request.method == "GET":  
+        search_query = request.GET.get('query')
+        if search_query:
+            SearchCheck = Book.objects.filter(book_name__contains=search_query)
+            if SearchCheck:
+                book = Book.objects.all().filter(book_name__startswith=search_query)
+                topics = {
+                    'search':book,
+                }
+                return render(request, 'homepage/homepage.html', {'topics':topics})
+    return render(request, 'homepage/homepage.html', {'topics':topics})
+
+def Highest_rating_today(request):
+    books = Book.objects.all()
     Highest_rating_today = books.order_by('-date_created').values()[:8]
+    topics = {
+        'Highest rating today':Highest_rating_today,
+    }
+    if request.method == "GET":  
+        search_query = request.GET.get('query')
+        if search_query:
+            SearchCheck = Book.objects.filter(book_name__contains=search_query)
+            if SearchCheck:
+                book = Book.objects.all().filter(book_name__startswith=search_query)
+                topics = {
+                    'search':book,
+                }
+                return render(request, 'homepage/homepage.html', {'topics':topics})
+    return render(request, 'homepage/homepage.html', {'topics':topics})
+
+def Highest_rating_week(request):
+    books = Book.objects.all()
     Highest_rating_week = books.order_by('-date_created').values()[:8]
+    topics = {
+        'Highest rating this week':Highest_rating_week,
+    }
+    if request.method == "GET":  
+        search_query = request.GET.get('query')
+        if search_query:
+            SearchCheck = Book.objects.filter(book_name__contains=search_query)
+            if SearchCheck:
+                book = Book.objects.all().filter(book_name__startswith=search_query)
+                topics = {
+                    'search':book,
+                }
+                return render(request, 'homepage/homepage.html', {'topics':topics})
+    return render(request, 'homepage/homepage.html', {'topics':topics})
+
+def Recently(request):
+    books = Book.objects.all()
     Recently = books.order_by('-date_created').values()[:8]
-    if id == 0:
-        return render(request, 'homepage/menu.html', {'m':'Undiscoveredy', 'context':Undiscoveredy, })
-    if id == 1:
-        return render(request, 'homepage/menu.html', {'m':'Popular today', 'context':Popular_today, })
-    if id == 2:
-        return render(request, 'homepage/menu.html', {'m':'Popular this week', 'context':Popular_week, })
-    if id == 3:
-        return render(request, 'homepage/menu.html', {'m':'Highest rating today', 'context':Highest_rating_today, })
-    if id == 4:
-        return render(request, 'homepage/menu.html', {'m':'Highest rating this week', 'context':Highest_rating_week, })
-    if id == 5:
-        return render(request, 'homepage/menu.html', {'m':'Recently update', 'context':Recently, })
-    return render(request, 'homepage/menu.html', context)
+    topics = {
+        'Recently':Recently,
+    }
+    if request.method == "GET":  
+        search_query = request.GET.get('query')
+        if search_query:
+            SearchCheck = Book.objects.filter(book_name__contains=search_query)
+            if SearchCheck:
+                book = Book.objects.all().filter(book_name__startswith=search_query)
+                topics = {
+                    'search':book,
+                }
+                return render(request, 'homepage/homepage.html', {'topics':topics})
+    return render(request, 'homepage/homepage.html', {'topics':topics})
