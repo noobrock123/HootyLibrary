@@ -155,7 +155,8 @@ class Book(models.Model):
     def __init__(self):
         super(Book, self).__init__()
     '''
-
+    def get_genres(self):
+        return Genre.objects.filter(book=self)
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.__original_date_created = self.date_created
