@@ -39,7 +39,7 @@ def register(request):
         )
         user = authenticate(username=username, password=password)
         login(request, user)
-        messages.success(request,f'{user.username}:{user.alias_name} successful to log in')
+        messages.success(request,f'{user.username}:{user.alias_name} create user successful')
         return redirect('MAIN_APP:home')
     return render(request, 'register/templates/sign_up_and_in/signup.html', {})
 
