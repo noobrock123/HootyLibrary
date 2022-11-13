@@ -15,6 +15,14 @@ def index(request):
     }
     
     if request.method == "GET":
+        search_query = request.GET.get('query')
+        if search_query:
+            book = Book.objects.all().filter(book_name__startswith=search_query)
+            topics = {
+                'search':book,
+            }
+            return render(request, 'homepage/homepage.html', {'topics':topics})
+
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
             'user': request.user, #'books': latest_book,
@@ -26,17 +34,6 @@ def about(request):
 
 def book(request):
     return render(request, 'book_views/index.html')
-
-def searchbar(request):
-    if request.method == "GET":
-        query = request.GET.get('query')
-        checkbook = Book.objects.filter(book_name__iexact=query)
-        if checkbook:
-            book = Book.objects.filter(book_name__startswith=query).values()
-            return render(request, 'search.html', {'book':book})
-        else:
-            print("no information")
-            return render(request, 'homepage/homepage.html', {'message': 'no information'})
 
 def create_book(request):
     if request.method == "GET":
