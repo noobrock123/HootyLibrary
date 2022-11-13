@@ -22,14 +22,14 @@
                 <p class="product-short-description">Its long story..</p>
             </div>
         </div>
-        {% for x in booknames %}
+        {% for book in context %}
             <div class="product-card">
                 <div class="product-image">
-                    <img src="{{ x.thumbnail }}" class="product-thumb"> {{ x.thumbnail }}
+                    <img src="/media/{{ book.id }}/{{ book.thumbnail }}" class="product-thumb"> {{ book.thumbnail }}
                     <button class="card-btn">Open Me</button>
                 </div>
                 <div class="product-info">
-                    <h2 class="product-brand">{{ x.book_name }}</h2>
+                    <h2 class="product-brand">{{ book.book_name }}</h2>
                     <p class="product-short-description">Its long story..</p>
                 </div>
             </div>

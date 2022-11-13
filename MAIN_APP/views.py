@@ -55,20 +55,23 @@ def sign_out(request):
         return HttpResponseRedirect(reverse('MAIN_APP:home'))
 
 def menu(request, id):
-    name = Book.objects.all().values()
-    context = {
-        'names': name,
-    }
+    books = Book.objects.all()
+    Undiscoveredy = books.order_by('-date_created').values()[:8]
+    Popular_today = books.order_by('-date_created').values()[:8]
+    Popular_week = books.order_by('-date_created').values()[:8]
+    Highest_rating_today = books.order_by('-date_created').values()[:8]
+    Highest_rating_week = books.order_by('-date_created').values()[:8]
+    Recently = books.order_by('-date_created').values()[:8]
     if id == 0:
-        return render(request, 'homepage/menu.html', {'m':'Undiscoveredy'})
+        return render(request, 'homepage/menu.html', {'m':'Undiscoveredy', 'context':Undiscoveredy, })
     if id == 1:
-        return render(request, 'homepage/menu.html', {'m':'Popular today'})
+        return render(request, 'homepage/menu.html', {'m':'Popular today', 'context':Popular_today, })
     if id == 2:
-        return render(request, 'homepage/menu.html', {'m':'Popular this week'})
+        return render(request, 'homepage/menu.html', {'m':'Popular this week', 'context':Popular_week, })
     if id == 3:
-        return render(request, 'homepage/menu.html', {'m':'Highest rating today'})
+        return render(request, 'homepage/menu.html', {'m':'Highest rating today', 'context':Highest_rating_today, })
     if id == 4:
-        return render(request, 'homepage/menu.html', {'m':'Highest rating this week'})
+        return render(request, 'homepage/menu.html', {'m':'Highest rating this week', 'context':Highest_rating_week, })
     if id == 5:
-        return render(request, 'homepage/menu.html', {'m':'Recently update'})
+        return render(request, 'homepage/menu.html', {'m':'Recently update', 'context':Recently, })
     return render(request, 'homepage/menu.html', context)
