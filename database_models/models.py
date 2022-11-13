@@ -10,7 +10,12 @@ from django.dispatch import receiver
 
 
 class CustomAccountManager(BaseUserManager):
-    
+ 
+    def user_random_id(self):
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while User.objects.filter(pk=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        return rand_id   
 
     def create(self, username, email, password, **others):
 
@@ -21,7 +26,7 @@ class CustomAccountManager(BaseUserManager):
         email = self.normalize_email(email)
 
         user = self.model(
-            user_id=user_random_id(),
+            user_id=self.user_random_id(),
             username=username,
             email=email,
             date_joined=timezone.now(),
@@ -40,17 +45,13 @@ class CustomAccountManager(BaseUserManager):
         user.save()
         return user
 
-def user_random_id():
-        rand_id = hex(rand.randint(0, pow(16, 8)))
-        while User.objects.filter(pk=rand_id).exists():
-            rand_id = hex(rand.randint(0, pow(16, 8)))
-        return rand_id
+
 def get_profile_pic_path(instance, file):
     return f"profile_pic/{instance.username}/{file}"
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    user_id = models.TextField(primary_key=True, max_length=12,default=user_random_id)
+    user_id = models.TextField(primary_key=True, max_length=12)
     username = models.CharField(unique=True, max_length=32)
     alias_name = models.CharField(max_length=40, blank=True)
     email = models.EmailField(_('Email'), unique=True,
@@ -155,7 +156,8 @@ class Book(models.Model):
     def __init__(self):
         super(Book, self).__init__()
     '''
-
+    def get_genres(self):
+        return Genre.objects.filter(book=self)
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.__original_date_created = self.date_created
