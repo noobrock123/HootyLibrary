@@ -203,8 +203,8 @@ class Read(models.Model):
     class Meta:
         unique_together = ('user_refer', 'book_refer',)
 
-    def get_recent_read_books(self, user):
-        return Read.objects.filter(user_refer=user).order_by('-book_read_latest_time')[0].book_refer
+    #def get_recent_read_books(self, user):
+    #    return Read.objects.get(user_refer=user).order_by('-book_read_latest_time')[:8].book_refer
 
     def __str__(self) -> str:
         return f'{super().__str__()}{{{self.user_refer.username}-> {self.book_refer.book_name}}}'

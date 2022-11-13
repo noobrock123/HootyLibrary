@@ -8,32 +8,59 @@
     <link rel="stylesheet" href="{% static 'editProfile/style.css' %}">
 </head>
 <body>
-    <form class="card" method="post">
+    <form class="card" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="card-profile">
             <div class="image-profile">
+                {% if not user.profile_pic %}
                 <img src="{% static 'editProfile/images/img1.jpg' %}">
-                <button type="submit" class="browse">Browse</button>
+                {% else %}
+                <img src="{{ user.profile_pic.url }}">
+                {% endif %}
+                <div class="browse">
+                    <input type="file" name="profile_pic" accept="image/png, image/jpeg"></input>
+                </div>
             </div>
             <div class="name">
-                <input type="text" placeholder="Alias Name" name="alias_name"
-                value="{{user.alias_name}}" required class="input-edit">
+                <h5>Alias name</h5>
+                {% if not user.alias_name %}
+                <input type="text" placeholder="Your desire name..." name="alias_name" class="input-edit">
+                {% else %}
+                <input type="text" name="alias_name" value="{{user.alias_name}}" class="input-edit">
+                {% endif %}
             </div>
         </div>
         <div class="card-content">
             <h2>Bio</h2>
+            {% if not user.bio %}
+            <textarea cols="40" rows="5" placeholder="Enter your bio..." name="bio"></textarea>
+            {% else %}
             <textarea cols="40" rows="5" placeholder="Enter your bio..." name="bio"
-            value="{{user.bio}}"></textarea>
+            value="{{ user.bio }}"></textarea>
+            {% endif %}
         </div>
         <div class="my-choise">
+            <h5>Email</h5>
             <input type="text" placeholder="E-mail" name="email"
             value="{{user.email}}" required class="edit-choise">
-            <input type="text" placeholder="Age" name="age"
-            value="{{user.age}}" required class="edit-choise">
-            <input type="text" placeholder="Gender" name="gender"
-            value="{{user.gender}}" required class="edit-choise">
-            <input type="text" placeholder="Occupation" name="occupation"
-            value="{{user.occupation}}" required class="edit-choise">
+            <h5>Age</h5>
+            {% if not user.age %}
+            <input type="text" placeholder="Your age..." name="age" class="edit-choise">
+            {% else %}
+            <input type="text" placeholder="Your age..." name="age" value="{{user.age}}" class="edit-choise">
+            {% endif %}
+            <h5>Gender</h5>
+            {% if not user.gender %}
+            <input type="text" placeholder="etc: Helicopter" name="gender" class="edit-choise">
+            {% else %}
+            <input type="text" placeholder="etc: Helicopter" name="gender" value="{{user.gender}}" class="edit-choise">
+            {% endif %}
+            <h5>Occupation</h5>
+            {% if not user.occupation %}
+            <input type="text" placeholder="etc: Home, Office, University" name="occupation" class="edit-choise">
+            {% else %}
+            <input type="text" placeholder="etc: Home, Office, University" name="occupation" value="{{user.occupation}}" class="edit-choise">
+            {% endif %}
         </div>
     <!--
     <p>social_link</p>
@@ -53,7 +80,7 @@
             <a href="#"><img src="{% static 'editProfile/images/youtube.png' %}"></a>
         </div>
         <button class="confirm" type="submit">Confirm</button>
-        <button class="cancle" type="submit">Cancle</button>
+        <button class="cancle" type="submit" name="cancel" value="C">Cancle</button>
     <!--
 <script>
     var loadFile = function(event) {

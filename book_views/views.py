@@ -31,6 +31,10 @@ def book_pdf(request, book_id):
 
 def book_views(request, book_id):
     book = Book.objects.get(book_id=book_id)
+    if request.user.is_authenticated:
+        if book.author != request.user:
+            if not Read.objects.filter(book_refer=book).filter(user_refer=request.user):
+                Read.objects.create(user_refer=request.user, book_refer=book)
     context = {
         'book_name': book.book_id,
         'description': book.description,
@@ -42,7 +46,6 @@ def book_views(request, book_id):
         'favorite_books': Favorite.objects.filter(book_refer=book),
         'avg_score': book.get_avg_score(),
         'book': book,
-
     }
     return render(request, 'book_views/templates/book_views/index.html', context)
 
@@ -61,10 +64,10 @@ def create_book(request):
         pdf_files = request.FILES.get('pdf_files')
         create = True
         if not book_name:
-            create = False
+            create=False
             messages.error(request, 'book_name is required ! ! ! ')
         if not book_type:
-            create = False
+            create=False
             messages.error(request, 'book_type is required ! ! ! ')
         if not create:
             return render(request, 'book_views/templates/book_views/create_book.html', context)

@@ -9,7 +9,10 @@ from MAIN_APP import views as main_app
 
 
 def register(request):
+<<<<<<< Updated upstream
     # print(request.method)
+=======
+>>>>>>> Stashed changes
     if request.user.is_authenticated:
         return redirect('MAIN_APP:home')
     if request.method == 'POST':
@@ -30,6 +33,7 @@ def register(request):
         except:
             pass
         if password != confirm_password:
+<<<<<<< Updated upstream
             messages.error(request, 'Password do not match')
             return render(request, 'register/templates/sign_up_and_in/signup.html', {})
         user = User.objects.create_user(
@@ -37,6 +41,19 @@ def register(request):
             email=email,
             password=password,
         )
+=======
+            messages.error(request, message='password do not match')
+            return render(request, 'sign_up_and_in/signup.html', {})
+        try:
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+            )
+        except ValidationError:
+            return redirect('register:regis')
+
+>>>>>>> Stashed changes
         user = authenticate(username=username, password=password)
         login(request, user)
         messages.success(request,f'{user.username}:{user.alias_name} create user successful')
@@ -49,9 +66,7 @@ def log_in(request):
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
-            print("logged in!")
             login(request, user)
             return redirect('MAIN_APP:home')
-    if request.method == 'GET':
-        return render(request, 'sign_up_and_in/signin.html')
+    return render(request, 'sign_up_and_in/signin.html')
 

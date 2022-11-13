@@ -1,14 +1,10 @@
+{% extends 'layout.html' %}
 {% load static %}
 
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UFT-8">
-    <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
-</head>
 <body>
+    <!--
     <nav class="flex-div">
         <div class="nav-left flex-div">
             <img src="{% static 'homepage/images/menu.png' %}" class="menu-icon" onclick="toggleTab()">
@@ -154,6 +150,29 @@
             </div>
         </div>
     </nav>
+    -->
+    {% block body %}
+    {% if recent_read %}
+    <section class="product"> 
+        <h2 class="product-category">Recently read</h2>
+        <div class="product-container">
+        {% for book in recent_read %}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/media/{{ book.book_refer.id }}/{{ book.book_refer.thumbnail }}" class="product-thumb">
+                    <a href="{% url 'book_views:book' book.book_refer.book_id %}" class="sub-menu-link">
+                    <button class="card-btn">Read</button></a>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">{{ book.book_refer.book_name }}</h2>
+                    <p class="product-short-description">Its long story..</p>
+                </div> 
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
     {% for topic, books in topics.items %}
     <section class="product"> 
         <h2 class="product-category">{{ topic }}</h2>
@@ -178,6 +197,7 @@
 
     </section>
     {% endfor %}
+    {% endblock %}
 
     <script src="{% static 'homepage/script.js' %}"></script>
 

@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 from django.contrib.auth import logout
+=======
+from django.shortcuts import render, redirect
+from django.urls import path, include, reverse
+from database_models.models import Book, Read
+>>>>>>> Stashed changes
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.template import loader
@@ -18,6 +24,7 @@ def index(request):
     topics = {
         'Latest Books':latest_book,
     }
+<<<<<<< Updated upstream
     
     if request.method == "GET":  
         search_query = request.GET.get('query')
@@ -30,9 +37,15 @@ def index(request):
                 }
                 return render(request, 'homepage/homepage.html', {'topics':topics})
 
+=======
+    read = Read.objects.filter(user_refer=request.user)
+    recently_read = read.order_by('-book_read_latest_time')[:8]
+    if request.method == "GET":
+>>>>>>> Stashed changes
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
             'user': request.user, #'books': latest_book,
+            'recent_read': recently_read,
             'topics': topics,},)
 
 
@@ -46,10 +59,11 @@ def book(request):
 def searchbar(request):
     if request.method == "GET":
         query = request.GET.get('query')
-        checkbook = Book.objects.filter(book_name__iexact=query)
+        checkbook = Book.objects.filter(book_name__contains=query)
+        results = { 'Result for: ' + query: checkbook}
         if checkbook:
             book = Book.objects.filter(book_name__startswith=query).values()
-            return render(request, 'search.html', {'book':book})
+            return render(request, 'homepage/homepage.html', {'topics':results})
         else:
             print("no information")
             return render(request, 'homepage/homepage.html', {'message': 'no information'})

@@ -13,7 +13,6 @@ def user_picture(request, user_id):
     except:
         return HttpResponse('Not found')
 
-
 def userProfile(request, user_id):
     user = User.objects.get(user_id=user_id)
     # if user == request.user:
@@ -50,6 +49,9 @@ def editProfile(request, user_id):
             'user': user,
         }
         if request.method == 'POST':
+            cancel = request.POST.get('cancel')
+            if cancel:
+                return redirect('MAIN_APP:home')
             alias_name = request.POST.get('alias_name')
             email = request.POST.get('email')
             gender = request.POST.get('gender')
@@ -68,7 +70,11 @@ def editProfile(request, user_id):
             user.alias_name = alias_name
             user.email = email if email != '' else user.email
             user.gender = gender
-            user.age = age
+            if not age:
+                print(age)
+                user.age = None
+            else:
+                user.age = age 
             user.occupation = occupation
             user.bio = bio
             user.social_link = social_link
