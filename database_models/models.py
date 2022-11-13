@@ -111,9 +111,15 @@ def get_pdf_files_path(instance, file):
 
 
 class BookManager(models.Manager):
+    def get_generate_book_id(self,):
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while Book.objects.filter(pk=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        return rand_id
+
     def create(self, book_name, author, book_type, genres, **others):
         book = self.model(
-            book_id=get_generate_book_id(),
+            book_id=self.get_generate_book_id(),
             description=others.get('description', ''),
             date_created=timezone.now(),
             book_type=book_type,
@@ -130,11 +136,7 @@ class BookManager(models.Manager):
             else:
                 raise ValueError(_('Your genres does not exit'))
         return book
-def get_generate_book_id():
-        rand_id = hex(rand.randint(0, pow(16, 8)))
-        while Book.objects.filter(pk=rand_id).exists():
-            rand_id = hex(rand.randint(0, pow(16, 8)))
-        return rand_id
+
 
 class Book(models.Model):
     book_id = models.CharField(primary_key=True, max_length=10,default=get_generate_book_id)
@@ -244,7 +246,6 @@ class Review(models.Model):
         self.review_date = self.__original_review_date
         self.full_clean()
         super().save()
-
 
 
 class Issue(models.Model):
