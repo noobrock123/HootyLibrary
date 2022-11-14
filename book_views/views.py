@@ -69,8 +69,7 @@ def create_book(request):
             create=False
             messages.error(request, 'book_type is required ! ! ! ')
         if not create:
-            print("hi")
-            return render(request, 'book_views/templates/book_views/create_book.html', context)
+            return render(request, 'book_views/create_book.html', context)
         book = Book.objects.create(
             book_name=book_name,
             description=description,
