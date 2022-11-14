@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
+from django.http import HttpResponseNotFound
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('userProfile.urls')),
@@ -27,6 +29,7 @@ urlpatterns = [
     path('',include('book_views.urls')),
     path('',include('login_via_google.urls')),
     path('accounts/', include('allauth.urls')),
+    path('/<str:others>',HttpResponseNotFound), # in case 404
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

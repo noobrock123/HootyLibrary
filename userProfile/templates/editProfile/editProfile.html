@@ -1,13 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
     <link rel="stylesheet" href="{% static 'editProfile/style.css' %}">
 </head>
+
 <body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
     <form class="card" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="card-profile">
@@ -35,14 +44,12 @@
             {% if not user.bio %}
             <textarea cols="40" rows="5" placeholder="Enter your bio..." name="bio"></textarea>
             {% else %}
-            <textarea cols="40" rows="5" placeholder="Enter your bio..." name="bio"
-            value="{{ user.bio }}"></textarea>
+            <textarea cols="40" rows="5" placeholder="Enter your bio..." name="bio" value="{{ user.bio }}"></textarea>
             {% endif %}
         </div>
         <div class="my-choise">
             <h5>Email</h5>
-            <input type="text" placeholder="E-mail" name="email"
-            value="{{user.email}}" required class="edit-choise">
+            <input type="text" placeholder="E-mail" name="email" value="{{user.email}}" required class="edit-choise">
             <h5>Age</h5>
             {% if not user.age %}
             <input type="text" placeholder="Your age..." name="age" class="edit-choise">
@@ -59,10 +66,11 @@
             {% if not user.occupation %}
             <input type="text" placeholder="etc: Home, Office, University" name="occupation" class="edit-choise">
             {% else %}
-            <input type="text" placeholder="etc: Home, Office, University" name="occupation" value="{{user.occupation}}" class="edit-choise">
+            <input type="text" placeholder="etc: Home, Office, University" name="occupation" value="{{user.occupation}}"
+                class="edit-choise">
             {% endif %}
         </div>
-    <!--
+        <!--
     <p>social_link</p>
     <input type="text" name="social_link" id="" value="{{user.social_link}}" >
     <p>donation_link</p>
@@ -81,7 +89,7 @@
         </div>
         <button class="confirm" type="submit">Confirm</button>
         <button class="cancle" type="submit" name="cancel" value="C">Cancle</button>
-    <!--
+        <!--
 <script>
     var loadFile = function(event) {
         var image = document.getElementById('output');
@@ -91,4 +99,5 @@
     -->
     </form>
 </body>
+
 </html>
