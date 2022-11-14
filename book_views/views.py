@@ -31,10 +31,6 @@ def book_pdf(request, book_id):
 
 def book_views(request, book_id):
     book = Book.objects.get(book_id=book_id)
-    if request.user.is_authenticated:
-        if book.author != request.user:
-            if not Read.objects.filter(book_refer=book).filter(user_refer=request.user):
-                Read.objects.create(user_refer=request.user, book_refer=book)
     context = {
         'book_name': book.book_id,
         'description': book.description,
@@ -47,7 +43,7 @@ def book_views(request, book_id):
         'avg_score': book.get_avg_score(),
         'book': book,
     }
-    return render(request, 'book_views/templates/book_views/index.html', context)
+    return render(request, 'book_views/index.html', context)
 
 
 @login_required(login_url='register:log_in')
@@ -55,6 +51,7 @@ def create_book(request):
     context = {
         'genres': Genre.objects.all(),
     }
+    print('Hello')
     if request.method == 'POST':
         book_name = request.POST.get('book_name')
         description = request.POST.get('description')
@@ -82,4 +79,4 @@ def create_book(request):
         )
         return redirect('book_views:book', book.book_id)
 
-    return render(request, 'book_views/templates/book_views/create_book.html', context)
+    return render(request, 'book_views/create_book.html', context)
