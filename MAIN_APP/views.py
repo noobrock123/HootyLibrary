@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
 from django.contrib.auth import logout
-=======
 from django.shortcuts import render, redirect
 from django.urls import path, include, reverse
 from database_models.models import Book, Read
->>>>>>> Stashed changes
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.template import loader
@@ -24,24 +21,9 @@ def index(request):
     topics = {
         'Latest Books':latest_book,
     }
-<<<<<<< Updated upstream
-    
-    if request.method == "GET":  
-        search_query = request.GET.get('query')
-        if search_query:
-            SearchCheck = Book.objects.filter(book_name__contains=search_query)
-            if SearchCheck:
-                book = Book.objects.all().filter(book_name__startswith=search_query)
-                topics = {
-                    'search':book,
-                }
-                return render(request, 'homepage/homepage.html', {'topics':topics})
-
-=======
     read = Read.objects.filter(user_refer=request.user)
     recently_read = read.order_by('-book_read_latest_time')[:8]
     if request.method == "GET":
->>>>>>> Stashed changes
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
             'user': request.user, #'books': latest_book,
