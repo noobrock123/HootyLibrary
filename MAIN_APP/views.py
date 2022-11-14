@@ -12,9 +12,6 @@ from database_models.models import Book
 from django.utils import timezone
 from datetime import datetime, timedelta
 
-
-
-# Create your views here.
 def index(request):
     books = Book.objects.all()
     latest_book = books.order_by('-date_created').values()[:8]
@@ -29,7 +26,6 @@ def index(request):
             'user': request.user, #'books': latest_book,
             'recent_read': recently_read,
             'topics': topics,},)
-
 
 def about(request):
     return render(request, 'about/about.html')
