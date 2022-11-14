@@ -60,7 +60,7 @@ def editProfile(request, user_id):
             bio = request.POST.get('bio')
             social_link = request.POST.get('social_link')
             donation_link = request.POST.get('donation_link')
-            profile_pic = request.FILES.get('profile_pic')
+            profile_pic = request.POST.get('profile_pic')
             try:
                 if user != User.objects.get(email=email):
                     messages.error('This email is already exist ! ! !')

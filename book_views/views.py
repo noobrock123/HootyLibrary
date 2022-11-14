@@ -61,12 +61,15 @@ def create_book(request):
         pdf_files = request.FILES.get('pdf_files')
         create = True
         if not book_name:
+            print("hi")
             create=False
             messages.error(request, 'book_name is required ! ! ! ')
         if not book_type:
+            print("hi")
             create=False
             messages.error(request, 'book_type is required ! ! ! ')
         if not create:
+            print("hi")
             return render(request, 'book_views/templates/book_views/create_book.html', context)
         book = Book.objects.create(
             book_name=book_name,

@@ -14,6 +14,7 @@
             <div class="image-profile">
                 {% if not user.profile_pic %}
                 <img src="{% static 'editProfile/images/img1.jpg' %}">
+<<<<<<< Updated upstream
                 {% else %}
                 <img src="{{ user.profile_pic.url }}">
                 {% endif %}
@@ -28,6 +29,13 @@
                 {% else %}
                 <input type="text" name="alias_name" value="{{user.alias_name}}" class="input-edit">
                 {% endif %}
+=======
+                <input type="file" name="profile_pic" class="browse" accept="image/png, image/jpeg"></input>
+            </div>
+            <div class="name">
+                <input type="text" placeholder="Alias Name" name="alias_name"
+                value="{{user.alias_name}}" class="input-edit">
+>>>>>>> Stashed changes
             </div>
         </div>
         <div class="card-content">
@@ -43,6 +51,7 @@
             <h5>Email</h5>
             <input type="text" placeholder="E-mail" name="email"
             value="{{user.email}}" required class="edit-choise">
+<<<<<<< Updated upstream
             <h5>Age</h5>
             {% if not user.age %}
             <input type="text" placeholder="Your age..." name="age" class="edit-choise">
@@ -61,6 +70,14 @@
             {% else %}
             <input type="text" placeholder="etc: Home, Office, University" name="occupation" value="{{user.occupation}}" class="edit-choise">
             {% endif %}
+=======
+            <input type="text" placeholder="Age" name="age"
+            value="{{user.age}}" class="edit-choise">
+            <input type="text" placeholder="Gender" name="gender"
+            value="{{user.gender}}" class="edit-choise">
+            <input type="text" placeholder="Occupation" name="occupation"
+            value="{{user.occupation}}" class="edit-choise">
+>>>>>>> Stashed changes
         </div>
     <!--
     <p>social_link</p>
