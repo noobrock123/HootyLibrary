@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.card {
+width: 94.6%;
+height: 1100px;
+transform: translate(3%,3%);
+overflow: hidden;
+background: #fff;
+border-radius: 15px;
+display: flex;
+flex-direction: column;
+box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+z-index: 10;
+} 
+
+.card-profile{
+height: 50px;
+background: rgb(254, 157, 12);
+}
+
+.image-profile{
+  padding: 0 -20px 50px;
+}
+
+.card-profile .image-profile img {
+  width: 200px;
+  height: 290px;
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.card-profile .browse {
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+}
+
+.card-profile .browse-name {
+  width: 30%;
+  padding: 5px;
+  margin: 10px 0;
+  border: 1px solid #fff;
+  outline: none;
+  font-size: 10px;
+  color: rgb(186, 127, 0);
+  background: #fff;
+  box-shadow: inset 0 5px 60px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.card-profile .browse-btn {
+  width: 10%;
+  background: rgb(253, 168, 41);
+  padding: 7px;
+  border: 0;
+  color: #fff;
+  outline: none;
+  font-size: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.card-profile .browse-btn:hover {
+  background: rgb(255, 153, 0);
+}
+
+
+.card-content {
+margin-top: 80px;
+margin-left: 40%;
+}
+
+.card-content .title {
+  margin-bottom: 30px;
+  text-align:left;
+  padding: 0 1px 10px 20px;
+  font-size: 50px;
+}
+
+.card-content h1 {
+  font-size: 14px;
+  margin-left: 20%;
+  text-align:left;
+  padding: 0 1px 10px 20px;
+  color: rgb(96, 96, 96);
+}
+
+.card-content .name {
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #fff;
+    outline: none;
+    font-size: 16px;
+    color: rgb(186, 127, 0);
+    background: #fff;
+    box-shadow: inset 0 5px 60px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.card-content textarea {
+    width: 80%;
+    height: 40%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #fff;
+    outline: none;
+    font-size: 16px;
+    color: rgb(186, 127, 0);
+    background: #fff;
+    box-shadow: inset 0 5px 60px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+
+
+
+
+.card-content .select-menu{
+  width: 200px;
+  margin: 20px auto;
+  margin-right: 80%;
+}
+
+.card-content .select-menu .select-btn{
+  height: 55px;
+  background: #fff;
+  color: rgb(122, 122, 122);
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 8px;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+}
+
+.card-content .select-btn i{
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.card-content .select-menu.active .select-btn i{
+  transform: rotate(-180deg);
+}
+
+.card-content .select-menu .options{
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+  display: none;
+}
+
+.card-content .select-menu.active .options{
+  display: block;
+}
+
+.card-content .options .option{
+  display: flex;
+  height: 40px;
+  cursor: pointer;
+  padding: 0 16px;
+  border-radius: 8px;
+  align-items: center;
+  background: #fff;
+}
+.card-content .options .option:hover{
+  background: #fcca7f;
+}
+
+.card-content .option i{
+  font-size: 16px;
+  margin-right: 12px;
+}
+
+.card-content .option .option-text{
+  font-size: 16px;
+  color: #333;
+}
+
+.card-profile p {
+  padding: 2%;
+  color: rgb(148, 148, 148);
+  font-size: 16px;
+}
+
+.type-head {
+  margin-left: 2%;
+}
+
+.type-head .type {
+  background: #e2dded;
+  padding: 2px;
+  border: 0;
+  color: #fff;
+  outline: none;
+  font-size: 10px;
+  margin: 3px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.type-head .type:hover {
+  background: #c1b6da;
+}
+
+.card-content p {
+  padding: 1%;
+  font-size: 16px;
+  color: rgb(148, 148, 148);
+}
+
+.card-content .button {
+  margin-right: 10%;
+}
+
+.card .card-content .confirm {
+  width: 40%;
+  margin-left: 25%;
+  background: rgb(253, 168, 41);
+  padding: 10px;
+  border: 0;
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.card .card-content .confirm:hover {
+  background: rgb(255, 153, 0);
+}
+
+.card .card-content .cancle {
+  width: 40%;
+  margin-left: 25%;
+  background: rgb(43, 43, 43);
+  padding: 10px;
+  border: 0;
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.card .card-content .cancle:hover {
+  background: rgb(0, 0, 0);
+}
