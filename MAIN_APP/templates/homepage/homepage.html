@@ -119,7 +119,7 @@
                 </div>
                 <hr>
                 {% if is_user_authenticated %}
-                <a href="{% url 'userProfile:editProfile' user.user_id %}" class="sub-menu-link">
+                <a href="{% url 'userProfile:editProfile' %}" class="sub-menu-link">
                    <img src="{% static 'homepage/images/profile.png' %}">
                    <p>Edit Profile</p>
                 </a>
