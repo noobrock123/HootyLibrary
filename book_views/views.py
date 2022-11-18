@@ -9,6 +9,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
+from django.views import defaults
 # Create your views here.
 
 
@@ -17,7 +18,8 @@ def book_thumbnail(request, book_id):
         with open(f'{Book.objects.get(book_id=book_id).thumbnail.path}', 'rb') as thumbnail:
             return HttpResponse(thumbnail.read(), content_type="image/jpeg")
     except:
-        return HttpResponse('Not found')
+        with open(f'book_views/static/bookpage/images/not found book.jpg', 'rb') as thumbnail:
+            return HttpResponse(thumbnail.read(), content_type="image/jpeg")
 
 
 @xframe_options_exempt
@@ -25,26 +27,25 @@ def book_pdf(request, book_id):
     try:
         with open(f'{Book.objects.get(book_id=book_id).pdf_files.path}', 'rb') as pdf:
             return HttpResponse(pdf.read(), content_type="application/pdf")
-    except:
-        return HttpResponse('Not found')
+    except Exception as e:
+        return defaults.page_not_found(request, e)
 
 
 def book_views(request, book_id):
-    book = Book.objects.get(book_id=book_id)
+    try:
+        book = Book.objects.get(book_id=book_id)
+    except Exception as e:
+        return defaults.page_not_found(request, e)
     if request.user.is_authenticated:
         if book.author != request.user:
-            if not Read.objects.filter(book_refer=book).filter(user_refer=request.user):
-                Read.objects.create(user_refer=request.user, book_refer=book)
+            read = Read.objects.get_or_create(user_refer=request.user, book_refer=book)
+            
+            # if not Read.objects.filter(book_refer=book).filter(user_refer=request.user):
+            #     Read.objects.create(user_refer=request.user, book_refer=book)
+            # else:
+            #     print('read has saved')
+            #     Read.objects.get(user_refer=request.user,book_refer=book).save()
     context = {
-        'book_name': book.book_id,
-        'description': book.description,
-        'date_created': book.date_created,
-        'book_type': book.book_type,
-        'genres': book.genres,
-        'author': book.author,
-        'reviews': book.get_reviews(),
-        'favorite_books': Favorite.objects.filter(book_refer=book),
-        'avg_score': book.get_avg_score(),
         'book': book,
     }
     return render(request, 'book_views/templates/book_views/index.html', context)
