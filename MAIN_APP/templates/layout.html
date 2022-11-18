@@ -14,31 +14,31 @@
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
-                <a href="{% url 'MAIN_APP:menu' id=0 %}" class="sub-menu-link" name>
+                <a href="../Undiscoveredy" class="sub-menu-link">
                     <p>Undiscovered</p>
                 </a>
-                <a href="{% url 'MAIN_APP:menu' id=1 %}" class="sub-menu-link">
+                <a href="../Popular_today" class="sub-menu-link">
                     <p>Popular today</p>
                     <span>></span>
                 </a>          
-                <a href="{% url 'MAIN_APP:menu' id=2 %}" class="sub-menu-link">
+                <a href="../Popular_week" class="sub-menu-link">
                     <p>Popular this week</p>
                     <span>></span>
                     </a>
-                <a href="{% url 'MAIN_APP:menu' id=3 %}" class="sub-menu-link">
+                <a href="../Highest_rating_today" class="sub-menu-link">
                     <p>Highest rating today</p>
                 </a>
-                <a href="{% url 'MAIN_APP:menu' id=4 %}" class="sub-menu-link">
+                <a href="../Highest_rating_week" class="sub-menu-link">
                     <p>Highest rating this week</p>
                 </a>
-                <a href="{% url 'MAIN_APP:menu' id=5 %}" class="sub-menu-link">
+                <a href="../Recently" class="sub-menu-link">
                     <p>Recently update</p>
                 </a>
             </div>
         </div>
         <div class="nav-middle flex-div">
             <div class="search-box flex-div">
-                <form action="search" method="get" >
+                <form action="" method="get" >
                 <input name="query"  class="search" type="text" placeholder="Search" >
                 <button class="button"><img src="{% static 'homepage/images/search.png' %}" ></button>
                 </form>
@@ -62,16 +62,17 @@
                         </li>
                     </ul>
                 </div>
+                <form action="" method="get" >
                 <a class="sub-filter-link">
-                    <input type="checkbox" name="">
+                    <input type="checkbox" name="oldTolate">
                     <p>Oldest to Latest</p>
                 </a>
                 <a class="sub-filter-link">
-                    <input type="checkbox" name="">
+                    <input type="checkbox" name="zToa">
                     <p>Z to A</p>
                 </a>
                 <a class="sub-filter-link">
-                    <input type="checkbox" name="">
+                    <input type="checkbox" name="lowTohigh">
                     <p>lowest rating to Highest rating</p>
                 </a>
                 <a class="sub-filter-link">
@@ -79,6 +80,7 @@
                     <p>lowest rating to Highest view</p>
                 </a>
                 <input type="submit" value="Confirm">
+                </form>
             </div>
         </div>
         <div class="nav-right flex-div">

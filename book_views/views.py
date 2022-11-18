@@ -37,14 +37,11 @@ def book_views(request, book_id):
     except Exception as e:
         return defaults.page_not_found(request, e)
     if request.user.is_authenticated:
-        if book.author != request.user:
-            read = Read.objects.get_or_create(user_refer=request.user, book_refer=book)
-            
-            # if not Read.objects.filter(book_refer=book).filter(user_refer=request.user):
-            #     Read.objects.create(user_refer=request.user, book_refer=book)
-            # else:
-            #     print('read has saved')
-            #     Read.objects.get(user_refer=request.user,book_refer=book).save()
+        user = User.objects.get(user_id=request.user.user_id)
+        if book.author != user:
+            read = Read.objects.get_or_create(user_refer=user, book_refer=book)
+            read[0].save()
+
     context = {
         'book': book,
     }
@@ -63,12 +60,13 @@ def create_book(request):
         genres = request.POST.getlist('genres')
         thumbnail = request.FILES.get('thumbnail')
         pdf_files = request.FILES.get('pdf_files')
+        author = User.username
         create = True
         if not book_name:
-            create=False
+            create = False
             messages.error(request, 'book_name is required ! ! ! ')
         if not book_type:
-            create=False
+            create = False
             messages.error(request, 'book_type is required ! ! ! ')
         if not create:
             return render(request, 'book_views/templates/book_views/create_book.html', context)
