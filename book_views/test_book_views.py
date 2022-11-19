@@ -53,7 +53,8 @@ class BookViewTestCase(TestCase):
         )
         
     
-    def test_clien_access_book_do_not_exist(self):
+    def test_client_access_book_does_not_exist(self):
+        # test client access book does not exist
         c = Client()
         response = c.get(f'/book/waefawefwaef/')
         self.assertEqual(response.status_code,404)
