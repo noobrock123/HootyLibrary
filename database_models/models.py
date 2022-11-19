@@ -155,6 +155,8 @@ class Book(models.Model):
     def __init__(self):
         super(Book, self).__init__()
     '''
+    def get_report(self):
+        return Report.objects.filter(book_refer=self)
     def get_genres(self):
         return Genre.objects.filter(book=self)
     def __init__(self, *args, **kwargs) -> None:
@@ -273,7 +275,7 @@ class Report(models.Model):
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     report_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
-    msg = models.TextField(max_length=100, blank=True)
+    msg = models.TextField(max_length=100)
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
