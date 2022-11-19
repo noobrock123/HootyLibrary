@@ -49,33 +49,33 @@ class UserProfileTestCase(TestCase):
     def test_client_can_access_user_profile_picture(self):
         # test client can access user profile picture
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}')
+        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}/')
         self.assertEqual(response.status_code, 200)
 
     def test_client_can_access_user_profile(self):
         # test client can access user profile
         c = Client()
-        response = c.get(f'/user_profile/{self.user1.user_id}')
+        response = c.get(f'/user_profile/{self.user1.user_id}/')
         self.assertEqual(response.status_code, 200)
 
     def test_client_access_user_profile_picture_correct(self):
         # test client get user profile picture correct
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}')
+        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}/')
         with open(self.user1.profile_pic.path, 'rb') as profile_pic:
             self.assertEqual(response.content, profile_pic.read())
 
     def test_client_access_user_profile_not_set(self):
         # test client get user profile picture when owener user do not set picture profile
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user2.user_id}')
+        response = c.get(f'/user_profile/user_picture/{self.user2.user_id}/')
         with open('userProfile/static/userProfile/images/default_user_profile.png', 'rb') as default_profile_pic:
             self.assertEqual(response.content, default_profile_pic.read())
 
     def test_client_access_user_profile_correct(self):
         # test client get user profile correct
         c = Client()
-        response = c.get(f'/user_profile/{self.user1.user_id}')
+        response = c.get(f'/user_profile/{self.user1.user_id}/')
         with self.subTest():
             self.assertQuerysetEqual(response.context['my_books'], [
                                      self.book1, ], ordered=False)

@@ -39,30 +39,35 @@ class userProfileTestCase(TestCase):
     def test_client_can_access_user_picture(self):
         # test client can access user picture
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}')
+        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}/')
         self.assertEqual(response.status_code, 200)
 
     def test_client_access_user_picture_does_not_set(self):
         # test client can access if user not set user picture yet
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user2.user_id}')
+        response = c.get(f'/user_profile/user_picture/{self.user2.user_id}/')
         self.assertEqual(response.status_code, 200)
 
     def test_client_recieve_correct_user_picture(self):
         # test client recieve correct user picture
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}')
+        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}/')
         with open(self.user1.profile_pic.path, 'rb') as profile_pic:
             self.assertEqual(response._container[0], profile_pic.read())
 
     def test_client_can_access_user_profile(self):
         # test client can access user profile
         c = Client()
-        response = c.get(f'/user_profile/{self.user1.user_id}')
+        response = c.get(f'/user_profile/{self.user1.user_id}/')
         self.assertEqual(response.status_code, 200)
 
     def test_client_recieve_correct_user_profile(self):
         # test client recieve correct user profile
         c = Client()
-        response = c.get(f'/user_profile/{self.user1.user_id}')
-        self.assertEqual(response.context['user_id'], self.user1.user_id)
+        response = c.get(f'/user_profile/{self.user1.user_id}/')
+        self.assertEqual(response.context['user_id'], str(self.user1.user_id))
+    def test_client_access_user_profile_not_exist(self):
+        # test client access user profile does not exist
+        c = Client()
+        response = c.get(f'/user_profile/awefwafewaef/')
+        self.assertEqual(response.status_code,404)
