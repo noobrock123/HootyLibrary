@@ -53,7 +53,10 @@ class BookViewTestCase(TestCase):
         )
         
     
-    
+    def test_clien_access_book_do_not_exist(self):
+        c = Client()
+        response = c.get(f'/book/waefawefwaef/')
+        self.assertEqual(response.status_code,404)
     def test_client_access_book_no_logged_in(self):
         # test client access book when not logged in
         c = Client()
