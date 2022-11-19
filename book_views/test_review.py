@@ -65,20 +65,7 @@ class Create_Book(TestCase):
             title='review2 title',
             msg='review2 msg'
         )
-        self.issue1 = Issue.objects.create(
-            issuer=self.user1,
-            book_refer=self.book1,
-            title='issue1 title',
-            msg='issue1 msg'
-        )
-        self.favorite1 = Favorite.objects.create(
-            user_refer=self.user1,
-            book_refer=self.book1,
-        )
-        self.read1 = Read.objects.create(
-            user_refer=self.user1,
-            book_refer=self.book1,
-        )
+        
     def test_client_access_review_on_not_logged_in(self):
         # test client access review on not logged in
         # should redirect to book page

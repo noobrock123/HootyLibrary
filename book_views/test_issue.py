@@ -51,43 +51,15 @@ class CreateBookTestCase(TestCase):
             pdf_files=SimpleUploadedFile(name='RH_StudyGuide_V2.pdf', content=open(
                 'book_views/test_data/RH_StudyGuide_V2.pdf', 'rb').read(), content_type='application/pdf'),
         )
-        self.review1 = Review.objects.create(
-            reviewer=self.user1,
-            book_refer=self.book1,
-            title='review1 title',
-            score=5,
-            msg='review1 msg'
-        )
-        self.review2 = Review.objects.create(
-            reviewer=self.user2,
-            book_refer=self.book1,
-            score=8,
-            title='review2 title',
-            msg='review2 msg'
-        )
+        
         self.issue1 = Issue.objects.create(
             issuer=self.user1,
             book_refer=self.book1,
             title='issue1 title',
             msg='issue1 msg'
         )
-        self.favorite1 = Favorite.objects.create(
-            user_refer=self.user1,
-            book_refer=self.book1,
-        )
-        self.read1 = Read.objects.create(
-            user_refer=self.user1,
-            book_refer=self.book1,
-        )
-    def test_client_access_issue_on_logged_in_author(self):
-        # client access issue on logged in and was author
-        # should redirect to book page
-        c = Client()
-        c.login(username='user2',password='password')
-        response = c.get(f'/book/{self.book2.book_id}/issue/')
-        with self.subTest():
-            self.assertRedirects(response, f'/book/{self.book2.book_id}/', status_code=302,
-            target_status_code=200, fetch_redirect_response=True)
+        
+    
     def test_client_access_issue_on_logged_in_not_author(self):
         # test client access issue on logged in and was not author
         # should can issue and redirect to book page

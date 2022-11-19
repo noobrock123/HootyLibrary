@@ -51,34 +51,12 @@ class BookFavoriteTestCase(TestCase):
             pdf_files=SimpleUploadedFile(name='RH_StudyGuide_V2.pdf', content=open(
                 'book_views/test_data/RH_StudyGuide_V2.pdf', 'rb').read(), content_type='application/pdf'),
         )
-        self.review1 = Review.objects.create(
-            reviewer=self.user1,
-            book_refer=self.book1,
-            title='review1 title',
-            score=5,
-            msg='review1 msg'
-        )
-        self.review2 = Review.objects.create(
-            reviewer=self.user2,
-            book_refer=self.book1,
-            score=8,
-            title='review2 title',
-            msg='review2 msg'
-        )
-        self.issue1 = Issue.objects.create(
-            issuer=self.user1,
-            book_refer=self.book1,
-            title='issue1 title',
-            msg='issue1 msg'
-        )
+        
         self.favorite1 = Favorite.objects.create(
             user_refer=self.user1,
             book_refer=self.book1,
         )
-        self.read1 = Read.objects.create(
-            user_refer=self.user1,
-            book_refer=self.book1,
-        )
+        
     def test_client_access_favorite_book_on_logged_in_favorited(self):
         # test client access favorited book on logged in
         # should redirect to book page and favorite was deleted 
