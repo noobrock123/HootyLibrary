@@ -29,6 +29,7 @@
     <form action="{% url 'book_views:report' book.book_id %}">
         <input type="submit" value="report" />
     </form>
+    {% endif %}
     {% if favorite %}
     <form action="{% url 'book_views:book_favorite' book.book_id %}">
         <input type="submit" value="unfavorite" name="favorite" id="">
@@ -38,7 +39,7 @@
         <input type="submit" value="favorite" name="favorite" id="">
     </form>
     {% endif %}
-    {% endif %}
+    
     <p>book_name: {{book.book_name}}</p>
     <p>description: {{book.description}}</p>
     <p>date_created: {{book.date_created}}</p>
