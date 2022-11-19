@@ -76,7 +76,27 @@ class BookTestCase(TestCase):
             user_refer=self.user1,
             book_refer=self.book1,
         )
-
+        self.report1 = Report.objects.create(
+            reporter=self.user1,
+            book_refer=self.book3,
+            title='report1 title',
+            msg='report1 msg'
+        )
+        self.report2 = Report.objects.create(
+            reporter=self.user2,
+            book_refer=self.book3,
+            title='report2 title',
+            msg='report2 msg'
+        )
+    def test_book_str(self):
+        # test __str__
+        self.assertEqual(f'{self.book3.book_id}: {self.book3.book_name}',str(self.book3))
+    def test_book_get_genres(self):
+        # test get_genres
+        self.assertQuerysetEqual(self.book3.get_genres(), [self.genre1,self.genre2],ordered=False)
+    def test_book_get_report(self):
+        # test get_report
+        self.assertQuerysetEqual(self.book3.get_report(), [self.report1,self.report2],ordered=False)
     def test_book_create_correct_by_default(self):
         # Test book was created correctly when pass book_name, author, book_type
         with self.subTest():
