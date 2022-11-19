@@ -58,7 +58,12 @@ class CreateBookTestCase(TestCase):
             title='issue1 title',
             msg='issue1 msg'
         )
-        
+    def test_client_access_issue_book_not_logged_in(self):
+        # test client access issue book not logged in 
+        c = Client()
+        response = c.get(f'/book/{self.book1.book_id}/issue/')
+        self.assertRedirects(response, f'/book/{self.book1.book_id}/', status_code=302,
+            target_status_code=200, fetch_redirect_response=True)
     def test_client_access_issue_book_does_not_exist(self):
         # test client access issue book does not exist
         c = Client()

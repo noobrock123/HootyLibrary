@@ -161,9 +161,10 @@ def issue(request,book_id):
         book = Book.objects.get(book_id=book_id)
     except Exception as e:
         return defaults.page_not_found(request, e)
-    user = User.objects.get(user_id=request.user.user_id)
+    
     if not request.user.is_authenticated:
         return redirect('book_views:book', book.book_id)
+    user = User.objects.get(user_id=request.user.user_id)
     if user == book.author:
         return redirect('book_views:book', book_id)
     if request.method == 'POST':
