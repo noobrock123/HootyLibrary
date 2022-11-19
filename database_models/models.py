@@ -19,7 +19,7 @@ class CustomAccountManager(BaseUserManager):
 
     def create(self, username, email, password, **others):
 
-        self.create_user(username, email, password, **others)
+        return self.create_user(username, email, password, **others)
 
     def create_user(self, username, email, password, **others):
 
