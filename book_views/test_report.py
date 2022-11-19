@@ -51,8 +51,18 @@ class ReportTestCase(TestCase):
             pdf_files=SimpleUploadedFile(name='RH_StudyGuide_V2.pdf', content=open(
                 'book_views/test_data/RH_StudyGuide_V2.pdf', 'rb').read(), content_type='application/pdf'),
         )
-        
-    
+    def test_client_access_report_book_not_logged_in(self):
+        # test client access report book not logged in 
+        c = Client()
+        response = c.get(f'/book/{self.book1.book_id}/report/')
+        self.assertRedirects(response, f'/book/{self.book1.book_id}/', status_code=302,
+            target_status_code=200, fetch_redirect_response=True)
+    def test_client_access_report_book_does_not_exist(self):
+        # test client access report book does not exist
+        c = Client()
+        c.login(username='user3', password='password')
+        response = c.get(f'/book/awefawefaw/report/')
+        self.assertEqual(response.status_code, 404)
     
     def test_client_access_report_on_logged_in_not_author(self):
         # test client access report on logged in and was not author
