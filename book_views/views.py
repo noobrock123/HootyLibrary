@@ -9,6 +9,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
+from database_models.models import User
 # Create your views here.
 
 
@@ -62,6 +63,7 @@ def create_book(request):
         genres = request.POST.getlist('genres')
         thumbnail = request.FILES.get('thumbnail')
         pdf_files = request.FILES.get('pdf_files')
+        author = User.username
         create = True
         if not book_name:
             create=False

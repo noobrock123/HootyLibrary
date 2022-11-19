@@ -100,6 +100,6 @@ class RegisterTestCase(TestCase):
             self.assertEqual(response.status_code, 200)
         with self.subTest():
             self.assertTemplateUsed(
-                response, 'register/templates/sign_up_and_in/signup.html')
+                response, 'sign_up_and_in/signup.html')
         with self.subTest():
             self.assertEqual(str(messages[0]), 'Password do not match')
