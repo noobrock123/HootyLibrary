@@ -29,7 +29,6 @@ def register(request):
         except:
             pass
         if password != confirm_password:
-<<<<<<< Updated upstream
             messages.error(request, message='password do not match')
             return render(request, 'sign_up_and_in/signup.html', {})
         try:
@@ -40,15 +39,6 @@ def register(request):
             )
         except ValidationError:
             return redirect('register:regis')
-=======
-            messages.error('password do not match')
-            return render(request, 'sign_up_and_in/sign_up.html', {})
-        user = User.objects.create_user(
-            username=username,
-            email=email,
-            password=password,
-        )
->>>>>>> Stashed changes
 
         user = authenticate(username=username, password=password)
         login(request, user)

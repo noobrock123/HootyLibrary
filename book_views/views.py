@@ -51,7 +51,6 @@ def create_book(request):
     context = {
         'genres': Genre.objects.all(),
     }
-    print('Hello')
     if request.method == 'POST':
         book_name = request.POST.get('book_name')
         description = request.POST.get('description')
@@ -65,16 +64,10 @@ def create_book(request):
             create=False
             messages.error(request, 'book_name is required ! ! ! ')
         if not book_type:
-            print("hi")
             create=False
             messages.error(request, 'book_type is required ! ! ! ')
         if not create:
-<<<<<<< Updated upstream
             return render(request, 'book_views/create_book.html', context)
-=======
-            print("hi")
-            return render(request, 'book_views/templates/book_views/create_book.html', context)
->>>>>>> Stashed changes
         book = Book.objects.create(
             book_name=book_name,
             description=description,
