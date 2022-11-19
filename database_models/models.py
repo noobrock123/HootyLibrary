@@ -123,7 +123,6 @@ class BookManager(models.Manager):
             pdf_files=others.get('pdf_files', None)
         )
         book.save()
-        book.genres.add(Genre.objects.first())
         for genre in genres:
 
             if Genre.objects.filter(genre_list=genre).exists():
