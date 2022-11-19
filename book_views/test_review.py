@@ -65,7 +65,11 @@ class Create_Book(TestCase):
             title='review2 title',
             msg='review2 msg'
         )
-        
+    def test_client_access_review_book_does_not_exist(self):
+        # test client access review book does not exist
+        c = Client()
+        response = c.get(f'/book/{self.book1}/review/')
+        self.assertEqual(response.status_code, 404)
     def test_client_access_review_on_not_logged_in(self):
         # test client access review on not logged in
         # should redirect to book page
