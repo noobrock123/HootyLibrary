@@ -55,7 +55,6 @@ class CreateBookTestCase(TestCase):
 
     
     
-    
     def test_client_redirect_create_book_on_user_not_login(self):
         # test client can redirect create book on user not login
         c = Client()
@@ -145,7 +144,6 @@ class CreateBookTestCase(TestCase):
 
         post = {
             'description': 'created_book_description',
-            'book_type': 1,
             'genres': ['genre1', 'genre2'],
             'thumbnail': SimpleUploadedFile(name='RH_StudyGuide_V2.pdf', content=open(
                 'book_views/test_data/RH_StudyGuide.jpg', 'rb').read(), content_type='image/jpeg'),
