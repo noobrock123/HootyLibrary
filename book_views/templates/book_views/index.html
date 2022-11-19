@@ -9,26 +9,74 @@
 </head>
 
 <body>
-<h1>This is book views</h1>
-<img src="/media/{{ book.id }}/{{ book.thumbnail }}" class="product-thumb">
-<p>book_name: {{book.book_name}}</p>
-<p>description: {{book.description}}</p>
-<p>date_created: {{book.date_created}}</p> 
-<p>book_type: {{book.book_type}}</p>
-<p>genres: {{book.genres}}</p>
-<p>author: {{book.author}}</p>
-<hr>
-{% for review in reviews%}
-<p>reviewer: {{ review.reviewer.username}}</p>
-<p>score: {{ review.score }}</p>
-<p>title: {{ review.title }}</p>
-<p>msg: {{ review.msg }}</p>
-{% endfor %}
-<hr>
-{% for favorite_book in favorite_books%}
-<p>favorite: {{favorite_book.user_refer}}</p>
-{% endfor %}
-<p>avg_score: {{avg_score}}</p>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>This is book views</h1>
+    
+    <img src="{% url 'book_views:book_thumbnail' book.book_id %}" class="product-thumb">
+    {% if request.user.is_authenticated and request.user != book.author %}
+    <form action="{% url 'book_views:issue' book.book_id %}">
+        <input type="submit" value="issue" />
+    </form>
+    <form action="{% url 'book_views:review' book.book_id %}">
+        <input type="submit" value="review" />
+    </form>
+    <form action="{% url 'book_views:report' book.book_id %}">
+        <input type="submit" value="report" />
+    </form>
+    {% if favorite %}
+    <form action="{% url 'book_views:book_favorite' book.book_id %}">
+        <input type="submit" value="unfavorite" name="favorite" id="">
+    </form>
+    {% else %}
+    <form action="{% url 'book_views:book_favorite' book.book_id %}" >
+        <input type="submit" value="favorite" name="favorite" id="">
+    </form>
+    {% endif %}
+    {% endif %}
+    <p>book_name: {{book.book_name}}</p>
+    <p>description: {{book.description}}</p>
+    <p>date_created: {{book.date_created}}</p>
+    <p>book_type: {{book.book_type}}</p>
+    <p>genres:</p>
+    {% for genre in book.genres.all %}
+    <p>- {{genre}}</p>
+    {% endfor %}
+    
+    <p>author: <a href="{% url 'userProfile:user_profile' book.author.user_id %}">{% if book.author.alias_name %}{{book.author.alias_name}}{% else %}{{book.author.username}}{% endif %}</a></p>
 
+    <p>avg_score: {{book.get_avg_score}}</p>
+    <p>pdf link:<a href="{% url 'book_views:book_pdf' book.book_id %}">{{book.book_name}}</a></p>
+    <hr>
+    {% for review in book.get_reviews %}
+    
+    <p>reviewer: <a href="{% url 'userProfile:user_profile' review.reviewer.user_id %}">{% if review.reviewer.alias_name %}{{ review.reviewer.alias_name}}{% else %}{{review.reviewer.username}}{% endif %}</a></p>
+    <p>score: {{ review.score }}</p>
+    <p>title: {{ review.title }}</p>
+    <p>msg: {{ review.msg }}</p>
+    {% endfor %}
+    <hr>
+    
+    <p>favorite:{% for favorite_book in book.get_favorite_books %} <a href="{% url 'userProfile:user_profile' favorite_book.user_id %}">{{favorite_book.username}}</a> {% endfor %}</p>
+    
+    <hr>
+    <p>Issues</p>
+    {% for issue in book.get_issues %}
+    <p>title: {{issue.title}}</p>
+    <p>message: {{issue.msg}}</p>
+    <hr>
+    {% endfor %}
+    <p>Report</p>
+    {% for report in book.get_report %}
+    <p>title: {{report.title}}</p>
+    <p>message: {{report.msg}}</p>
+    <hr>
+    {% endfor %}
 </body>
+
 </html>
