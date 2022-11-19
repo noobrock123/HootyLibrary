@@ -139,7 +139,7 @@ class BookManager(models.Manager):
 
 
 class Book(models.Model):
-    book_id = models.CharField(primary_key=True, max_length=10,default=get_generate_book_id)
+    book_id = models.CharField(primary_key=True, max_length=10)
     book_name = models.CharField(max_length=60, default='Untitled', blank=False)
     description = models.TextField(max_length=120, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
