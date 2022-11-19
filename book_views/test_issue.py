@@ -59,7 +59,12 @@ class CreateBookTestCase(TestCase):
             msg='issue1 msg'
         )
         
-    
+    def test_client_access_issue_book_does_not_exist(self):
+        # test client access issue book does not exist
+        c = Client()
+        c.login(username='user3', password='password')
+        response = c.get(f'/book/awefawefaw/issue/')
+        self.assertEqual(response.status_code, 404)
     def test_client_access_issue_on_logged_in_not_author(self):
         # test client access issue on logged in and was not author
         # should can issue and redirect to book page
