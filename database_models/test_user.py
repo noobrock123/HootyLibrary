@@ -24,7 +24,33 @@ class UserTestCase(TestCase):
                 'database_models/data_test/owl.jpg', 'rb').read(), content_type='image/jpeg'),
 
         )
+    def test_user_str(self):
+        # test user __str__
+        self.assertEqual(f'{self.user1.user_id}: {self.user1.username}', str(self.user1))
+    def test_create(self):
+        # test create
+        user2 = User.objects.create(
+            username='user2',
+            password='password',
+            email='user2@email.email'
+        )
+        self.assertTrue(
+            user2.username == 'user2' and
+            user2.check_password('password') and
+            user2.email == 'user2@email.email' and
+            timezone.now() < user2.date_joined + timedelta(seconds=1) and
+            user2.gender == None and
+            user2.age == None and
+            user2.occupation == None and
+            user2.bio == '' and
+            user2.social_link == None and
+            user2.donation_link == None and
+            user2.profile_pic == None and
+            user2.is_staff == 0 and
+            user2.is_active == 1 and
+            True
 
+        )
     def test_create_normal_user_correct(self):
         # test normal user was create correctly
         user2 = User.objects.create_user(

@@ -73,7 +73,7 @@ class EditUserProfielTestCase(TestCase):
 
         messages = list(get_messages(response.wsgi_request))
         with self.subTest():
-            self.assertRedirects(response, f'/user_profile/{self.user1.user_id}', status_code=302,
+            self.assertRedirects(response, f'/user_profile/{self.user1.user_id}/', status_code=302,
                                  target_status_code=200, fetch_redirect_response=True)
         with self.subTest():
             self.assertEqual(

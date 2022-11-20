@@ -9,7 +9,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
-from database_models.models import User
+from django.views import defaults
 # Create your views here.
 
 
@@ -18,7 +18,8 @@ def book_thumbnail(request, book_id):
         with open(f'{Book.objects.get(book_id=book_id).thumbnail.path}', 'rb') as thumbnail:
             return HttpResponse(thumbnail.read(), content_type="image/jpeg")
     except:
-        return HttpResponse('Not found')
+        with open(f'book_views/static/bookpage/images/not found book.jpg', 'rb') as thumbnail:
+            return HttpResponse(thumbnail.read(), content_type="image/jpeg")
 
 
 @xframe_options_exempt
@@ -26,27 +27,36 @@ def book_pdf(request, book_id):
     try:
         with open(f'{Book.objects.get(book_id=book_id).pdf_files.path}', 'rb') as pdf:
             return HttpResponse(pdf.read(), content_type="application/pdf")
-    except:
-        return HttpResponse('Not found')
-
-
-def book_views(request, book_id):
+    except Exception as e:
+        return defaults.page_not_found(request, e)
+@login_required(login_url='register:log_in')
+def book_favorite(request, book_id):
     book = Book.objects.get(book_id=book_id)
+    user = User.objects.get(user_id=request.user.user_id)
+    try:
+        Favorite.objects.filter(book_refer=book).get(user_refer=user).delete()
+    except:
+        Favorite.objects.create(user_refer=user,book_refer=book)
+    return redirect('book_views:book',book_id)
+def book_views(request, book_id):
+    try:
+        book = Book.objects.get(book_id=book_id)
+    except Exception as e:
+        return defaults.page_not_found(request, e)
+    favorite=None
     if request.user.is_authenticated:
-        if book.author != request.user:
-            if not Read.objects.filter(book_refer=book).filter(user_refer=request.user):
-                Read.objects.create(user_refer=request.user, book_refer=book)
+        user = User.objects.get(user_id=request.user.user_id)
+        if book.author != user:
+            read = Read.objects.get_or_create(user_refer=user, book_refer=book)
+            read[0].save()
+        try:
+            favorite = Favorite.objects.filter(book_refer=book).get(user_refer=user)
+        except:
+            favorite = None
     context = {
-        'book_name': book.book_id,
-        'description': book.description,
-        'date_created': book.date_created,
-        'book_type': book.book_type,
-        'genres': book.genres,
-        'author': book.author,
-        'reviews': book.get_reviews(),
-        'favorite_books': Favorite.objects.filter(book_refer=book),
-        'avg_score': book.get_avg_score(),
         'book': book,
+        'favorite':favorite,
+        
     }
     return render(request, 'book_views/templates/book_views/index.html', context)
 
@@ -66,13 +76,14 @@ def create_book(request):
         author = User.username
         create = True
         if not book_name:
-            create=False
+            create = False
             messages.error(request, 'book_name is required ! ! ! ')
         if not book_type:
-            create=False
+            create = False
             messages.error(request, 'book_type is required ! ! ! ')
         if not create:
             return render(request, 'book_views/templates/book_views/create_book.html', context)
+        # print(genres)
         book = Book.objects.create(
             book_name=book_name,
             description=description,
@@ -85,3 +96,91 @@ def create_book(request):
         return redirect('book_views:book', book.book_id)
 
     return render(request, 'book_views/templates/book_views/create_book.html', context)
+def review(request,book_id):
+    
+    try:
+        book = Book.objects.get(book_id=book_id)
+    except Exception as e:
+        return defaults.page_not_found(request, e)
+    if not request.user.is_authenticated:
+        return redirect('book_views:book', book.book_id)
+    user = User.objects.get(user_id=request.user.user_id)
+    if user == book.author:
+        return redirect('book_views:book', book_id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        message = request.POST.get('message')
+        score = request.POST.get('score')
+        try:
+            Review.objects.create(
+                reviewer=user,
+                book_refer=book,
+                score=score if score else 0,
+                title=title,
+                msg=message,
+            )
+            messages.success(request, f'Review successful')
+            return redirect('book_views:book', book_id=book_id)
+        except Exception as exception:
+            for e in exception:
+                messages.error(request, f'{e[0]}: {e[1][0]}')
+    return render(request, "book_views/templates/book_views/review.html")
+def report(request,book_id):
+    
+    try:
+        book = Book.objects.get(book_id=book_id)
+    except Exception as e:
+        return defaults.page_not_found(request, e)
+    
+    if not request.user.is_authenticated:
+        return redirect('book_views:book', book.book_id)
+    user = User.objects.get(user_id=request.user.user_id)
+    if user == book.author:
+        return redirect('book_views:book', book_id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        message = request.POST.get('message')
+        try:
+            Report.objects.create(
+                reporter=user,
+                book_refer=book,
+                title=title,
+                msg=message,
+            )
+            messages.success(request, f'Report successful')
+            return redirect('book_views:book', book_id=book_id)
+        except Exception as exception:
+            for e in exception:
+                messages.error(request, f'{e[0]}: {e[1][0]}')
+
+    return render(request, "book_views/templates/book_views/report.html")
+
+def issue(request,book_id):
+    
+    try:
+        book = Book.objects.get(book_id=book_id)
+    except Exception as e:
+        return defaults.page_not_found(request, e)
+    
+    if not request.user.is_authenticated:
+        return redirect('book_views:book', book.book_id)
+    user = User.objects.get(user_id=request.user.user_id)
+    if user == book.author:
+        return redirect('book_views:book', book_id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        message = request.POST.get('message')
+        try:
+            Issue.objects.create(
+                issuer=user,
+                book_refer=book,
+                title=title,
+                msg=message,
+            )
+            messages.success(request, f'Issue successful')
+            return redirect('book_views:book', book_id=book_id)
+        except Exception as exception:
+            for e in exception:
+                messages.error(request, f'{e[0]}: {e[1][0]}')
+
+    return render(request, "book_views/templates/book_views/issue.html")

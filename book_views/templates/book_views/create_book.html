@@ -6,14 +6,15 @@
     {% csrf_token %}
     <input type="text" name="book_name" id="" placeholder="book_name">
     <input type="number" name="book_type" id="" placeholder="book_type">
-    <input type="file" name="thumbnail" id="" accept="image/png, image/jpeg">
-    <input type="file" name="pdf_files" id="" accept="pdf_files">
-    <textarea rows = "5" cols = "60" name = "description"></textarea><br>
+    <p>thumbnail: <input type="file" name="thumbnail" id="" accept="image/png, image/jpeg"></p>
+    <p>pdf file: <input type="file" name="pdf_files" id="" accept="pdf_files"></p>
+    
+    <textarea rows = "5" cols = "60" name = "description" placeholder="Enter your descriptions"></textarea><br>
     <p for="">genre_list</p>
     {% for genre in genres %}
     <p><input type="checkbox" name="genres" id="" value={{genre.genre_list}}>{{genre.genre_list}} </p>
     {% endfor %}
-    <p>thumbnail</p>
+    
     
 
     <input type="submit" value="submit" name="" id="">
