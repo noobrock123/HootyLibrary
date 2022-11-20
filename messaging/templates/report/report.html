@@ -1,19 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'report/style.css' %}">
 </head>
 <body>
     <div class="card">
         <div class="card-profile">
             <div class="reportbook">
-                <h2>Reporting Book...</h2><p>book_id</p>
+                <h2>Reporting {{ book.book_name }}</h2><p>{{ book.book_id }}</p>
             </div>
             <div class="image-profile">
-                <img src="images/img1.jpg">
+                <img src="{{ book.thumbnail.url }}">
             </div>
             <div class="name">
                 <h1>Title</h1>
@@ -22,7 +23,7 @@
         </div>
         <div class="card-content">
             <h1>what do you report for?</h1>
-            <textarea type="text" cols="40" rows="5" placeholder="Enter your opinions here..."></textarea>
+            <textarea type="text" cols="40" rows="5" placeholder="Things to report"></textarea>
         </div>
         <div class="button">
             <button class="confirm" type="submit">Report</button>

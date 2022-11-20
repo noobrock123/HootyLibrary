@@ -37,7 +37,7 @@ def create_review(request, book_id):
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
 
-    return render(request, 'messaging/prototype.html', {'book': book})
+    return render(request, 'review/review.html', {'book': book})
 
 
 def show_issues(request, book_id):
@@ -69,10 +69,10 @@ def issuing(request, book_id):
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
 
-    return render(request, 'messaging/prototype.html', {'book': book})
+    return render(request, 'issue/issue.html', {'book': book})
 
 @login_required(login_url='register:log_in')
-def issuing(request, book_id):
+def create_report(request, book_id):
     book = Book.objects.get(book_id=book_id)
     if request.method == 'POST':
         book = Book.objects.get(book_id=book_id)
@@ -85,4 +85,4 @@ def issuing(request, book_id):
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
 
-    return render(request, 'messaging/prototype.html', {'book': book})
+    return render(request, 'report/report.html', {'book': book})

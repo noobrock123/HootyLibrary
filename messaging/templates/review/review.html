@@ -1,19 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'review/style.css' %}">
 </head>
 <body>
     <div class="card">
         <div class="card-profile">
             <div class="reportbook">
-                <h2>Reviewing Book...</h2><p>book_id</p>
+                <h2>Reviewing {{ book.book_name }}</h2><p> {{ book.book_id }}</p>
             </div>
             <div class="image-profile">
-                <img src="images/img1.jpg">
+                <img src="{{ book.thumbnail.url }}">
             </div>
             <div class="name">
                 <h1>Title</h1>
@@ -71,6 +72,6 @@
             <button class="cancle" type="submit">Cancle</button>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="{% static 'review/script.js' %}"></script>
 </body>
 </html>

@@ -8,9 +8,10 @@ from . import views
 app_name = "messaging"
 urlpatterns = [
     path('<str:book_id>/reviews/', views.reviews, name='reviews'),
-    path('<str:book_id>/create_review/', views.create_review, name='create_review'),
-    path('<str:book_id>/issues/', views.show_issues, name='issues'),
-    path('<str:book_id>/issuing/', views.issuing, name='issuing'),
+    path('create_review/', views.create_review, name='create_review'),
+    path('issues/', views.show_issues, name='issues'),
+    path('create_issue/', views.issuing, name='create_issue'),
+    path('create_report/', views.create_report, name='create_report'),
 
 ]
 
