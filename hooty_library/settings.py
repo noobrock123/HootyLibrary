@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
     'book_views.apps.BookViewsConfig',
+    'messaging.apps.MessagingConfig',
     'django.contrib.sites',
     'allauth', 
     'allauth.account', 

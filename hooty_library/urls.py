@@ -25,10 +25,12 @@ urlpatterns = [
     path('registeration/', include('register.urls')),
     path('accounts/', include('allauth.urls')),
 
-    # path('user_profile/', include('userProfile.urls')),
-    path('', include('userProfile.urls')),
+    path('user_profile/', include('userProfile.urls')),
+    #path('', include('userProfile.urls')),
     path('', include('MAIN_APP.urls')),
-    path('',include('book_views.urls')),
+    path('book/',include('book_views.urls')),
+    path('',include('login_via_google.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
