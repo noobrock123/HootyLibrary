@@ -53,7 +53,6 @@ def editProfile(request):
         donation_link = request.POST.get('donation_link')
         profile_pic = request.FILES.get('profile_pic')
 
-<<<<<<< HEAD
     try:
         user = User.objects.get(user_id=user_id)
     except:
@@ -96,18 +95,6 @@ def editProfile(request):
             user.social_link = social_link
             user.donation_link = donation_link
             user.profile_pic = profile_pic if profile_pic != None else user.profile_pic
-=======
-        user.alias_name = alias_name
-        user.email = email if email != '' else user.email
-        user.gender = gender
-        user.age = age
-        user.occupation = occupation
-        user.bio = bio
-        user.social_link = social_link
-        user.donation_link = donation_link
-        user.profile_pic = profile_pic if profile_pic != None else user.profile_pic
-        try:
->>>>>>> main
             user.save()
         except Exception as exception:
             for e in exception:
