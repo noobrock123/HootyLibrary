@@ -64,10 +64,10 @@ def editProfile(request):
         user.profile_pic = profile_pic if profile_pic != None else user.profile_pic
         try:
             user.save()
-        #except Exception as exception:
-         #   for e in exception:
-         #       messages.error(request, e[1][0])
-         #   return render(request, 'editProfile/editProfile.html', context)
+        except Exception as exception:
+            for e in exception:
+                messages.error(request, e[1][0])
+            return render(request, 'editProfile/editProfile.html', context)
 
         messages.success(request, 'Successful,Your profile has been edited.')
         return redirect('userProfile:user_profile', user_id=user.user_id)

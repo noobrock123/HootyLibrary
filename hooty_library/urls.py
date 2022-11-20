@@ -29,7 +29,6 @@ urlpatterns = [
     #path('', include('userProfile.urls')),
     path('', include('MAIN_APP.urls')),
     path('book/',include('book_views.urls')),
-    path('',include('login_via_google.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 if settings.DEBUG:
