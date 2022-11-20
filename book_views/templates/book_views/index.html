@@ -30,17 +30,15 @@
         <input type="submit" value="report" />
     </form>
     {% endif %}
-    <!--
     {% if favorite %}
-    <form action="#">
+    <form action="{% url 'book_views:book_favorite' book.book_id %}">
         <input type="submit" value="unfavorite" name="favorite" id="">
     </form>
     {% else %}
-    <form action="#">
+    <form action="{% url 'book_views:book_favorite' book.book_id %}">
         <input type="submit" value="favorite" name="favorite" id="">
     </form>
     {% endif %}
--->
     
     <p>book_name: {{book.book_name}}</p>
     <p>description: {{book.description}}</p>
