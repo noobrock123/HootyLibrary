@@ -70,10 +70,3 @@ class ReadTestCase(TestCase):
         with self.assertRaises(Exception) as raised:
             Read.objects.get(user_refer=self.user1, book_refer=self.book1)
         self.assertEqual(Read.DoesNotExist, type(raised.exception))
-
-    def test_read_get_recent_read_books(self):
-        # test read function get_recent_read_books()
-        self.assertEqual(
-            self.read1.get_recent_read_books(self.user1),
-            self.book1
-        )

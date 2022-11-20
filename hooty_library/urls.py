@@ -22,13 +22,13 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('userProfile.urls')),
     path('registeration/', include('register.urls')),
-    path('user_profile/', include('userProfile.urls')),
+    path('accounts/', include('allauth.urls')),
+
+    # path('user_profile/', include('userProfile.urls')),
+    path('', include('userProfile.urls')),
     path('', include('MAIN_APP.urls')),
     path('',include('book_views.urls')),
-    path('',include('login_via_google.urls')),
-    path('accounts/', include('allauth.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

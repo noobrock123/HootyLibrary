@@ -14,7 +14,21 @@ class RegisterTestCase(TestCase):
             password='password',
             email='user1@email.email',
         )
-
+    def test_regis_logged_in(self):
+        c = Client()
+        c.login(username='user1',password='password')
+        response = c.get('/registeration/sign_up/')
+        self.assertRedirects(response, '/', status_code=302,
+                                 target_status_code=200, fetch_redirect_response=True)
+    def test_client_can_access_log_in(self):
+        c = Client()
+        response = c.get('/registeration/sign_in/')
+        self.assertEqual(response.status_code,200)
+    def test_log_in(self):
+        c = Client()
+        response = c.post('/registeration/sign_in/',{'name_email':'user1','password':'password'})
+        self.assertRedirects(response, '/', status_code=302,
+                                 target_status_code=200, fetch_redirect_response=True)
     def test_view_register(self):
         # test client can access register
         c = Client(enforce_csrf_checks=True)

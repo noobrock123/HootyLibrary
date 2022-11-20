@@ -31,14 +31,13 @@ def register(request):
         if password != confirm_password:
             messages.error(request, message='Password do not match')
             return render(request, 'sign_up_and_in/signup.html', {})
-        try:
-            user = User.objects.create_user(
-                username=username,
-                email=email,
-                password=password,
-            )
-        except ValidationError:
-            return redirect('register:regis')
+        
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+        )
+        
 
         user = authenticate(username=username, password=password)
         login(request, user)
