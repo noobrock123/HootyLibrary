@@ -21,6 +21,34 @@ def index(request):
     read = Read.objects.filter(user_refer=request.user)
     recently_read = read.order_by('-book_read_latest_time')[:8]
     if request.method == "GET":
+        search_query = request.GET.get('query')
+        if search_query:
+            SearchCheck = Book.objects.filter(book_name__contains=search_query)
+            if SearchCheck:
+                book = Book.objects.all().filter(book_name__startswith=search_query)
+                topics = {
+                    'search':book,
+                }
+                return render(request, 'homepage/homepage.html', {'topics':topics})
+        oldTolate_query = request.GET.get('oldTolate')
+        zToa_query = request.GET.get('zToa')
+        if oldTolate_query or zToa_query:
+            topics = { }
+            if oldTolate_query:
+                oldTolateBook = Book.objects.all().order_by('date_created').values()
+                topics.update({'Oldest to Latest':oldTolateBook,})
+            if  zToa_query:
+                book = Book.objects.all().order_by('-book_name').values()
+                topics.update({'Z to A':book,})
+                
+                
+            return render(request, 'homepage/homepage.html', {'topics':topics})
+        if zToa_query:
+            book = Book.objects.all().order_by('-book_name').values()
+            topics = {
+                'Z to A':book,
+            }
+            return render(request, 'homepage/homepage.html', {'topics':topics})
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
             'user': request.user, #'books': latest_book,
@@ -32,19 +60,6 @@ def about(request):
 
 def book(request):
     return render(request, 'book_views/index.html')
-
-
-def searchbar(request):
-    if request.method == "GET":
-        query = request.GET.get('query')
-        checkbook = Book.objects.filter(book_name__contains=query)
-        results = { 'Result for: ' + query: checkbook}
-        if checkbook:
-            book = Book.objects.filter(book_name__startswith=query).values()
-            return render(request, 'homepage/homepage.html', {'topics':results})
-        else:
-            print("no information")
-            return render(request, 'homepage/homepage.html', {'message': 'no information'})
 
 def create_book(request):
     if request.method == "GET":

@@ -29,7 +29,7 @@ def register(request):
         except:
             pass
         if password != confirm_password:
-            messages.error(request, message='password do not match')
+            messages.error(request, message='Password do not match')
             return render(request, 'sign_up_and_in/signup.html', {})
         try:
             user = User.objects.create_user(

@@ -2,55 +2,66 @@
 <html lang="en">
 
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    </head>
-    <body>
-        <div class="profile_layout">
-            <div class="profile_main">
-                <img class="profile_pic" src=" " width="130px" height="130px"> 
-                <div class="name_box">
-                    <h2 id="alias_username">{{username}}</h2>
-                    <p id="username">{{username}}</p>
-                </div>
-            </div>
-            <div class="user_info">
-                <div class="main_info">
-                    <p id="info">Heyyyyyy</p>
-                    <p id="info">This</p>
-                    <p id="info">Shit</p>
-                </div>
-                <div class="bio">
-                    <p>Helksdolahgvlkfsdhvl;askrdgfvaaaaaaaaapwaeoihfojdsahgkjvbhdfalkjbvlskdjfhgkdfsmncvlkfsehgkvldfsjgkjvbwhropiahgkjlrshdgr</p>
-                </div>
-            </div>
-        </div>
-        <div class="book_list">
-            <h3 class="title">{{username}}'s Latest Books</h3>
-            <button class="pre-btn">Prev</button>
-            <button class="nxt-btn">Next</button>
-            <div class="book_container">
-                <!-- {% for my_book in my_books %} -->
-                <div class="book_card">
-                    <div class="book_image">
-                        <img src="{{book.thumbnail}}" class="book_thumb"></img>
-                        <button class="btn-read">Read Now</button>
-                    </div>
-                    <p>{{my_book.book_name}}</p>
-                </div>
-                {% endfor %}
-            </div>
-            <h3 class="title">{{username}}'s Popular Books</h3>
-            <div class="book_card">
-                {% for my_book in my_books %}
-                    <p>{{my_book.book_name}}</p>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="user_review">
 
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="profile_layout">
+        <div class="profile_main">
+            <img class="profile_pic" src="{% url 'userProfile:user_picture' user_id %}" width="130px" height="130px">
+            <div class="name_box">
+                <h2 id="alias_username">{{username}}</h2>
+                <p id="username">{{username}}</p>
+            </div>
         </div>
-    </body>
+        <div class="user_info">
+            <div class="main_info">
+                <p id="info">Heyyyyyy</p>
+                <p id="info">This</p>
+                <p id="info">Shit</p>
+            </div>
+            <div class="bio">
+                <p>Helksdolahgvlkfsdhvl;askrdgfvaaaaaaaaapwaeoihfojdsahgkjvbhdfalkjbvlskdjfhgkdfsmncvlkfsehgkvldfsjgkjvbwhropiahgkjlrshdgr
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="book_list">
+        <h3 class="title">{{username}}'s Latest Books</h3>
+        <button class="pre-btn">Prev</button>
+        <button class="nxt-btn">Next</button>
+        <div class="book_container">
+            <!-- {% for my_book in my_books %} -->
+            <div class="book_card">
+                <div class="book_image">
+                    <img src="{{book.thumbnail}}" class="book_thumb"></img>
+                    <button class="btn-read">Read Now</button>
+                </div>
+                <p>{{my_book.book_name}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <h3 class="title">{{username}}'s Popular Books</h3>
+        <div class="book_card">
+            {% for my_book in my_books %}
+            <p>{{my_book.book_name}}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="user_review">
+
+    </div>
+</body>
+
 </html>
 {% for my_book in my_books %}
 <p>{{my_book.book_name}}</p>
@@ -61,5 +72,5 @@
 <p>{{link}}</p>
 <p>{{user}}</p>
 <div class="image">
-    <img src="" width="500" height="600"> 
+    <img src="{% url 'userProfile:user_picture' user_id %}" width="500" height="600">
 </div>
