@@ -15,7 +15,6 @@
         <div class="signup-box">
             <div class="left-box">
                 <div class="line"></div>
-<<<<<<< HEAD
                 <form action="{% provider_login_url 'google' %}" method="post">
                     <button type="button"><img src="{% static 'sign_up/images/gmail.png' %}">Create with Google</button>
                 </form>
@@ -25,17 +24,6 @@
                 <form method="post">
                     {% csrf_token %}
                     <h1>Sign Up</h1>
-=======
-                <button type="button"><img src="{% static 'sign_up/images/gmail.png' %}">Create with Google</button>
-                <button type="button"><img src="{% static 'sign_up/images/outlook.png' %}">Create with Outlook</button>
-                <button type="button"><img src="{% static 'sign_up/images/facebook.png' %}">Create with
-                    facebook</button>
-            </div>
-            <div class="right-box">
-                <form method="post">
-
-                    {% csrf_token %}
->>>>>>> main
                     <input type="text" placeholder="Username" name="username" required class="input-box">
                     <input type="text" placeholder="E-mail" name="email" required class="input-box">
                     <input type="password" placeholder="Create Password" name="password" required class="input-box">

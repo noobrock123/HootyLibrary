@@ -19,7 +19,7 @@ class CustomAccountManager(BaseUserManager):
 
     def create(self, username, email, password, **others):
 
-        self.create_user(username, email, password, **others)
+        return self.create_user(username, email, password, **others)
 
     def create_user(self, username, email, password, **others):
 
@@ -78,7 +78,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__original_date_joined = self.date_joined
-
+    def get_my_book(self):
+        return Book.objects.filter(author=self)
     def save(self, *args, **kwargs):
 
         self.date_joined = self.__original_date_joined
@@ -111,9 +112,15 @@ def get_pdf_files_path(instance, file):
 
 
 class BookManager(models.Manager):
+    def get_generate_book_id(self,):
+        rand_id = hex(rand.randint(0, pow(16, 8)))
+        while Book.objects.filter(pk=rand_id).exists():
+            rand_id = hex(rand.randint(0, pow(16, 8)))
+        return rand_id
+
     def create(self, book_name, author, book_type, genres, **others):
         book = self.model(
-            book_id=get_generate_book_id(),
+            book_id=self.get_generate_book_id(),
             description=others.get('description', ''),
             date_created=timezone.now(),
             book_type=book_type,
@@ -123,7 +130,6 @@ class BookManager(models.Manager):
             pdf_files=others.get('pdf_files', None)
         )
         book.save()
-        book.genres.add(Genre.objects.first())
         for genre in genres:
 
             if Genre.objects.filter(genre_list=genre).exists():
@@ -131,15 +137,11 @@ class BookManager(models.Manager):
             else:
                 raise ValueError(_('Your genres does not exit'))
         return book
-def get_generate_book_id():
-        rand_id = hex(rand.randint(0, pow(16, 8)))
-        while Book.objects.filter(pk=rand_id).exists():
-            rand_id = hex(rand.randint(0, pow(16, 8)))
-        return rand_id
+
 
 class Book(models.Model):
-    book_id = models.CharField(primary_key=True, max_length=10,default=get_generate_book_id)
-    book_name = models.CharField(max_length=60, default='Untitled')
+    book_id = models.CharField(primary_key=True, max_length=10)
+    book_name = models.CharField(max_length=60, default='Untitled', blank=False)
     description = models.TextField(max_length=120, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
     book_type = models.IntegerField(default=1)
@@ -156,6 +158,8 @@ class Book(models.Model):
     def __init__(self):
         super(Book, self).__init__()
     '''
+    def get_report(self):
+        return Report.objects.filter(book_refer=self)
     def get_genres(self):
         return Genre.objects.filter(book=self)
     def __init__(self, *args, **kwargs) -> None:
@@ -245,7 +249,6 @@ class Review(models.Model):
         super().save()
 
 
-
 class Issue(models.Model):
     issuer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
@@ -274,7 +277,7 @@ class Report(models.Model):
     book_refer = models.ForeignKey(Book, on_delete=models.CASCADE)
     report_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
-    msg = models.TextField(max_length=100, blank=True)
+    msg = models.TextField(max_length=100)
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)

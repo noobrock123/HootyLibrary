@@ -10,7 +10,8 @@
     <nav class="flex-div">
         <div class="nav-left flex-div">
             <img src="{% static 'homepage/images/menu.png' %}" class="menu-icon" onclick="toggleTab()">
-            <img src="{% static 'homepage/images/logo.png' %}" class="logo">
+            <a href="/"><img src="{% static 'homepage/images/logo.png' %}" class="logo"></a>
+            
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
@@ -123,7 +124,7 @@
                 </div>
                 <hr>
                 {% if is_user_authenticated %}
-                <a href="{% url 'userProfile:editProfile' user.user_id %}" class="sub-menu-link">
+                <a href="{% url 'userProfile:editProfile' %}" class="sub-menu-link">
                    <img src="{% static 'homepage/images/profile.png' %}">
                    <p>Edit Profile</p>
                 </a>
