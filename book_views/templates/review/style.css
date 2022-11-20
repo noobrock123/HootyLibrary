@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+body{
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+  }
+
+.card {
+  width: 94.6%;
+  height: 180%;
+  transform: translate(3%, 3%);
+  overflow: hidden;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0,5);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+  z-index: 10;
+} 
+
+.card-profile{
+  height: 150px;
+  background: rgb(254, 157, 12);
+}
+
+.image-profile{
+  width: 150px;
+  height: 150px;
+  transform: translate(100px,100px);
+}
+
+.card-profile .reportbook {
+  margin-top: 50px;
+}
+
+.card-profile  .reportbook h2 {
+  color: #fff;
+  font-size: 35px;
+  margin-right: 30px;
+  padding: 0 1px 10px 20px;
+
+}
+.card-profile  .reportbook p {
+  color: rgb(248, 248, 248);
+  font-size: 16px;
+  margin-left: 30px;
+}
+
+.card-profile .name {
+  font-size: 25px;
+  text-align: left;
+  margin-left: 300px;
+}
+
+.card-profile .name h1 {
+  font-size: 25px;
+  margin-left: 60px;
+  text-align:left;
+  padding: 0 1px 10px 20px;
+}
+
+.card-profile .name .input-edit {
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #fff;
+    outline: none;
+    font-size: 16px;
+    color: rgb(186, 127, 0);
+    background: #fff;
+    box-shadow: inset 0 5px 60px 0 rgba(0, 0, 0, 0.1);
+    margin-left: 70px;
+}
+
+.image-profile img{
+  width: 170px;
+  height: 250px;
+  border-radius: 6px;
+  box-shadow: 0 5px 60px 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-profile a {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(203, 122, 0);
+  text-decoration: none;
+  margin-left: 20px;
+  transition: 0.2s;
+}
+
+.card-profile a:hover {
+  color: rgb(255, 153, 0);
+}
+
+
+.card-content {
+  margin-top: 190px;
+  margin-left: 20%;
+  transform: translate(10px,50px);
+}
+
+.card-content h1 {
+  font-size: 25px;
+  margin-left: 120px;
+  text-align:left;
+  padding: 0 1px 10px 20px;
+}
+
+.card .card-content textarea {
+    width: 70%;
+    padding: 10%;
+    margin: 30px 50px;
+    border: 1px solid #fff;
+    outline: none;
+    font-size: 16px;
+    color: rgb(186, 127, 0);
+    background: #fff;
+    box-shadow: inset 0 5px 60px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-left: 120px;
+}
+
+.card-content p{
+  margin-left: 70px;
+  font-size: 16px;
+  text-align:left;
+  padding: 0 50px 50px 20px;
+}
+
+.card .button {
+  margin-top: 50px;
+}
+
+.card .confirm {
+    position: flex;
+    width: 50%;
+    margin-left: 25%;
+    background: rgb(253, 168, 41);
+    padding: 10px;
+    border: 0;
+    color: #fff;
+    outline: none;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.card .confirm:hover {
+    background: rgb(255, 153, 0);
+}
+
+.card .cancle {
+    position: flex;
+    width: 50%;
+    margin-left: 25%;
+    background: rgb(43, 43, 43);
+    padding: 10px;
+    border: 0;
+    color: #fff;
+    outline: none;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.card .cancle:hover {
+    background: rgb(0, 0, 0);
+}
+
+
+
+
+
+
+.card-content .select-menu{
+  width: 200px;
+  margin: 20px auto;
+  margin-right: 65%;
+}
+
+.card-content .select-menu .select-btn{
+  height: 55px;
+  background: #fff;
+  color: rgb(122, 122, 122);
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 8px;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+}
+
+.card-content .select-btn i{
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.card-content .select-menu.active .select-btn i{
+  transform: rotate(-180deg);
+}
+
+.card-content .select-menu .options{
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+  display: none;
+}
+
+.card-content .select-menu.active .options{
+  display: block;
+}
+
+.card-content .options .option{
+  display: flex;
+  height: 40px;
+  cursor: pointer;
+  padding: 0 16px;
+  border-radius: 8px;
+  align-items: center;
+  background: #fff;
+}
+.card-content .options .option:hover{
+  background: #fcca7f;
+}
+
+.card-content .option i{
+  font-size: 16px;
+  margin-right: 12px;
+}
+
+.card-content .option .option-text{
+  font-size: 16px;
+  color: #333;
+}
