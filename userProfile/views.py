@@ -56,7 +56,7 @@ def editProfile(request):
         user.alias_name = alias_name
         user.email = email if email != '' else user.email
         user.gender = gender
-        user.age = age
+        user.age = age if age else None
         user.occupation = occupation
         user.bio = bio
         user.social_link = social_link
