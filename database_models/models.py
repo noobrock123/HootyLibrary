@@ -255,6 +255,7 @@ class Issue(models.Model):
     issue_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=40)
     msg = models.TextField(max_length=500)
+    is_resolved = models.BooleanField(default=False, null=True)
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)

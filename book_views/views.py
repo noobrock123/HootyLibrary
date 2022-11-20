@@ -58,7 +58,7 @@ def book_views(request, book_id):
         'favorite':favorite,
         
     }
-    return render(request, 'book_views/templates/book_views/index.html', context)
+    return render(request, 'book_views/index.html', context)
 
 
 @login_required(login_url='register:log_in')

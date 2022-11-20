@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
     'book_views.apps.BookViewsConfig',
+    'messaging.apps.MessagingConfig',
     'django.contrib.sites',
     'allauth', 
     'allauth.account', 
@@ -161,7 +162,7 @@ AUTHENTICATION_BACKENDS = (
  'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-SITE_ID = 11
+SITE_ID = 11 
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_LOGIN_ON_GET=True
 SOCIALACCOUNT_PROVIDERS = {
