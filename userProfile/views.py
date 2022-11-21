@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.sessions.models import Session
 from django.http import HttpResponseNotFound
 from django.views import defaults
+from django.db.models import Count
 # Create your views here.
 
 
@@ -31,7 +32,8 @@ def userProfile(request, user_id):
         'occupation': user.occupation,
         'link': user.get_links(),
         'user_id': user.user_id,
-
+        'popular' : Book.objects.filter(author=user).annotate(num=Count('read')).order_by('-num'),
+        'alias_name':user.alias_name,
     }
     return render(request, 'userProfile/userProfile.html', context)
 
