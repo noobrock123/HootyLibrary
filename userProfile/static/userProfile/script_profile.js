@@ -1,3 +1,16 @@
+var counter = 1;
+setInterval(function(){
+  document.getElementById('radio' + counter).checked = true;
+  counter++;
+  if(counter > 4){
+    counter = 1;
+  }
+}, 5000);
+
+
+
+
+
 
 const productContainers = [...document.querySelectorAll('.product-container')];
         const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
@@ -38,17 +51,15 @@ const productContainers = [...document.querySelectorAll('.product-container')];
         selectBtn = optionMenu.querySelector(".select-btn"),
         options = optionMenu.querySelectorAll(".option"),
         sBtn_text = optionMenu.querySelector(".sBtn-text");
-    
-    selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));       
-    
-    options.forEach(option =>{
-        option.addEventListener("click", ()=>{
-            let selectedOption = option.querySelector(".option-text").innerText;
-            sBtn_text.innerText = selectedOption;
-    
-            optionMenu.classList.remove("active");
-        });
-    });
-    
-
-
+ 
+ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));       
+ 
+ options.forEach(option =>{
+     option.addEventListener("click", ()=>{
+         let selectedOption = option.querySelector(".option-text").innerText;
+         sBtn_text.innerText = selectedOption;
+ 
+         optionMenu.classList.remove("active");
+     });
+ });
+ 

@@ -1,129 +1,59 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: 'poppins', sans-serif;
+  box-sizing: border-box;
+}
 
-body{
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-  }
+a {
+  text-decoration: none;
+  color: #5a5a5a;
+}
 
-.card {
-  width: 94.6%;
-  height: 520px;
-  transform: translate(3%,3%);
-  overflow: hidden;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0,5);
+img {
+  cursor: pointer;
+}
+
+.flex-div {
   display: flex;
-  flex-direction: column;
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
-  z-index: 10;
-} 
+  align-items: center;
+}
 
-.card-profile{
-  height: 150px;
+nav {
+  padding: 0 2%;
+  justify-content: space-between;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background: rgb(254, 157, 12);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.image-profile{
-  background: white;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  padding: 15px;
-  transform: translate(100px,100px);
+.nav-right img {
+  width: 25px;
+  margin-right: 25px;
 }
 
-.card-profile .name {
-  font-size: 25px;
-  text-align: left;
-  margin-left: 300px;
-  margin-top: 10px;
-}
-
-.image-profile img{
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-}
-
-.card-profile a {
-  font-size: 16px;
-  font-weight: 400;
-  color: rgb(203, 122, 0);
-  text-decoration: none;
-  margin-left: 20px;
-  transition: 0.2s;
-}
-
-.card-profile a:hover {
-  color: rgb(255, 153, 0);
-}
-
-.card-content {
-  margin-top: 120px;
-}
-
-.card-content h2 {
-  margin-left: 90px;
-  text-align:left;
-  padding: 0 1px 10px 20px;
-}
-
-.card .my-choise {
-  position: relative;
-  margin-left: 90px;
-  text-align:left;
-  padding: 0 1px 10px 20px;
-}
-
-.card .my-choise h1 {
-  font-size: 16px;
-}
-
-.card-content p{
-  margin-left: 70px;
-  font-size: 16px;
-  text-align:left;
-  padding: 0 50px 50px 20px;
-}
-
-.icons{
-  text-align: center;
-  padding-top: 5px;
-  padding-bottom: 10px;
-}
-
-.icons a{
-  text-decoration: none;
-  font-size: 20px;
-  color: #0ABDE3;
-  padding: 0 14px;
-  transition-duration: 0.4s;
-  transition-property: transform;
-}
-
-.icons img {
+.nav-right .user-icon {
   width: 40px;
   height: 40px;
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  margin-right: 0;
 }
 
+.nav-right .addbook-icon {
+  width: 35px;
+  height: 35px;
+}
 
-
-
+.nav-left .logo {
+  width: 200px;
+}
 
 .product {
   position: relative;
   overflow: hidden;
   padding: 20px;
-  top: 20%;
 }
 
 .product-category {

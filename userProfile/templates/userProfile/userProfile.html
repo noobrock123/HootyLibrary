@@ -1,76 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-
+{% load static %}
 <html>
-
 <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
+    <link rel="stylesheet" href="{% static 'userProfile/style.css' %}">
 </head>
-
 <body>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-    </ul>
-    {% endif %}
-    <div class="profile_layout">
-        <div class="profile_main">
-            <img class="profile_pic" src="{% url 'userProfile:user_picture' user_id %}" width="130px" height="130px">
-            <div class="name_box">
-                <h2 id="alias_username">{{username}}</h2>
-                <p id="username">{{username}}</p>
-            </div>
-        </div>
-        <div class="user_info">
-            <div class="main_info">
-                <p id="info">Heyyyyyy</p>
-                <p id="info">This</p>
-                <p id="info">Shit</p>
-            </div>
-            <div class="bio">
-                <p>Helksdolahgvlkfsdhvl;askrdgfvaaaaaaaaapwaeoihfojdsahgkjvbhdfalkjbvlskdjfhgkdfsmncvlkfsehgkvldfsjgkjvbwhropiahgkjlrshdgr
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="book_list">
-        <h3 class="title">{{username}}'s Latest Books</h3>
-        <button class="pre-btn">Prev</button>
-        <button class="nxt-btn">Next</button>
-        <div class="book_container">
-            <!-- {% for my_book in my_books %} -->
-            <div class="book_card">
-                <div class="book_image">
-                    <img src="{{book.thumbnail}}" class="book_thumb"></img>
-                    <button class="btn-read">Read Now</button>
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <ul>
+            <a href="/"><img src="{% static 'homepage/images/logo.png' %}" class="logo"></a>
+                <div class="image">
+                    <img src="{% url 'userProfile:user_picture' user_id %}" width="150" height="200">
                 </div>
-                <p>{{my_book.book_name}}</p>
+        
+            </ul>
+            <ul>
+                <p>
+                    <h3 class="title">{{alias_name}}</h3>
+                    {{username}}
+                </p>
+                <p>Age: {{age}}  Gender: {{gender}} Occupation: {{occupation}}</p>
+                <p>link: {{link}}</p>
+                <div class="bio">
+                    <p>bio {{bio}}</p>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="product"> 
+        <h3 class="product-category">{{username}}'s Books</h3>
+        <button class="pre-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
+        <button class="nxt-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
+        <div class="product-container">
+            {% for my_book in my_books %}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/media/{{ my_book.id }}/{{ my_book.thumbnail }}" class="product-thumb">
+                    <a href="{% url 'book_views:book' my_book.book_id %}" class="sub-menu-link">
+                    <button class="card-btn">Read</button></a>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">{{ my_book.book_name }}</h2>
+                    <p class="product-short-description">{{ my_book.description }}</p>
+                </div> 
             </div>
             {% endfor %}
         </div>
-        <h3 class="title">{{username}}'s Popular Books</h3>
-        <div class="book_card">
+    
+        <h3 class="product-category">{{username}}'s Popular Books</h3>
+        <button class="pre-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
+        <button class="nxt-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
+        <div class="product-container">
             {% for my_book in my_books %}
-            <p>{{my_book.book_name}}</p>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/media/{{ my_book.id }}/{{ my_book.thumbnail }}" class="product-thumb">
+                    <a href="{% url 'book_views:book' my_book.book_id %}" class="sub-menu-link">
+                    <button class="card-btn">Read</button></a>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">{{ my_book.book_name }}</h2>
+                    <p class="product-short-description">{{ my_book.description }}</p>
+                </div> 
+            </div>
             {% endfor %}
         </div>
-    </div>
+    </section>
+    
     <div class="user_review">
-
+        
     </div>
+
+    <script src="{% static 'userProfile/script.js' %}"></script>
 </body>
 
 </html>
-{% for my_book in my_books %}
-<p>{{my_book.book_name}}</p>
-{% endfor %}
-<p>{{username}}</p>
-<p>{{gender}}</p>
-<p>{{occupation}}</p>
-<p>{{link}}</p>
-<p>{{user}}</p>
-<div class="image">
-    <img src="{% url 'userProfile:user_picture' user_id %}" width="500" height="600">
-</div>
+
+
+    
+    

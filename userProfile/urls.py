@@ -9,8 +9,13 @@ app_name = "userProfile"
 urlpatterns = [
     path('<str:user_id>/user_picture/',
          views.user_picture, name='user_picture'),
+<<<<<<< HEAD
     path('edit_profile', views.editProfile, name='editProfile'),
     path('<str:user_id>', views.userProfile, name='user_profile'),
+=======
+    path('edit_profile/', views.editProfile, name='editProfile'),
+    path('<str:user_id>/', views.userProfile, name='user_profile'),
+>>>>>>> origin/main
 
 ]
 

@@ -39,19 +39,19 @@ class userProfileTestCase(TestCase):
     def test_client_can_access_user_picture(self):
         # test client can access user picture
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}/')
+        response = c.get(f'/user_profile/{self.user1.user_id}/user_picture/')
         self.assertEqual(response.status_code, 200)
 
     def test_client_access_user_picture_does_not_set(self):
         # test client can access if user not set user picture yet
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user2.user_id}/')
+        response = c.get(f'/user_profile/{self.user2.user_id}/user_picture/')
         self.assertEqual(response.status_code, 200)
 
     def test_client_recieve_correct_user_picture(self):
         # test client recieve correct user picture
         c = Client()
-        response = c.get(f'/user_profile/user_picture/{self.user1.user_id}/')
+        response = c.get(f'/user_profile/{self.user1.user_id}/user_picture/')
         with open(self.user1.profile_pic.path, 'rb') as profile_pic:
             self.assertEqual(response._container[0], profile_pic.read())
 
