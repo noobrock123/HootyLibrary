@@ -23,37 +23,54 @@ def index(request):
     if request.method == "GET":
         search_query = request.GET.get('query')
         if search_query:
-            SearchCheck = Book.objects.filter(book_name__contains=search_query)
-            if SearchCheck:
-                book = Book.objects.all().filter(book_name__startswith=search_query)
-                topics = {
-                    'search':book,
-                }
-                return render(request, 'homepage/homepage.html', {'topics':topics})
+            topics = search(search_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
+        Education_query = request.GET.get('Education')
+        Entertain_query = request.GET.get('Entertain')
         oldTolate_query = request.GET.get('oldTolate')
         zToa_query = request.GET.get('zToa')
-        if oldTolate_query or zToa_query:
-            topics = { }
-            if oldTolate_query:
-                oldTolateBook = Book.objects.all().order_by('date_created').values()
-                topics.update({'Oldest to Latest':oldTolateBook,})
-            if  zToa_query:
-                book = Book.objects.all().order_by('-book_name').values()
-                topics.update({'Z to A':book,})
-                
-                
-            return render(request, 'homepage/homepage.html', {'topics':topics})
-        if zToa_query:
-            book = Book.objects.all().order_by('-book_name').values()
-            topics = {
-                'Z to A':book,
-            }
+        if Education_query or Entertain_query or oldTolate_query or zToa_query:
+            topics = filter(Education_query, Entertain_query, oldTolate_query, zToa_query)
             return render(request, 'homepage/homepage.html', {'topics':topics})
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
             'user': request.user, #'books': latest_book,
             'recent_read': recently_read,
             'topics': topics,},)
+
+def search(search_query):
+    books = Book.objects.all()
+    latest_book = books.order_by('-date_created').values()[:8]
+    topics = {
+        'Latest Books':latest_book,
+    }
+    if search_query:
+        SearchCheck = Book.objects.filter(book_name__contains=search_query)
+        if SearchCheck:
+            book = Book.objects.all().filter(book_name__startswith=search_query)
+            topics = {
+                'search':book,
+            }
+            return topics
+
+def filter(Education_query, Entertain_query, oldTolate_query, zToa_query):
+    topics = { }
+    book = Book.objects.all()
+    if Education_query == 1:
+        book = book.filter(book_type=1)
+        topics.update({'Education_query':book,})
+    if Entertain_query == 2:
+        book = book.filter(book_type=2)
+        topics.update({'Entertain_query':book,})
+    if oldTolate_query:
+        oldTolateBook = book.order_by('date_created').values()
+        topics.update({'Oldest to Latest':oldTolateBook,})
+    if  zToa_query:
+        book = book.order_by('-book_name').values()
+        topics.update({'Z to A':book,})
+    return topics
+    
+    
 
 def about(request):
     return render(request, 'about/about.html')
@@ -77,22 +94,24 @@ def sign_out(request):
         logout(request)
         return HttpResponseRedirect(reverse('MAIN_APP:home'))
 
-def Undiscoveredy(request):
+def Undiscovered(request):
     books = Book.objects.all()
-    Undiscoveredy = books.order_by('-date_created').values()[:8]
+    Undiscovered = books.order_by('-date_created').values()[:8]
     topics = {
-        'Undiscoveredy':Undiscoveredy,
+        'Undiscovered':Undiscovered,
     }
     if request.method == "GET":  
         search_query = request.GET.get('query')
         if search_query:
-            SearchCheck = Book.objects.filter(book_name__contains=search_query)
-            if SearchCheck:
-                book = Book.objects.all().filter(book_name__startswith=search_query)
-                topics = {
-                    'search':book,
-                }
-                return render(request, 'homepage/homepage.html', {'topics':topics})
+            topics = search(search_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
+        Education_query = request.GET.get('Education')
+        Entertain_query = request.GET.get('Entertain')
+        oldTolate_query = request.GET.get('oldTolate')
+        zToa_query = request.GET.get('zToa')
+        if Education_query or Entertain_query or oldTolate_query or zToa_query:
+            topics = filter(Education_query, Entertain_query, oldTolate_query, zToa_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
     return render(request, 'homepage/homepage.html', {'topics':topics})
 
 def Popular_today(request):
@@ -104,13 +123,15 @@ def Popular_today(request):
     if request.method == "GET":  
         search_query = request.GET.get('query')
         if search_query:
-            SearchCheck = Book.objects.filter(book_name__contains=search_query)
-            if SearchCheck:
-                book = Book.objects.all().filter(book_name__startswith=search_query)
-                topics = {
-                    'search':book,
-                }
-                return render(request, 'homepage/homepage.html', {'topics':topics})
+            topics = search(search_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
+        Education_query = request.GET.get('Education')
+        Entertain_query = request.GET.get('Entertain')
+        oldTolate_query = request.GET.get('oldTolate')
+        zToa_query = request.GET.get('zToa')
+        if Education_query or Entertain_query or oldTolate_query or zToa_query:
+            topics = filter(Education_query, Entertain_query, oldTolate_query, zToa_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
     return render(request, 'homepage/homepage.html', {'topics':topics})
 
 def Popular_week(request):
@@ -122,13 +143,15 @@ def Popular_week(request):
     if request.method == "GET":  
         search_query = request.GET.get('query')
         if search_query:
-            SearchCheck = Book.objects.filter(book_name__contains=search_query)
-            if SearchCheck:
-                book = Book.objects.all().filter(book_name__startswith=search_query)
-                topics = {
-                    'search':book,
-                }
-                return render(request, 'homepage/homepage.html', {'topics':topics})
+            topics = search(search_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
+        Education_query = request.GET.get('Education')
+        Entertain_query = request.GET.get('Entertain')
+        oldTolate_query = request.GET.get('oldTolate')
+        zToa_query = request.GET.get('zToa')
+        if Education_query or Entertain_query or oldTolate_query or zToa_query:
+            topics = filter(Education_query, Entertain_query, oldTolate_query, zToa_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
     return render(request, 'homepage/homepage.html', {'topics':topics})
 
 def Highest_rating_today(request):
@@ -140,13 +163,15 @@ def Highest_rating_today(request):
     if request.method == "GET":  
         search_query = request.GET.get('query')
         if search_query:
-            SearchCheck = Book.objects.filter(book_name__contains=search_query)
-            if SearchCheck:
-                book = Book.objects.all().filter(book_name__startswith=search_query)
-                topics = {
-                    'search':book,
-                }
-                return render(request, 'homepage/homepage.html', {'topics':topics})
+            topics = search(search_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
+        Education_query = request.GET.get('Education')
+        Entertain_query = request.GET.get('Entertain')
+        oldTolate_query = request.GET.get('oldTolate')
+        zToa_query = request.GET.get('zToa')
+        if Education_query or Entertain_query or oldTolate_query or zToa_query:
+            topics = filter(Education_query, Entertain_query, oldTolate_query, zToa_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
     return render(request, 'homepage/homepage.html', {'topics':topics})
 
 def Highest_rating_week(request):
@@ -158,13 +183,15 @@ def Highest_rating_week(request):
     if request.method == "GET":  
         search_query = request.GET.get('query')
         if search_query:
-            SearchCheck = Book.objects.filter(book_name__contains=search_query)
-            if SearchCheck:
-                book = Book.objects.all().filter(book_name__startswith=search_query)
-                topics = {
-                    'search':book,
-                }
-                return render(request, 'homepage/homepage.html', {'topics':topics})
+            topics = search(search_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
+        Education_query = request.GET.get('Education')
+        Entertain_query = request.GET.get('Entertain')
+        oldTolate_query = request.GET.get('oldTolate')
+        zToa_query = request.GET.get('zToa')
+        if Education_query or Entertain_query or oldTolate_query or zToa_query:
+            topics = filter(Education_query, Entertain_query, oldTolate_query, zToa_query)
+            return render(request, 'homepage/homepage.html', {'topics':topics})
     return render(request, 'homepage/homepage.html', {'topics':topics})
 
 def Recently(request):

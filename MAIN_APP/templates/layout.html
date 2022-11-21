@@ -15,8 +15,9 @@
         </div>
         <div class="sub-tab-wrap" id="subTab">
             <div class="sub-tab">
-                <a href="../Undiscoveredy" class="sub-menu-link">
+                <a href="../Undiscovered" class="sub-menu-link">
                     <p>Undiscovered</p>
+                    <span>></span>
                 </a>
                 <a href="../Popular_today" class="sub-menu-link">
                     <p>Popular today</p>
@@ -28,12 +29,15 @@
                     </a>
                 <a href="../Highest_rating_today" class="sub-menu-link">
                     <p>Highest rating today</p>
+                    <span>></span>
                 </a>
                 <a href="../Highest_rating_week" class="sub-menu-link">
                     <p>Highest rating this week</p>
+                    <span>></span>
                 </a>
                 <a href="../Recently" class="sub-menu-link">
                     <p>Recently update</p>
+                    <span>></span>
                 </a>
             </div>
         </div>
@@ -48,6 +52,7 @@
         </div>
         <div class="sub-filter-wrap" id="subFilter">
             <div class="sub-filter">
+                <form action="" method="get" >
                 <div class="select-menu">
                     <div class="select-btn">
                         <span class="sBtn-text">Select your option</span>
@@ -56,14 +61,16 @@
             
                     <ul class="options">
                         <li class="option">
+                            <input type="hidden" name="Education" id="1">
                             <span class="option-text">Education</span>
                         </li>
                         <li class="option">
+                            <input type="hidden" name="Entertain" id="2">
                             <span class="option-text">Entertain</span>
                         </li>
                     </ul>
                 </div>
-                <form action="" method="get" >
+                
                 <a class="sub-filter-link">
                     <input type="checkbox" name="oldTolate">
                     <p>Oldest to Latest</p>
