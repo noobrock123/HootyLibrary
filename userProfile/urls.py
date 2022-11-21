@@ -9,7 +9,7 @@ app_name = "userProfile"
 urlpatterns = [
     path('<str:user_id>/user_picture/',
          views.user_picture, name='user_picture'),
-    path('<str:user_id>/edit_profile', views.editProfile, name='editProfile'),
+    path('edit_profile/', views.editProfile, name='editProfile'),
     path('<str:user_id>/', views.userProfile, name='user_profile'),
 
 ]
