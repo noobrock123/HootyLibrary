@@ -175,6 +175,9 @@ class Book(models.Model):
     def get_favorite_books(self):
         return [favorite.user_refer for favorite in Favorite.objects.filter(book_refer=self)]
 
+    def get_books_favorite(user_id):
+        return [favorite.book_refer for favorite in Favorite.objects.filter(user_refer=user_id)]
+
     def get_avg_score(self):
         book_reviews = Review.objects.filter(book_refer=self)
         score_sum = 0
