@@ -152,7 +152,6 @@
     </nav>
     -->
     {% block body %}
-    {% if recent_read %}
     <!--image slider start-->
     <div class="slider">
         <div class="slides">
@@ -196,6 +195,7 @@
     </div>
       <!--image slider end-->
 
+    {% if recent_read %}
     <section class="product"> 
         <h2 class="product-category">Recently read</h2>
         <div class="product-container">
@@ -241,8 +241,6 @@
     </section>
     {% endfor %}
     {% endblock %}
-
-    <script src="{% static 'homepage/script.js' %}"></script>
 
 </body>
 </html>
