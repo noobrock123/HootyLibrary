@@ -15,8 +15,10 @@ from datetime import datetime, timedelta
 def index(request):
     books = Book.objects.all()
     latest_book = books.order_by('-date_created').values()[:8]
+    favorite_book = Book.get_books_favorite(request.user)
     topics = {
         'Latest Books':latest_book,
+        'favorite_book':favorite_book,
     }
     read = Read.objects.filter(user_refer=request.user)
     recently_read = read.order_by('-book_read_latest_time')[:8]
@@ -37,7 +39,7 @@ def index(request):
             'user': request.user, #'books': latest_book,
             'recent_read': recently_read,
             'topics': topics,
-            'books': books},)
+            'favorite_book': favorite_book},)
 
 def search(search_query):
     books = Book.objects.all()
