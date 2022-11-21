@@ -36,7 +36,8 @@ def index(request):
             {'is_user_authenticated': request.user.is_authenticated,
             'user': request.user, #'books': latest_book,
             'recent_read': recently_read,
-            'topics': topics,},)
+            'topics': topics,
+            'books': books},)
 
 def search(search_query):
     books = Book.objects.all()
@@ -56,12 +57,12 @@ def search(search_query):
 def filter(Education_query, Entertain_query, oldTolate_query, zToa_query):
     topics = { }
     book = Book.objects.all()
-    if Education_query == 1:
-        book = book.filter(book_type=1)
-        topics.update({'Education_query':book,})
-    if Entertain_query == 2:
-        book = book.filter(book_type=2)
-        topics.update({'Entertain_query':book,})
+    if Education_query:
+        book = book.filter(book_type=1).values()
+        topics.update({'Education':book,})
+    if Entertain_query:
+        book = book.filter(book_type=2).values()
+        topics.update({'Entertain':book,})
     if oldTolate_query:
         oldTolateBook = book.order_by('date_created').values()
         topics.update({'Oldest to Latest':oldTolateBook,})
@@ -196,7 +197,11 @@ def Highest_rating_week(request):
 
 def Recently(request):
     books = Book.objects.all()
-    Recently = books.order_by('-date_created').values()[:8]
+    Recently = books.order_by('--book_read_latest_time').values()[:8]
+    topics = {
+        'Recently':Recently,
+    }
+    return render(request, 'homepage/homepage.html', {'topics':topics})
 def get_Undiscoveredy():
     all_book = Book.objects.values_list('book_id',flat=True).distinct()
     readed_book = Read.objects.values_list('book_refer_id',flat=True).distinct()
