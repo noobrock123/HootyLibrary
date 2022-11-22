@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{% static 'issue/style.css' %}">
 </head>
 <body>
-    <div class="card">
+    <form class="card" method="post">
+        {% csrf_token %}
         <div class="card-profile">
             <div class="reportbook">
                 <h2>Issue for {{ book.book_name }}</h2><p>{{ book.book_id }}</p>
@@ -18,17 +19,17 @@
             </div>
             <div class="name">
                 <h1>Title</h1>
-                <input type="text" placeholder="Title" required class="input-edit">
+                <input type="text" placeholder="Title" name="title" required class="input-edit">
             </div>
         </div>
         <div class="card-content">
             <h1>what issue(s) do you have?</h1>
-            <textarea type="text" cols="40" rows="5" placeholder="Your issues..."></textarea>
+            <textarea type="text" cols="40" rows="5" placeholder="Your issues..." name="msg"></textarea>
         </div>
         <div class="button">
             <button class="confirm" type="submit">Issue</button>
             <button class="cancle" type="submit">Cancle</button>
         </div>
-    </div>
+    </form>
 </body>
 </html>

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{% static 'review/style.css' %}">
 </head>
 <body>
-    <div class="card">
+    <form class="card" method="post">
+        {% csrf_token %}
         <div class="card-profile">
             <div class="reportbook">
                 <h2>Reviewing {{ book.book_name }}</h2><p> {{ book.book_id }}</p>
@@ -18,60 +19,60 @@
             </div>
             <div class="name">
                 <h1>Title</h1>
-                <input type="text" placeholder="Title" required class="input-edit">
+                <input type="text" placeholder="Title" name="title" required class="input-edit">
             </div>
         </div>
         <div class="card-content">
-            <div class="select-menu">
+            <di class="select-menu">
                 <div class="select-btn">
                     <span class="sBtn-text">Scores</span>
                     <i class="bx bx-chevron-down"></i>
                 </div>
         
-                <ul class="options">
-                    <li class="option">
+                <ul class="options" name="score">
+                    <li class="option" value="0">
                         <span class="option-text">0</span>
                     </li>
-                    <li class="option">
+                    <li class="option" value="0.5">
                         <span class="option-text">0.5</span>
                     </li>
-                    <li class="option">
+                    <li class="option" value="1.0">
                         <span class="option-text">1</span>
                     </li>
-                    <li class="option">
+                    <i class="option" value="1.5">
                         <span class="option-text">1.5</span>
-                    </li>
-                    <li class="option">
+                    </i>
+                    <li class="option" value="2.0">
                         <span class="option-text">2</span>
                     </li>
-                    <li class="option">
+                    <li class="option" value="2.5">
                         <span class="option-text">2.5</span>
                     </li>
-                    <li class="option">
+                    <l class="option" value="3.0">
                         <span class="option-text">3</span>
-                    </li>
-                    <li class="option">
+                    </l>
+                    <li class="option" value="3.5">
                         <span class="option-text">3.5</span>
                     </li>
-                    <li class="option">
+                    <li class="option" value="4.0">
                         <span class="option-text">4</span>
                     </li>
-                    <li class="option">
+                    <l class="option" value="4.5">
                         <span class="option-text">4.5</span>
-                    </li>
-                    <li class="option">
+                    </l>
+                    <li class="option" value="5.0">
                         <span class="option-text">5</span>
                     </li>
                 </ul>
-            </div>
+            </di>
             <h1>what do you have to say?</h1>
-            <textarea type="text" cols="40" rows="5" placeholder="Enter your opinions here..."></textarea>
+            <textarea type="text" cols="40" rows="5" name="msg" placeholder="Enter your opinions here..."></textarea>
         </div>
         <div class="button">
             <button class="confirm" type="submit">Review</button>
             <button class="cancle" type="submit">Cancle</button>
         </div>
-    </div>
+    </form>
     <script src="{% static 'review/script.js' %}"></script>
 </body>
 </html>

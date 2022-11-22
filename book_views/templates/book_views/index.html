@@ -20,13 +20,13 @@
     
     <img src="{% url 'book_views:book_thumbnail' book.book_id %}" class="product-thumb">
     {% if request.user.is_authenticated and request.user != book.author %}
-    <form action="create_issue/">
+    <form action="create_issue">
         <input type="submit" value="issue" />
     </form>
-    <form action="create_review/">
+    <form action="create_review">
         <input type="submit" value="review" />
     </form>
-    <form action="create_report/">
+    <form action="create_report">
         <input type="submit" value="report" />
     </form>
     {% endif %}

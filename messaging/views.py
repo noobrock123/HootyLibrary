@@ -30,6 +30,7 @@ def create_review(request, book_id):
         book = Book.objects.get(book_id=book_id)
         user = request.user
         title = request.POST.get('title')
+        score = float(request.POST.get('score'))
         msg = request.POST.get('msg')
         try:
             Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
@@ -47,27 +48,33 @@ def show_issues(request, book_id):
         user = request.user
         title = request.POST.get('title')
         msg = request.POST.get('msg')
+        msg = "test"
         try:
             Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
-        return redirect('userProfile:user_profile', user_id=user.user_id)
+        return redirect('book_views:book', book_id=book.book_id)
 
     return render(request, 'messaging/prototype.html', {'book': book})
 
 @login_required(login_url='register:log_in')
-def issuing(request, book_id):
+def create_issue(request, book_id):
     book = Book.objects.get(book_id=book_id)
     if request.method == 'POST':
         book = Book.objects.get(book_id=book_id)
         user = request.user
         title = request.POST.get('title')
         msg = request.POST.get('msg')
+<<<<<<< Updated upstream
         try:
             Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
+=======
+        Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
+        return redirect('book_views:book', book_id=book.book_id)
+>>>>>>> Stashed changes
 
     return render(request, 'issue/issue.html', {'book': book})
 
