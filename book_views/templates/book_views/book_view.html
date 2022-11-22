@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'style_book_view.css' %}">
 </head>
 
-<body style="background-color: aqua;">
+<body>
     <style>
         .card {
             width: 94.6%;
@@ -70,7 +70,8 @@
                 <img src="{% url 'book_views:book_thumbnail' book.book_id %}" alt="" style="padding-left: 80px;">
             </div>
             <div>
-                <h1>{{book.book_name}}</h1>
+                <h1 style="display: inline-block;">{{book.book_name}}  </h1>
+                <small>({{book.book_id}})</small>
                 <h3>Type: {% if book.book_type == 1 %} Education {% else %} Entertainment {% endif %}</h3>
                 <h3>Genre: {% for genre in book.get_genres %} {{genre}} {% endfor %}</h3>
                 <h3>Description</h3>
