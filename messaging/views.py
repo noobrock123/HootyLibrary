@@ -32,11 +32,16 @@ def create_review(request, book_id):
         title = request.POST.get('title')
         score = float(request.POST.get('score'))
         msg = request.POST.get('msg')
+<<<<<<< Updated upstream
         try:
             Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
+=======
+        Review.objects.create(reviewer=user, book_refer=book, title=title, msg=msg)
+        return redirect('book_views:book', book_id=book.book_id)
+>>>>>>> Stashed changes
 
     return render(request, 'review/review.html', {'book': book})
 
@@ -66,11 +71,21 @@ def create_issue(request, book_id):
         title = request.POST.get('title')
         msg = request.POST.get('msg')
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         try:
             Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
+=======
+        Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
+        return redirect('book_views:book', book_id=book.book_id)
+>>>>>>> Stashed changes
+=======
+        Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
+        return redirect('book_views:book', book_id=book.book_id)
+>>>>>>> Stashed changes
 =======
         Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         return redirect('book_views:book', book_id=book.book_id)
