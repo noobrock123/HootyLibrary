@@ -36,10 +36,9 @@ def index(request):
             return render(request, 'homepage/homepage.html', {'topics':topics})
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
-            'user': request.user, #'books': latest_book,
+            'user': request.user,
             'recent_read': recently_read,
-            'topics': topics,
-            'favorite_book': favorite_book},)
+            'topics': topics,},)
 
 def search(search_query):
     books = Book.objects.all()
@@ -198,12 +197,12 @@ def Highest_rating_week(request):
     return render(request, 'homepage/homepage.html', {'topics':topics})
 
 def Recently(request):
-    books = Book.objects.all()
-    Recently = books.order_by('--book_read_latest_time').values()[:8]
-    topics = {
-        'Recently':Recently,
-    }
-    return render(request, 'homepage/homepage.html', {'topics':topics})
+    read = Read.objects.filter(user_refer=request.user)
+    Recently = read.order_by('-book_read_latest_time')[:8]
+    return render(request, 'homepage/homepage.html', {'Recently': Recently,
+        'is_user_authenticated': request.user.is_authenticated,
+        'user': request.user,
+    })
 def get_Undiscoveredy():
     all_book = Book.objects.values_list('book_id',flat=True).distinct()
     readed_book = Read.objects.values_list('book_refer_id',flat=True).distinct()

@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UFT-8">
@@ -132,7 +131,7 @@
                 </div>
                 <hr>
                 {% if is_user_authenticated %}
-                <a href="{% url 'userProfile:editProfile' %}" class="sub-menu-link">
+                <a href="{% url 'userProfile:editProfile'  %}" class="sub-menu-link">
                    <img src="{% static 'homepage/images/profile.png' %}">
                    <p>Edit Profile</p>
                 </a>
@@ -163,10 +162,11 @@
             </div>
         </div>
     </nav>
+    
+    <script src="{% static 'homepage/script_homepage.js' %}"></script>
     {% endblock %}
     {% block body %}
     {% endblock %}
 
-    <script src="{% static 'homepage/script_homepage.js' %}"></script>
 </body>
 </html>
