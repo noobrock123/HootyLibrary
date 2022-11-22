@@ -16,7 +16,7 @@ def reviews(request, book_id):
         title = request.POST.get('title')
         msg = request.POST.get('msg')
         try:
-            Issue.objects.create(issuer=user, book_refer=book, title=tile, msg=msg)
+            Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
@@ -32,7 +32,7 @@ def create_review(request, book_id):
         title = request.POST.get('title')
         msg = request.POST.get('msg')
         try:
-            Issue.objects.create(issuer=user, book_refer=book, title=tile, msg=msg)
+            Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
@@ -48,7 +48,7 @@ def show_issues(request, book_id):
         title = request.POST.get('title')
         msg = request.POST.get('msg')
         try:
-            Issue.objects.create(issuer=user, book_refer=book, title=tile, msg=msg)
+            Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
@@ -64,7 +64,7 @@ def issuing(request, book_id):
         title = request.POST.get('title')
         msg = request.POST.get('msg')
         try:
-            Issue.objects.create(issuer=user, book_refer=book, title=tile, msg=msg)
+            Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
@@ -80,7 +80,7 @@ def create_report(request, book_id):
         title = request.POST.get('title')
         msg = request.POST.get('msg')
         try:
-            Issue.objects.create(issuer=user, book_refer=book, title=tile, msg=msg)
+            Issue.objects.create(issuer=user, book_refer=book, title=title, msg=msg)
         except:
             return HttpResponse('Not Found')
         return redirect('userProfile:user_profile', user_id=user.user_id)
