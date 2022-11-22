@@ -7,7 +7,7 @@ from . import views
 
 app_name = "messaging"
 urlpatterns = [
-    path('<str:book_id>/reviews/', views.reviews, name='reviews'),
+    path('reviews/', views.reviews, name='reviews'),
     path('create_review/', views.create_review, name='create_review'),
     path('issues/', views.show_issues, name='issues'),
     path('create_issue/', views.issuing, name='create_issue'),
