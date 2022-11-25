@@ -9,6 +9,10 @@ urlpatterns = [
     path('<str:book_id>/', views.book_views, name='book'),
     path('<str:book_id>/show_reviews', views.show_reviews, name='show_reviews'),
     path('<str:book_id>/', include('messaging.urls')),
+<<<<<<< HEAD
     path('favorite/<str:book_id>/',views.book_favorite, name='book_favorite'),
+=======
+    path('book_favorite/<str:book_id>', views.book_favorite, name='book_favorite'),
+>>>>>>> origin/main
     
 ]

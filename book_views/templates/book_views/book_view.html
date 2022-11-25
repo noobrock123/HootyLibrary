@@ -30,16 +30,14 @@
             width: 94.6%;
             height: 100px;
             transform: translate(3%, 3%);
-            overflow: hidden;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0, 5);
-            display: flex;
             flex-direction: column;
             box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
             z-index: 10;
-            background-color: rgb(254, 157, 12);
             margin-top: 50px;
         }
+
         .content{
             display: grid;
             grid-template-columns: 1fr 4fr;
@@ -54,11 +52,29 @@
             padding-top: 50px;
             padding-left: 100px;
         }
+
+        .image-profile img {
+            width: 120px;
+            height: 200px;
+        }
+
         input {
             padding: 16px 32px;
             font-size: medium;
+            background: #867aac;
+            color: #fff;
+            transition: background 0.2s;
+            outline: none;
+            cursor: pointer;
+            border: 0;
+            border-radius: 15px;
+            text-align: center;
             /* color: azure; */
             /* font- */
+        }
+
+        input:hover {
+            background: #6652a7;
         }
     </style>
     <div class="card">
@@ -67,7 +83,7 @@
         </div>
         <div class="content">
             <div class="image-profile">
-                <img src="{% url 'book_views:book_thumbnail' book.book_id %}" alt="" style="padding-left: 80px;">
+                <img src="{% url 'book_views:book_thumbnail' book.book_id %}" alt="" style="padding-left: 80px;" width="200" height="250">
             </div>
             <div>
                 <h1 style="display: inline-block;">{{book.book_name}}  </h1>
@@ -112,12 +128,19 @@
                 </form>
 
             </div>
+            <div>
+                <form action="">
+                    <input type="submit" name="" value="Make Report" id="" >
+
+                </form>
+
+            </div>
         </div>
         
     </div>
     <div class="read">
         <form action="{% url 'book_views:book_pdf' book.book_id %}">
-        <input type="submit" name="" value="Read PDF" id="" style="padding: 40px 950px;">
+        <input class="a" type="submit" name="" value="Read PDF" id="" style="padding: 40px 557px;">
 
         </form>
     </div>

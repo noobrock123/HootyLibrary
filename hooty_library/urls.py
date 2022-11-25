@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', include('admin_page.urls')),
     path('registeration/', include('register.urls')),
     path('accounts/', include('allauth.urls')),
+    path('admin_django/', admin.site.urls),
 
     path('user_profile/', include('userProfile.urls')),
     #path('', include('userProfile.urls')),

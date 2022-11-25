@@ -38,6 +38,7 @@ def book_favorite(request, book_id):
     except:
         Favorite.objects.create(user_refer=user,book_refer=book)
     return redirect('book_views:book',book_id)
+
 def book_views(request, book_id):
     try:
         book = Book.objects.get(book_id=book_id)
@@ -96,6 +97,15 @@ def create_book(request):
         return redirect('book_views:book', book.book_id)
 
     return render(request, 'book_views/templates/book_views/create_book.html', context)
+
+def show_reviews(request, book_id):
+    book = Book.objects.get(book_id=book_id)
+    books = Review.objects.filter(book_refer=book)
+    return render(request, 'reviews_view/review_view.html', {
+        'book_name': book.book_name,
+        'books': books})
+
+@login_required(login_url='register:log_in')
 def review(request,book_id):
     
     try:
@@ -125,8 +135,9 @@ def review(request,book_id):
             for e in exception:
                 messages.error(request, f'{e[0]}: {e[1][0]}')
     return render(request, "book_views/templates/book_views/review.html")
+
+@login_required(login_url='register:log_in')
 def report(request,book_id):
-    
     try:
         book = Book.objects.get(book_id=book_id)
     except Exception as e:
@@ -155,6 +166,7 @@ def report(request,book_id):
 
     return render(request, "book_views/templates/book_views/report.html")
 
+@login_required(login_url='register:log_in')
 def issue(request,book_id):
     
     try:
