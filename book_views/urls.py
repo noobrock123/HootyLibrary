@@ -7,6 +7,8 @@ urlpatterns = [
     path('pdf/<str:book_id>', views.book_pdf, name='book_pdf'),
     path('thumbnail/<str:book_id>/',views.book_thumbnail, name='book_thumbnail'),
     path('<str:book_id>/', views.book_views, name='book'),
+    path('<str:book_id>/show_reviews', views.show_reviews, name='show_reviews'),
     path('<str:book_id>/', include('messaging.urls')),
+    path('favorite/<str:book_id>/',views.book_favorite, name='book_favorite'),
     
 ]
