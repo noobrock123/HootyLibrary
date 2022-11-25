@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'database_models',
     'register.apps.RegisterConfig',
+    'admin_page.apps.AdminPageConfig',
     'MAIN_APP.apps.MainAppConfig',
     'userProfile.apps.UserprofileConfig',
     'book_views.apps.BookViewsConfig',
