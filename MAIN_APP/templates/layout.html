@@ -92,9 +92,11 @@
             </div>
         </div>
         <div class="nav-right flex-div">
-            <a href="" >
+            {% if user.is_superuser %}
+            <a href="{% url 'admin_page:admin_page' %}" >
             <img src="{% static 'homepage/images/admin.png' %}" class="addbook">
             </a>
+            {% endif %}
 
             <a href="{% url 'book_views:create_book' %}" >
             <img src="{% static 'homepage/images/addbook.png' %}" class="addbook">
