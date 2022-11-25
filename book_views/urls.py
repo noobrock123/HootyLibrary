@@ -8,5 +8,6 @@ urlpatterns = [
     path('thumbnail/<str:book_id>/',views.book_thumbnail, name='book_thumbnail'),
     path('<str:book_id>/', views.book_views, name='book'),
     path('<str:book_id>/', include('messaging.urls')),
+    path('book_favorite/<str:book_id>', views.book_favorite, name='book_favorite'),
     
 ]

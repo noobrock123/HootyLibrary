@@ -1,30 +1,45 @@
 {% load static %}
 <html>
 <head>
+    {% load static %}
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'homepage/style.css' %}">
-    <link rel="stylesheet" href="{% static 'userProfile/style.css' %}">
+    <link rel="stylesheet" href="{% static "userProfile/style.css" %}">
 </head>
 <body>
+    <style>
+        .img {
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .detail {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            margin-right: 150px;
+        }
+    </style>
     <nav class="flex-div">
         <div class="nav-left flex-div">
             <ul>
             <a href="/"><img src="{% static 'homepage/images/logo.png' %}" class="logo"></a>
-                <div class="image">
-                    <img src="{% url 'userProfile:user_picture' user_id %}" width="150" height="200">
+                <div class="image nav-left">
+                    <img src="{% url 'userProfile:user_picture' user_id %}" width="150" height="175" class="img">
                 </div>
         
             </ul>
             <ul>
                 <p>
-                    <h3 class="title">{{alias_name}}</h3>
+                    <h1 class="flex-div">{{alias_name}}</h3>
                     {{username}}
                 </p>
-                <p>Age: {{age}}  Gender: {{gender}} Occupation: {{occupation}}</p>
-                <p>link: {{link}}</p>
+                <div class="detail">
+                    <p class="detail">age: {{age}}</p>
+                    <p class="detail">Gender: {{ Gender }}</p>
+                    <p>Occupation: {{ Occupation}}</p>
+                </div>
                 <div class="bio">
-                    <p>bio {{bio}}</p>
+                    <p>bio: {{bio}}</p>
                 </div>
             </ul>
         </div>
