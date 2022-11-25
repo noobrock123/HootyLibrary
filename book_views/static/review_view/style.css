@@ -17,16 +17,22 @@
   .flex-div {
     display: flex;
     align-items: center;
+    background: rgb(254, 157, 12);
   }
-  
+ 
+  .bottom-flex-div {
+    display: flex;
+    align-items: center;
+  }
+
   nav {
     padding: 0 2%;
     justify-content: space-between;
     z-index: 10;
   }
   
-.nav-right h1 {
-    color: #fff;
+.nav-right .bottom-flex-div {
+    color: rgb(254, 157, 12);
     margin-right: 250px;
   }
   
@@ -79,7 +85,7 @@
   
   .card-profile{
     height: 80px;
-    background: rgb(55, 27, 198);;
+    background: rgb(255, 153, 0);
   }
   
   .image-profile{

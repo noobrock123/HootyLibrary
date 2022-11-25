@@ -1,49 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'review_view/style.css' %}">
 </head>
 <body>
     <nav class="flex-div">
         <div class="nav-left flex-div">
-            <img src="images/img1.jpg" class="logo">
+            <img src="{% static 'review_view/images/logo.png' %}" class="logo">
         </div>
         <div class="nav-middle flex-div">
-            <h2>Book_name's reviews</h2>
+            <h2>{{ book_name}}'s reviews</h2>
             <p>Book_ID</p>
         </div>
         <div class="nav-right">
+            <form action="">
             <button class="create" type="submit">Create a review</button>
+            </form>
         </div>
     </nav>
-    
+   
+    {% for book in books %}
     <div class="card">
         <div class="card-profile">
             <div class="image-profile">
-                <img src="images/img1.jpg" />
+                <img src="{{ book.reviewer.profile_pic.url}}" />
             </div>
         </div>
         <div class="card-content">
-            <h2>Book name: name</h2>
-            <h2>From: user_id (username)</h2>
-            <h2>Title: This book kill my dog</h2>
+            {% if book.reviewer.alias_name %}
+            <h2>From: {{ book.reviewer.alias_name}} ({{ book.reviewer.username }})</h2>
+            {% else %}
+            <h2>From: {{ book.reviewer.username }}</h2>
+            {% endif %}
+            <h2>Title: {{ book.title }}</h2>
         </div>
         <div class="message">
             <h2>Message:</h2>
-            <p>wesfrgbgrbfsdawfbgtrgsef</p>
+            <p>{{ book.msg }}</p>
         </div>
+    {% endfor %}
             
 
     </div>
-    <nav class="flex-div">
-        <div class="nav-left flex-div">
-            <button class="create" type="submit">Create a review</button>
+    <nav class="bottom-flex-div">
+        <div class="nav-left bottom-flex-div">
+            <button class="create" type="submit">Previous Page</button>
         </div>
         <div class="nav-right">
-            <button class="create" type="submit">Create a review</button>
+            <button class="create" type="submit">Next Page</button>
         </div>
     </nav>
 </body>
