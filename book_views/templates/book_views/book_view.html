@@ -31,9 +31,7 @@
             height: 100px;
             transform: translate(3%, 3%);
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0, 5);
             flex-direction: column;
-            box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
             z-index: 10;
             margin-top: 50px;
         }
@@ -48,7 +46,7 @@
         }
         .adtribute{
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             padding-top: 50px;
             padding-left: 100px;
         }
@@ -59,10 +57,12 @@
         }
 
         input {
-            padding: 16px 32px;
+            padding: 16px 10px;
+            box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
             font-size: medium;
             background: #867aac;
             color: #fff;
+            font-size: 22px;
             transition: background 0.2s;
             outline: none;
             cursor: pointer;
@@ -140,7 +140,7 @@
     </div>
     <div class="read">
         <form action="{% url 'book_views:book_pdf' book.book_id %}">
-        <input class="a" type="submit" name="" value="Read PDF" id="" style="padding: 40px 557px;">
+        <input class="a" type="submit" name="" value="Read PDF" id="" style="padding: 40px 557px; box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5); transform: translate(5%, 5%); margin-left: 100px;">
 
         </form>
     </div>
