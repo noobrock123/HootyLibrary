@@ -26,9 +26,7 @@
                 {% else %}
                 <img src="{{ user.profile_pic.url }}">
                 {% endif %}
-                <div class="browse">
-                    <input type="file" name="profile_pic" accept="image/png, image/jpeg"></input>
-                </div>
+                <input class="browes" type="file" placeholder="chooes file" name="profile_pic" accept="image/png, image/jpeg"></input>
             </div>
             <div class="name">
                 <h5>Alias name</h5>
@@ -84,13 +82,6 @@
     <input type="file" name="profile_pic" id="" accept="image/png, image/jpeg" onchange="loadFile(event)" >
     <input type="submit" value="submit" name="" id="">
     -->
-        <div class="icons">
-            <a href="#"><img src="{% static 'editProfile/images/facebook.png' %}"></a>
-            <a href="#"><img src="{% static 'editProfile/images/instagram.png' %}"></a>
-            <a href="#"><img src="{% static 'editProfile/images/patreon.png' %}"></a>
-            <a href="#"><img src="{% static 'editProfile/images/tiktok.png' %}"></a>
-            <a href="#"><img src="{% static 'editProfile/images/youtube.png' %}"></a>
-        </div>
         <button class="confirm" type="submit">Confirm</button>
         <button class="cancle" type="submit" name="cancel" value="C">Cancle</button>
         <!--

@@ -86,7 +86,7 @@ input[type="file"] {
   z-index: -2;
 }
 
-.card .card-profile .image-profile .browse {
+.card .card-profile .image-profile input.browes {
     display:inline-block;
     position: flex;
     width: 80%;
@@ -103,7 +103,7 @@ input[type="file"] {
     transition: background 0.2s;
 }
 
-.card .card-profile .image-profile .browse:hover {
+.card .card-profile .image-profile input.browes:hover {
     background: rgb(255, 153, 0);
 }
 
@@ -160,27 +160,6 @@ input[type="file"] {
   font-size: 16px;
   text-align:left;
   padding: 0 50px 50px 20px;
-}
-
-.icons{
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 10px;
-}
-
-.icons a{
-  text-decoration: none;
-  font-size: 20px;
-  color: #0ABDE3;
-  padding: 0 14px;
-  transition-duration: 0.4s;
-  transition-property: transform;
-}
-
-.icons img {
-  width: 40px;
-  height: 40px;
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card .confirm {

@@ -138,11 +138,6 @@
                     <img src="{% static 'homepage/images/about.png' %}">
                     <p>About</p>
                 </a>
-                <a href="#" class="sub-menu-link">
-                    <img src="{% static 'homepage/images/setting.png' %}">
-                    <p>Settings & Support</p>
-
-                </a>
                 {% if is_user_authenticated %}
                 <form action="{% url 'MAIN_APP:sign_out' %}">
                     <button type="submit" class="out-button">Sign Out</button>
