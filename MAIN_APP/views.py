@@ -27,12 +27,11 @@ def index(request):
         if search_query:
             topics = search(search_query)
             return render(request, 'homepage/homepage.html', {'topics':topics})
-        Education_query = request.GET.get('Education')
-        Entertain_query = request.GET.get('Entertain')
+        option_query = request.GET.get('options')
         oldTolate_query = request.GET.get('oldTolate')
         zToa_query = request.GET.get('zToa')
-        if Education_query or Entertain_query or oldTolate_query or zToa_query:
-            topics = filter(Education_query, Entertain_query, oldTolate_query, zToa_query)
+        if option_query or oldTolate_query or zToa_query:
+            topics = filter(option_query, oldTolate_query, zToa_query)
             return render(request, 'homepage/homepage.html', {'topics':topics})
         return render(request, 'homepage/homepage.html',
             {'is_user_authenticated': request.user.is_authenticated,
@@ -55,15 +54,16 @@ def search(search_query):
             }
             return topics
 
-def filter(Education_query, Entertain_query, oldTolate_query, zToa_query):
+def filter(option_query, oldTolate_query, zToa_query):
     topics = { }
     book = Book.objects.all()
-    if Education_query:
-        book = book.filter(book_type=1).values()
-        topics.update({'Education':book,})
-    if Entertain_query:
-        book = book.filter(book_type=2).values()
-        topics.update({'Entertain':book,})
+    if option_query:
+        if option_query == "Entertain":
+            book = book.filter(book_type=2).values()
+            topics.update({'Entertain':book,})
+        else:
+            book = book.filter(book_type=1).values()
+            topics.update({'Education':book,})   
     if oldTolate_query:
         oldTolateBook = book.order_by('date_created').values()
         topics.update({'Oldest to Latest':oldTolateBook,})
