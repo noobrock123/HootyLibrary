@@ -25,43 +25,35 @@
    
     {% for book in books %}
     <div class="card">
-        <div class="card-profile">
-            <div class="image-profile">
-                <img src="{{ book.reviewer.profile_pic.url}}" />
+        <div class="card-profile"></div>
+        <div>
+        <div class="container">
+            <img src="{{ book.reviewer.profile_pic.url}}" />
+            <div class="card-content">
+                <a href="{% url 'userProfile:user_profile' book.reviewer.user_id %}">
+                <p>{{ book.review_date }}</p>
+                {% if book.reviewer.alias_name %}
+                <h3>{{ book.reviewer.alias_name}} ({{ book.reviewer.username }})</h3>
+                {% else %}
+                <h3>{{ book.reviewer.username }}</h3>
+                {% endif %}
+                </a>
+                <h3>Title: {{ book.title }}</h3>
+                <h4>Rate: {{ book.score }}/5</h4>
             </div>
         </div>
-        <div class="card-content">
-            {% if book.reviewer.alias_name %}
-            <h2>From: {{ book.reviewer.alias_name}} ({{ book.reviewer.username }})</h2>
-            {% else %}
-            <h2>From: {{ book.reviewer.username }}</h2>
-            {% endif %}
-            <h2>Title: {{ book.title }}</h2>
         </div>
+        {% if book.msg|length %}
         <div class="message">
-            <h2>Message:</h2>
-            <p>{{ book.msg }}</p>
+            <h3>Comment:</h3>
+            <div>{{ book.msg }}</div>
         </div>
+        {% endif %}
     </div>
     {% empty %}
     <div class="card">
         <div class="card-profile"></div>
-        <div class="container">
-            <img src="{{ book.reviewer.profile_pic.url}}" />
-            <div class="card-content">
-                {% if book.reviewer.alias_name %}
-                <h2>From: {{ book.reviewer.alias_name}} ({{ book.reviewer.username }})</h2>
-                {% else %}
-                <h2>From: {{ book.reviewer.username }}</h2>
-                {% endif %}
-                <h2>Title: {{ book.title }}</h2>
-                <h2>Rate: {{ book.score }}</h2>
-            </div>
-            <div class="message">
-                <h2>Message:</h2>
-                <p>{{ book.msg }}</p>
-            </div>
-        </div>
+        <h3 style="margin: auto; margin-top: 20px; margin-bottom: 20px; text-align: center;">There is no review here. Create your own!</h3>
     </div>
     {% endfor %}
 

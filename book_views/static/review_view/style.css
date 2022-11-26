@@ -10,10 +10,6 @@ a{
   color: #5a5a5a;
 }
   
-img{
-  cursor: pointer;
-}
-  
 .flex-div {
   display: flex;
   align-items: center;
@@ -31,30 +27,49 @@ img{
 
 .container {
   display: grid;
-  grid-template-columns: 0.1fr 1fr;
-}
+  grid-template-columns: 180px auto;
+  }
 
-.container img {
+.container img{
   position: relative;
   margin: 30px;
-  width: 130px;
-  height: 130px;
+  margin-bottom: 10px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
+  cursor: pointer;
 }
 .container .card-content {
   margin-top: 30px;
 }
-.card-content h2 {
+.card-content h3 {
+  margin-bottom: 20px;
   text-align: left;
-  padding: 0 20px 20px 20px;
 }
-  
-.card-content p{
-  font-size: 16px;
+.card-content h4 {
+  text-align: left;
+}
+.card-content p {
+  margin-bottom: 4px;
+  opacity: 40%;
+  font-size: 14px;
+}
+
+.message {
+  margin: 20px;
   text-align:left;
-  padding: 0 50px 50px 20px;
+  font-size: 16px;
+  margin-left: 4%;
+  height: auto;
+  margin-bottom: 30px;
 }
- 
+.message div {
+  margin-top: 10px;
+  word-break: break-word;
+  width: auto;
+  height: auto;
+}
+
 .bottom-flex-div {
   display: flex;
   align-items: center;
@@ -76,40 +91,16 @@ img{
     height: 35px;
 }
   
-  .nav-left .logo {
-    width: 200px;
-  }
-
-
-
-
-
-.report_head .report{
-    position: flex;
-    width: 10%;
-    background: rgb(251, 250, 250);
-    padding: 10px;
-    border: 0;
-    margin-left: 10px;
-    color: rgb(134, 162, 223);
-    outline: none;
-    font-size: 30px;
-    margin-top: 20px;
-    cursor: pointer;
-    border-radius: 25px;
-    transition: background 0.2s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.nav-left .logo {
+  width: 200px;
 }
-
-
-
 
 .card {
   position: relative;
   margin: auto;
   margin-top: 3%;
-  width: 80%;
-  height: 400px;
+  width: 70%;
+  height: auto;
   overflow: hidden;
   background: #fff;
   border-radius: 15px;
@@ -119,7 +110,7 @@ img{
   } 
   
   .card-profile{
-    height: 80px;
+    height: 40px;
     background: rgb(255, 153, 0);
   }
   
@@ -155,14 +146,7 @@ img{
   
   
 
-.message {
-    margin-top: 40px;
-    padding: 10px 50px 50px 20px;
-    text-align:left;
-    font-size: 16px;
-    margin-left: 30%;
 
-}
 
 
 .flex-div .nav-right .create {
