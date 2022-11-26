@@ -34,7 +34,7 @@ nav {
   z-index: 10;
 }
 .nav-left .logo {
-  width: 300px;
+  width: 200px;
 }
 
 .product {
@@ -202,8 +202,8 @@ nav {
 }
 
 .image {
-  padding: 10px;
-  border-radius: 50%;
+  margin-bottom: 10px;
+  border-radius: 55%;
 }
 .detail {
   padding: 10px;
