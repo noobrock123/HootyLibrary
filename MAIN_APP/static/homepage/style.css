@@ -157,7 +157,6 @@ nav {
   border: 0;
   height: 1px;
   width: 100%;
-  background: rgb(86, 86, 86);
   margin: 15px 0 10px;
 }
 
@@ -173,6 +172,7 @@ nav {
 }
 
 .sub-menu-link p {
+  margin-left: 10px;
   width: 100%;
   margin: 12px 0;
 }
@@ -376,19 +376,15 @@ nav {
   margin: 12px 0;
 }
 
-.sub-menu-link p {
-  width: 100%;
-}
-
 .sub-menu-link img {
   width: 40px;
-  background: #e5e5e5;
   border-radius: 35%;
   padding: 8px;
   margin-right: 15px;
 }
 
 .sub-menu-link span {
+  margin-right: 5px;
   font-size: 22px;
   transition: transform 0.5s;
 }
