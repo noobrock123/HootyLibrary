@@ -98,7 +98,7 @@ def sign_out(request):
 
 def Undiscovered(request):
     books = Book.objects.all()
-    Undiscovered = books.order_by('-date_created').values()[:8]
+    Undiscovered = books.order_by('date_created').values()[:8]
     topics = {
         'Undiscovered':Undiscovered,
     }
