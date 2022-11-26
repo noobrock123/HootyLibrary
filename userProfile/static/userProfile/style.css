@@ -201,8 +201,9 @@ nav {
   margin-bottom: 10px;
 }
 
-.image {
+img.image {
   padding: 10px;
+  border-radius: 50%;
 }
 .detail {
   padding: 10px;
