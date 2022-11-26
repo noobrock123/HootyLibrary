@@ -17,7 +17,6 @@ a {
 
 img {
   cursor: pointer;
-  border-radius: 50%;
 }
 
 .flex-div {
@@ -29,7 +28,7 @@ nav {
   padding: 0 2%;
   justify-content: space-between;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  background: rgb(14, 10, 5);
+  background: rgb(254, 157, 12);
   position: sticky;
   top: 0;
   z-index: 10;

@@ -4,27 +4,15 @@
     {% load static %}
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static "userProfile/style.css" %}">
+    <link rel="stylesheet" href="{% static 'userProfile/style.css' %}">
 </head>
 <body>
-    <style>
-        .img {
-            border-radius: 50%;
-            padding: 10px;
-        }
-        .detail {
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            margin-right: 150px;
-        }
-    </style>
     <nav class="flex-div">
         <div class="nav-left flex-div">
             <ul>
             <a href="/"><img src="{% static 'homepage/images/logo.png' %}" class="logo"></a>
                 <div class="image nav-left">
-                    <img src="{% url 'userProfile:user_picture' user_id %}" width="150" height="175" class="img">
+                    <img src="{% url 'userProfile:user_picture' user_id %}" width="150" height="175" class="image">
                 </div>
         
             </ul>
@@ -90,6 +78,18 @@
     </div>
 
     <script src="{% static 'userProfile/script.js' %}"></script>
+    <style>
+        .image {
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .detail {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            margin-right: 150px;
+        }
+    </style>
 </body>
 
 </html>
