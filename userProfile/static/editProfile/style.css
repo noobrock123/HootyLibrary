@@ -86,7 +86,7 @@ input[type="file"] {
   z-index: -2;
 }
 
-.card-profile .image-profile .browse input {
+.card .card-profile .image-profile .browse {
     display:inline-block;
     position: flex;
     width: 80%;
@@ -103,7 +103,7 @@ input[type="file"] {
     transition: background 0.2s;
 }
 
-.card-profile .image-profile .browse input:hover {
+.card .card-profile .image-profile .browse:hover {
     background: rgb(255, 153, 0);
 }
 
