@@ -73,6 +73,7 @@ a{
 .bottom-flex-div {
   display: flex;
   align-items: center;
+  margin-top: 20px
 }
 
   nav {
@@ -83,8 +84,28 @@ a{
   
 .nav-right .bottom-flex-div {
     color: rgb(254, 157, 12);
+    outline: none;
+    padding: 10px;
     margin-right: 250px;
   }
+.nav-left .page_button {
+  background: rgb(250, 203, 47);
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+}
+.nav-right .page_button {
+  background: rgb(250, 203, 47);
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+}
   
 .nav-right .addbook-icon {
     width: 35px;

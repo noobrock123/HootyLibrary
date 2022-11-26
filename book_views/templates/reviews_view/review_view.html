@@ -17,7 +17,7 @@
             <p>({{ book_id }})</p>
         </div>
         <div class="nav-right">
-            <form action="">
+            <form action="../create_review">
             <button class="create" type="submit">Create a review</button>
             </form>
         </div>
@@ -58,12 +58,20 @@
     {% endfor %}
 
     <nav class="bottom-flex-div">
+        {% if page_prev != 0 %}
+        <div class="nav-left">
+            <form action="../{{ page_prev }}">
+            <button class="page_button" type="submit">Previous Page</button>
+            </form>
+        </div>
+        {% endif %}
         <div class="nav-left bottom-flex-div">
-            <button class="create" type="submit">Previous Page</button>
         </div>
+        {% if books|length == 8 %}
         <div class="nav-right">
-            <button class="create" type="submit">Next Page</button>
+            <button class="page_buttion" type="submit">Next Page</button>
         </div>
+        {% endif %}
     </nav>
 </body>
 </html>
