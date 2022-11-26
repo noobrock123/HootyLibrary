@@ -45,18 +45,28 @@ def book_views(request, book_id):
     except Exception as e:
         return defaults.page_not_found(request, e)
     favorite=None
+    is_author = False
+    has_reviews = True if Review.objects.filter(book_refer=book) else False
     if request.user.is_authenticated:
         user = User.objects.get(user_id=request.user.user_id)
+        print(book.author != user)
         if book.author != user:
             read = Read.objects.get_or_create(user_refer=user, book_refer=book)
             read[0].save()
+            is_author = False
+        else:
+            is_author = True
         try:
             favorite = Favorite.objects.filter(book_refer=book).get(user_refer=user)
         except:
             favorite = None
+    print(is_author)
     context = {
+        'is_login': request.user.is_authenticated,
         'book': book,
+        'is author': is_author,
         'favorite':favorite,
+        'has_reviews':has_reviews,
         
     }
     return render(request, 'book_views/templates/book_views/book_view.html', context)
@@ -98,11 +108,12 @@ def create_book(request):
 
     return render(request, 'book_views/templates/book_views/create_book.html', context)
 
-def show_reviews(request, book_id):
+def show_reviews(request, book_id, page=1):
     book = Book.objects.get(book_id=book_id)
     books = Review.objects.filter(book_refer=book)
     return render(request, 'reviews_view/review_view.html', {
         'book_name': book.book_name,
+        'book_id': book.book_id,
         'books': books})
 
 @login_required(login_url='register:log_in')
@@ -135,6 +146,14 @@ def review(request,book_id):
             for e in exception:
                 messages.error(request, f'{e[0]}: {e[1][0]}')
     return render(request, "book_views/templates/book_views/review.html")
+
+def show_issues(request, book_id, page=1):
+    book = Book.objects.get(book_id=book_id)
+    books = Issue.objects.filter(book_refer=book)
+    return render(request, 'reviews_view/review_view.html', {
+        'book_name': book.book_name,
+        'books': books})
+
 
 @login_required(login_url='register:log_in')
 def report(request,book_id):

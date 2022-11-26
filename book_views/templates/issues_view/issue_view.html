@@ -14,7 +14,7 @@
         </div>
         <div class="nav-middle flex-div">
             <h2>{{ book_name}}'s reviews</h2>
-            <p>({{ book_id }})</p>
+            <p>Book_ID</p>
         </div>
         <div class="nav-right">
             <form action="">
@@ -42,29 +42,10 @@
             <h2>Message:</h2>
             <p>{{ book.msg }}</p>
         </div>
-    </div>
-    {% empty %}
-    <div class="card">
-        <div class="card-profile"></div>
-        <div class="container">
-            <img src="{{ book.reviewer.profile_pic.url}}" />
-            <div class="card-content">
-                {% if book.reviewer.alias_name %}
-                <h2>From: {{ book.reviewer.alias_name}} ({{ book.reviewer.username }})</h2>
-                {% else %}
-                <h2>From: {{ book.reviewer.username }}</h2>
-                {% endif %}
-                <h2>Title: {{ book.title }}</h2>
-                <h2>Rate: {{ book.score }}</h2>
-            </div>
-            <div class="message">
-                <h2>Message:</h2>
-                <p>{{ book.msg }}</p>
-            </div>
-        </div>
-    </div>
     {% endfor %}
+            
 
+    </div>
     <nav class="bottom-flex-div">
         <div class="nav-left bottom-flex-div">
             <button class="create" type="submit">Previous Page</button>
