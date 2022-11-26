@@ -49,7 +49,7 @@ def search(search_query):
     if search_query:
         SearchCheck = Book.objects.filter(book_name__contains=search_query)
         if SearchCheck:
-            book = Book.objects.all().filter(book_name__startswith=search_query)
+            book = Book.objects.all().filter(book_name__icontains=search_query)
             topics = {
                 'search':book,
             }
