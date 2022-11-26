@@ -200,3 +200,13 @@ nav {
   grid-column: span 2;
   margin-bottom: 10px;
 }
+
+.image {
+  padding: 10px;
+}
+.detail {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 150px;
+}
