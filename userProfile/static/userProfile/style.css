@@ -1,45 +1,86 @@
 * {
-  margin: 0;
-  padding: 0;
-  font-family: 'poppins', sans-serif;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: flex;
+  }
+
+
+  .card{
+    width: 1000px;
+    position: center;
+    height: 600px;
+    margin-left: 20px;
+    margin-top: 20px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+  }
+  
+  .card-image img{
+    width: 100%;
+    height: 160px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;
+  }
+  
+  .profile-image img{
+    z-index: 1;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    margin-top: -75px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 100px;
+    border: 10px solid #fff;
+    transition-duration: 0.4s;
+    transition-property: transform;
+  }
+  
+  .profile-image img:hover{
+    transform: scale(1.1);
+  }
+  
+  .card-content h3{
+    font-size: 25px;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .card-content p{
+    font-size: 16px;
+    text-align: center;
+    color: rgb(139, 139, 139);
+    padding: 0 20px 5px 20px;
+  }
+
+  .bio p {
+    font-size: 16px;
+    text-align: center;
+    color: rgb(69, 69, 69);
+    padding: 0 20px 5px 20px;
+  }
+
+.his {
+    margin-top: 40px;
+    padding: 40px;
+    font-size: 12px;
 }
 
-a {
-  text-decoration: none;
-  color: #5a5a5a;
-}
 
-.flex-div .detail {
-  padding: 0 2%;
-  justify-content: space-between;
-}
 
-img {
-  cursor: pointer;
-}
 
-.user_container {
-  display: grid;
-  grid-template-columns: 190px auto;
-}
-
-.flex-div {
-  display: flex;
-  align-items: center;
-}
-
-nav {
-  padding: 0 2%;
-  justify-content: space-between;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  background: rgb(254, 157, 12);
-  top: 0;
-  z-index: 10;
-}
-.nav-left .logo {
-  width: 200px;
-}
 
 .product {
   position: relative;
@@ -203,15 +244,4 @@ nav {
 .collection:nth-child(3) {
   grid-column: span 2;
   margin-bottom: 10px;
-}
-
-.image {
-  margin-bottom: 10px;
-  border-radius: 55%;
-}
-.detail {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  margin-right: 150px;
 }
