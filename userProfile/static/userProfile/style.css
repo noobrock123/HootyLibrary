@@ -19,6 +19,11 @@ img {
   cursor: pointer;
 }
 
+.user_container {
+  display: grid;
+  grid-template-columns: 190px auto;
+}
+
 .flex-div {
   display: flex;
   align-items: center;
