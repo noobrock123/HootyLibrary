@@ -244,4 +244,19 @@
 .collection:nth-child(3) {
   grid-column: span 2;
   margin-bottom: 10px;
+
+}
+
+.image {
+  width:150px; 
+  height:150px;
+  margin-bottom: 10px;
+  border-radius: 60%;
+}
+
+.detail {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 150px;
 }

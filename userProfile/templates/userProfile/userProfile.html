@@ -1,34 +1,37 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Profile Card</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    
-    <!--Profile card start-->
-    <div class="card">
-      <div class="card-image">
-        <img src="images/1.png" alt="">
-      </div>
-      <div class="profile-image">
-        <img src="images/img1.jpg" alt="">
-      </div>
-      <div class="card-content">
-        <h3>{{username}}</h3>
-        <p>{{alias_name}}</p>
-      </div>
-      <div class="bio">
-        <p>{{bio}}</p>
-      </div>
-      <div class="his">
-        <h1>age: {{age}}</h1>
-        <h1>Gender: {{ Gender }}</h1>
-        <h1>Occupation: {{ Occupation}}</h1>
-      </div>
-    </div>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'userProfile/style.css' %}">
+</head>
+<body>
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <ul>
+            <a href="/"><img src="{% static 'homepage/images/logo.png' %}" class="logo"></a>
+                <div class="image nav-left">
+                    <img src="{% url 'userProfile:user_picture' user_id %}" width="150" height="150" class="image" style="width:65%">
+                </div>
+            </ul>
+            <ul>
+                <p>
+                    <h3 class="flex-div">Name:{{alias_name}}<small>{{username}}</small></h3>
+                </p>
+                <div class="detail">
+                    <p class="detail">Age: {{age}}</p>
+                    <p class="detail">Gender: {{ Gender }}</p>
+                    <p>Occupation: {{ Occupation}}</p>
+                </div>
+                <div class="detail">
+                    <p>{{username}}'story: {{bio}}</p>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+>>>>>>> c97f6c1e18084034f17b72edad9148350602a7b1
     <section class="product"> 
       <h3 class="product-category">{{username}}'s Books</h3>
       <button class="pre-btn"><img src="{% static 'homepage/images/arrow.png' %}"></button>
