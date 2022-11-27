@@ -206,8 +206,10 @@ nav {
 }
 
 .image {
+  width:150px; 
+  height:150px;
   margin-bottom: 10px;
-  border-radius: 55%;
+  border-radius: 60%;
 }
 .detail {
   padding: 10px;
