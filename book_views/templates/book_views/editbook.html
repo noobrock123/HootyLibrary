@@ -1,29 +1,40 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'addbook/style.css' %}">
 </head>
 <body>
     <div class="card">
         <div class="card-profile">
             <div class="image-profile">
-                <img src="images/img1.jpg">
+                <img src="{% static 'addbok/images/img1' %}">
             </div>
             <div class="browse">
                 <button class="browse-btn" type="submit">Browes IMG</button>
                 <button class="browse-btn" type="submit">Browes PDF</button>
             </div>
-            <p>Genres</p>
             <div class="type-head">
-                <button type="submit" class="type"><h2>COMEDY</h2></button>
-                <button type="submit" class="type"><h2>MONSTERS</h2></button>
-                <button type="submit" class="type"><h2>DEMONS</h2></button>
-                <button type="submit" class="type"><h2>BIOLOGY</h2></button>
-                <button type="submit" class="type"><h2>MATH</h2></button>
-            </div>
+                <p>Genres</p>
+                <div class="group">
+                  <input type="checkbox" id="xd" />
+                  <label for="xd">COMEDY</label>
+                </div>
+          
+                <div class="group">
+                  <input type="checkbox" id="figma" />
+                  <label for="figma">MONSTERS</label>
+                </div>
+          
+                <div class="group">
+                  <input type="checkbox" id="sketch" />
+                  <label for="sketch">DEMONS</label>
+                </div>
+              </div>
         </div>
         <div class="card-content">
             <h2 class="title">Create Book</h2>
@@ -38,14 +49,14 @@
                     <i class="bx bx-chevron-down"></i>
                 </div>
         
-                <ul class="options">
-                    <li class="option">
+                <label class="options">
+                    <option class="option">
                         <span class="option-text">Education</span>
-                    </li>
-                    <li class="option">
+                    </option>
+                    <option class="option">
                         <span class="option-text">Entertain</span>
-                    </li>
-                </ul>
+                    </option>
+                </label>
             </div>
             <div class="button">
                 <button class="confirm" type="submit">Confirm</button>

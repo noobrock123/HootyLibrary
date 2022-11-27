@@ -9,7 +9,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     #path('book/', views.book, name='book'),
     #path('search/', views.searchbar, name='search'),
-    path('book/create_book', views.create_book, name='crt_book'),
     path('Undiscovered/', views.Undiscovered, name='Undiscovered'),
     path('Popular_today/', views.Popular_today, name='Popular_today'),
     path('Popular_week/', views.Popular_week, name='Popular_week'),

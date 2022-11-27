@@ -8,6 +8,7 @@ from django.http import HttpResponseNotFound
 from django.views import defaults
 # Create your views here.
 
+@login_required(login_url='register:log_in')
 def reviews(request, book_id):
     book = Book.objects.get(book_id=book_id)
     if request.method == 'POST':
@@ -32,7 +33,7 @@ def create_review(request, book_id):
         title = request.POST.get('title')
         score = float(request.POST.get('score'))
         msg = request.POST.get('msg')
-        Review.objects.create(reviewer=user, book_refer=book, title=title, msg=msg)
+        Review.objects.create(reviewer=user, book_refer=book, title=title, msg=msg, score=score)
         return redirect('book_views:book', book_id=book.book_id)
 
     return render(request, 'review/review.html', {'book': book})

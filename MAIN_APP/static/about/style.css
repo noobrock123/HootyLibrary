@@ -75,21 +75,19 @@ section img#mountains_front {
 }
 
 .sec .link {
+    transform: translate(38%, 3%);
+    display: flex;
     margin-top: 80px;
     color: #fff;
-    padding: 20px;
+    padding: 30px;
+    text-align: center;
 }
 
 .sec .link img {
     width: 150px;
     height: 150px;
     padding: 20px;
-}
-
-.sec .link p {
-    font-size: 40px;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    margin-right: 40px;
 }
 
 .sec p {
@@ -122,8 +120,6 @@ section img#mountains_front {
    padding: 60px 30px;
    margin: 20px;
    background: #f2f3f7;
-   box-shadow: 0.6em 0.6em 1.2em #d2dce9,
-               -0.5em -0.5em 1em #ffffff;
    border-radius: 20px;
 }
 .container .card .content
@@ -165,20 +161,4 @@ section img#mountains_front {
    font-size: 1.2rem;
    font-weight: bold;
    text-align: center;
-}
-.container .card .content .sci
-{
-   margin-top: 20px;
-}
-.container .card .content .sci a
-{
-   text-decoration: none;
-   color: #6c758f;
-   font-size: 30px;
-   margin: 10px;
-   transition: color 0.4s;
-}
-.container .card .content .sci a:hover
-{
-   color: #0196e3;
 }

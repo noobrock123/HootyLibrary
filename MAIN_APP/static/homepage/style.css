@@ -341,6 +341,7 @@ nav {
 
 .user-info img {
   width: 60px;
+  height: 60px;
   border-radius: 50%;
   margin-right: 15px;
 }
@@ -442,10 +443,12 @@ nav {
 
 .sub-filter-wrap .sub-filter .select-menu{
   width: 200px;
+  outline: none;
   margin: 20px auto;
   margin-right: 23%;
 }
 .sub-filter-wrap .sub-filter .select-menu .select-btn{
+  outline: none;
   height: 55px;
   background: #fff;
   padding: 20px;
@@ -466,6 +469,7 @@ nav {
 }
 .sub-filter-wrap .sub-filter .select-menu .options{
   padding: 20px;
+  outline: none;
   margin-top: 10px;
   border-radius: 8px;
   background: #fff;
@@ -474,9 +478,11 @@ nav {
   pointer-events: auto;
 }
 .sub-filter-wrap .sub-filter .select-menu.active .options{
+  outline: none;
   display: block;
 }
 .sub-filter-wrap .sub-filter .options .option{
+  outline: none;
   display: flex;
   height: 40px;
   cursor: pointer;
@@ -718,10 +724,11 @@ nav {
 
 
 .slider{
-  width: 1240px;
+  width: 1600px;
   height: 400px;
   border-radius: 10px;
   overflow: hidden;
+  transform: translate(2.5%);
   margin-left: 14.5px;
   margin-top: 7px;
 }
@@ -742,8 +749,8 @@ nav {
 }
 
 .slide img{
-  width: 1240px;
-  height: 500px;
+  width: 1600px;
+  height: 600px;
 }
 
 /*css for manual slide navigation*/
