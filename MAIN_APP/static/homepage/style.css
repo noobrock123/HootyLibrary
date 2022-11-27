@@ -477,7 +477,7 @@ nav {
   pointer-events: auto;
 }
 .sub-filter-wrap .sub-filter .select-menu.active .options{
-  outline: none
+  outline: none;
   display: block;
 }
 .sub-filter-wrap .sub-filter .options .option{
