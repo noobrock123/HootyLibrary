@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'addbook/style.css' %}">
 </head>
 <body>
     <div class="card">
@@ -13,8 +14,8 @@
                 <img src="images/img1.jpg">
             </div>
             <div class="browse">
-                <button class="browse-btn" type="submit">Browes IMG</button>
-                <button class="browse-btn" type="submit">Browes PDF</button>
+                <button class="browse-btn" type="file" name="thumbnail" accept="image/png, image/jpeg">Choose your thumbnail</button>
+                <button class="browse-btn" type="file" name="pdf_files" id="" accept="pdf_files">Browes PDF</button>
             </div>
             <p>Genres</p>
             <div class="type-head">

@@ -94,7 +94,7 @@ def create_book(request):
             create = False
             messages.error(request, 'book_type is required ! ! ! ')
         if not create:
-            return render(request, 'book_views/templates/book_views/create_book.html', context)
+            return render(request, 'book_views/editbook.html', context)
         # print(genres)
         book = Book.objects.create(
             book_name=book_name,
@@ -107,7 +107,7 @@ def create_book(request):
         )
         return redirect('book_views:book', book.book_id)
 
-    return render(request, 'book_views/templates/book_views/create_book.html', context)
+    return render(request, 'book_views/editbook.html', context)
 
 def show_reviews(request, book_id, page):
     page_num = page
