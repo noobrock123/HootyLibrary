@@ -32,21 +32,15 @@
                 </div>
                 <div class="type-head">
                     <p>Genres</p>
+                    {% for genre in genres %}
                     <div class="group">
-                      <input type="checkbox" id="xd" />
-                      <label for="xd">COMEDY</label>
-                    </div>
-              
-                    <div class="group">
-                      <input type="checkbox" id="figma" />
-                      <label for="figma">MONSTERS</label>
-                    </div>
-              
-                    <div class="group">
-                      <input type="checkbox" id="sketch" />
-                      <label for="sketch">DEMONS</label>
-                    </div>
-                  </div>
+                        <input type="checkbox" id="{{genre.genre_list}}" name="genres" value="{{genre.genre_list}}"/>
+                        <label for="{{genre.genre_list}}">{{genre.genre_list}}</label>
+                      </div>
+  
+                    {% endfor %}
+                </div>
+                                  
             </div>
             <div class="card-content">
                 <h2 class="title">Create Book</h2>
@@ -92,12 +86,13 @@
         
 
     </div>
-    <script>
-        var loadFile = function(event) {
+    <!-- <script src="script.js"></script> -->
+    <script> 
+         var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
-    </script>
+     </script>
 </body>
 </html>
 
