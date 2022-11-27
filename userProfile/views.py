@@ -34,6 +34,7 @@ def userProfile(request, user_id):
         'user_id': user.user_id,
         'popular' : Book.objects.filter(author=user).annotate(num=Count('read')).order_by('-num')[:8],
         'alias_name':user.alias_name,
+        'user_id': user.user_id,
     }
     return render(request, 'userProfile/userProfile.html', context)
 

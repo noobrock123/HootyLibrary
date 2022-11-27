@@ -4,136 +4,57 @@
   <head>
     <meta charset="utf-8">
     <title>Profile Card</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'userProfile/style.css' %}">
   </head>
   <body>
     
     <!--Profile card start-->
     <div class="card">
       <div class="card-image">
-        <img src="images/1.png" alt="">
+        <img src="{% static 'userProfile/images/1.png' %}" alt="">
       </div>
       <div class="profile-image">
-        <img src="images/img1.jpg" alt="">
+        <img src="{% url 'userProfile:user_picture' user_id %}" alt="">
       </div>
       <div class="card-content">
-        <h3>{{username}}</h3>
-        <p>{{alias_name}}</p>
+        <h3>{{alias_name}}</h3>
+        <p>{{username}}</p>
       </div>
       <div class="bio">
         <p>{{bio}}</p>
       </div>
       <div class="his">
+        {% if age %}
         <h1>age: {{age}}</h1>
-        <h1>Gender: {{ Gender }}</h1>
-        <h1>Occupation: {{ Occupation}}</h1>
+        {% endif %}
+        {% if gender %}
+        <h1>Gender: {{ gender }}</h1>
+        {% endif %}
+        {% if occupation %}
+        <h1>Occupation: {{ occupation}}</h1>
+        {% endif %}
       </div>
     </div>
     <section class="product"> 
-      <h2 class="product-category">Popular Today</h2>
-      <button class="pre-btn"><img src="images/arrow.png"></button>
-      <button class="nxt-btn"><img src="images/arrow.png"></button>
+      <h2 class="product-category">{{ username }}'s Books</h2>
+      <button class="pre-btn"><img src="{% static 'userProfile/images/arrow.png' %}"></button>
+      <button class="nxt-btn"><img src="{% static 'userProfile/images/arrow.png' %}"></button>
       <div class="product-container">
+        {%for book in my_books %}
           <div class="product-card">
               <div class="product-image">
-                  <img src="images/card1.jpg" class="product-thumb">
+                  <img src="{{ book.thumbnail.url }}" class="product-thumb">
+                  <form action="{% url 'book_views:book' book.book_id %}">
                   <button class="card-btn">Open Me</button>
+                    </form>
               </div>
               <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
+                  <h2 class="product-brand">{{ book.book_name }}</h2>
                   <p class="product-short-description">Its long story..</p>
               </div>
           </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card2.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">Its long story..</p>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card3.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">Its long story..</p>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card4.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">Its long story..</p>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card5.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">Its long story..</p>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card6.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">Its long story..</p>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card7.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">Its long story..</p>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card8.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">Its long story..</p>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card9.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">Its long story..</p>
-              </div>
-          </div>
-          <div class="product-card">
-              <div class="product-image">
-                  <img src="images/card10.jpg" class="product-thumb">
-                  <button class="card-btn">Open Me</button>
-              </div>
-              <div class="product-info">
-                  <h2 class="product-brand">BOOK</h2>
-                  <p class="product-short-description">a short line about the cloth..</p>
-              </div>
-          </div>
+        {% endfor %}
+        
       </div>
 
   </section>
