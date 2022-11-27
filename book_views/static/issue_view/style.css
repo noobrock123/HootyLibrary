@@ -1,0 +1,223 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'poppins', sans-serif;
+  box-sizing: border-box;
+}
+  
+a{
+  text-decoration: none;
+  color: #5a5a5a;
+}
+
+
+  
+.flex-div {
+  display: flex;
+  align-items: center;
+  background: rgb(254, 157, 12);
+}
+.flex-div h2{
+  color: #fff;
+  margin-right: 6px;
+}
+.flex-div p{
+  margin: auto;
+  color:#fff;
+  opacity: 70%;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 180px auto 260px; 
+  }
+
+.container img{
+  position: relative;
+  margin: 30px;
+  margin-bottom: 10px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.container .card-content {
+  margin-top: 30px;
+  margin-right: 0px;
+}
+.card-content h3 {
+  width: auto;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.card-content h4 {
+  text-align: left;
+}
+.card-content p {
+  margin-bottom: 4px;
+  opacity: 40%;
+  font-size: 14px;
+}
+.container .issue_status {
+  text-align: center;
+  margin: auto;
+  margin-top: 30px;
+  width: auto;
+}
+.issue_status .confirm_text {
+  font-weight: bold;
+  color: green;
+}
+.issue_status .not_confirm_text {
+  font-weight: bold;
+  color: red;
+}
+.issue_status img {
+  height: 20px;
+  width: 20px;
+  margin: 0px;
+}
+.issue_status button {
+  margin-top: 16px;
+  font-weight: bold;
+  background: rgb(250, 203, 47);
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+}
+
+.message {
+  margin: 20px;
+  text-align:left;
+  font-size: 16px;
+  margin-left: 4%;
+  height: auto;
+  margin-bottom: 30px;
+}
+.message div {
+  margin-top: 10px;
+  word-break: break-word;
+  width: auto;
+  height: auto;
+}
+
+.bottom-flex-div {
+  display: flex;
+  align-items: center;
+  margin-top: 20px
+}
+
+  nav {
+    padding: 0 2%;
+    justify-content: space-between;
+    z-index: 10;
+  }
+  
+.nav-right .bottom-flex-div {
+    color: rgb(254, 157, 12);
+    outline: none;
+    padding: 10px;
+    margin-right: 250px;
+  }
+.nav-left .page_button {
+  background: rgb(250, 203, 47);
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+}
+.nav-right .page_button {
+  background: rgb(250, 203, 47);
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
+}
+  
+.nav-right .addbook-icon {
+    width: 35px;
+    height: 35px;
+}
+  
+.nav-left .logo {
+  width: 200px;
+}
+
+.card {
+  position: relative;
+  margin: auto;
+  margin-top: 3%;
+  width: 70%;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0,5);
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  } 
+  
+  .card-profile{
+    height: 40px;
+    background: rgb(255, 153, 0);
+  }
+  
+  .image-profile{
+    padding: 15px;
+    transform: translate(100px,100px);
+  }
+  
+  .card-profile .name {
+    font-size: 25px;
+    text-align: left;
+    margin-left: 300px;
+    margin-top: 10px;
+  }
+  
+  .image-profile img{
+    width: 120px;
+    height: 190px;
+  }
+  
+  .card-profile a {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(203, 122, 0);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.2s;
+  }
+  
+  .card-profile a:hover {
+    color: rgb(255, 153, 0);
+  }
+  
+  
+
+
+
+
+.flex-div .nav-right .create {
+  position: flex;
+  width: 100%;
+  background: rgb(250, 203, 47);
+  padding: 10px;
+  border: 0;
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+  margin: auto;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+.flex-div .nav-right .create:hover {
+  background: rgb(197, 152, 4);
+}

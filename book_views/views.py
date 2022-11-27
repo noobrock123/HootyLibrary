@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.views import defaults
+from datetime import datetime
 # Create your views here.
 
 
@@ -108,13 +109,17 @@ def create_book(request):
 
     return render(request, 'book_views/templates/book_views/create_book.html', context)
 
-def show_reviews(request, book_id, page=1):
+def show_reviews(request, book_id, page):
+    page_num = page
     book = Book.objects.get(book_id=book_id)
     books = Review.objects.filter(book_refer=book)
+    books = books[8 * (page -1): (8 * page) -1]
     return render(request, 'reviews_view/review_view.html', {
         'book_name': book.book_name,
         'book_id': book.book_id,
-        'books': books})
+        'books': books,
+        'page_next': page_num+1,
+        'page_prev': page_num-1})
 
 @login_required(login_url='register:log_in')
 def review(request,book_id):
@@ -147,12 +152,27 @@ def review(request,book_id):
                 messages.error(request, f'{e[0]}: {e[1][0]}')
     return render(request, "book_views/templates/book_views/review.html")
 
-def show_issues(request, book_id, page=1):
+def show_issues(request, book_id, page):
+    page_num = page
     book = Book.objects.get(book_id=book_id)
     books = Issue.objects.filter(book_refer=book)
-    return render(request, 'reviews_view/review_view.html', {
+    books = books[8 * (page -1): (8 * page) -1]
+    is_author = False
+    if (request.user != book.author):
+        is_author = True
+    if request.method == "POST":
+        user_id = request.POST.get('to_resolve')
+        to_resolve = request.POST.get('to_resolve_date')
+        to_be_resolved = Issue.objects.get(id=to_resolve)
+        to_be_resolved.is_resolved = True
+        to_be_resolved.save()
+    return render(request, 'issues_view/issue_view.html', {
         'book_name': book.book_name,
-        'books': books})
+        'book_id': book.book_id,
+        'books': books,
+        'is_author': is_author,
+        'page_next': page_num+1,
+        'page_prev': page_num-1})
 
 
 @login_required(login_url='register:log_in')

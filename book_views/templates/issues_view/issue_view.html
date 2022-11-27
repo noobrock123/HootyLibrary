@@ -5,7 +5,7 @@
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-eidth, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'review_view/style.css' %}">
+    <link rel="stylesheet" href="{% static 'issue_view/style.css' %}">
 </head>
 <body>
     <nav class="flex-div">
@@ -13,46 +13,85 @@
             <img src="{% static 'review_view/images/logo.png' %}" class="logo">
         </div>
         <div class="nav-middle flex-div">
-            <h2>{{ book_name}}'s reviews</h2>
-            <p>Book_ID</p>
+            <h2>{{ book_name }}'s issues</h2>
+            <p>({{ book_id }})</p>
         </div>
         <div class="nav-right">
-            <form action="">
-            <button class="create" type="submit">Create a review</button>
+            <form action="../../create_issue">
+            <button class="create" type="submit">Create an issue</button>
             </form>
         </div>
     </nav>
    
     {% for book in books %}
     <div class="card">
-        <div class="card-profile">
-            <div class="image-profile">
-                <img src="{{ book.reviewer.profile_pic.url}}" />
+        <div class="card-profile"></div>
+        <div>
+        <div class="container">
+            <img src="{{ book.issuer.profile_pic.url}}" />
+            <div class="card-content">
+                <p>{{ book.issue_date }}</p>
+                <a href="{% url 'userProfile:user_profile' book.issuer.user_id %}">
+                {% if book.issuer.alias_name %}
+                <h3>{{ book.issuer.alias_name}} ({{ book.issuer.username }})</h3>
+                {% else %}
+                <h3>{{ book.issuer.username }}</h3>
+                {% endif %}
+                </a>
+                <h3>Title: {{ book.title }}</h3>
+            </div>
+            <div class="issue_status">
+                {% if not book.is_resolved %}
+                <div class="not_confirm_text">
+                Not resovle!
+                <img src="{% static 'issue_view/images/delete-button.png' %}" />
+                </div>
+                {% else %}
+                <div class="confirm_text">
+                Resolved!
+                <img src="{% static 'issue_view/images/check.png' %}" />
+                </div>
+                {% endif %}
+                {% if is_author and not book.is_resolved %}
+                <form action="" method="post">
+                {% csrf_token %}
+                    <input type="hidden" name="to_resolve" value="{{ book.issuer.user_id }}"/>
+                    <input type="hidden" name="to_resolve_date" value="{{ book.id }}"/>
+                    <button type="submit">Mark as resolved</button>
+                </form>
+                {% endif %}
             </div>
         </div>
-        <div class="card-content">
-            {% if book.reviewer.alias_name %}
-            <h2>From: {{ book.reviewer.alias_name}} ({{ book.reviewer.username }})</h2>
-            {% else %}
-            <h2>From: {{ book.reviewer.username }}</h2>
-            {% endif %}
-            <h2>Title: {{ book.title }}</h2>
         </div>
+        {% if book.msg|length %}
         <div class="message">
-            <h2>Message:</h2>
-            <p>{{ book.msg }}</p>
+            <h3>Comment:</h3>
+            <div>{{ book.msg }}</div>
         </div>
-    {% endfor %}
-            
-
+        {% endif %}
     </div>
+    {% empty %}
+    <div class="card">
+        <div class="card-profile"></div>
+        <h3 style="margin: auto; margin-top: 20px; margin-bottom: 20px; text-align: center;">There is no review here. Create your own!</h3>
+    </div>
+    {% endfor %}
+
     <nav class="bottom-flex-div">
+        {% if page_prev != 0 %}
+        <div class="nav-left">
+            <form action="../{{ page_prev }}">
+            <button class="page_button" type="submit">Previous Page</button>
+            </form>
+        </div>
+        {% endif %}
         <div class="nav-left bottom-flex-div">
-            <button class="create" type="submit">Previous Page</button>
         </div>
+        {% if books|length == 8 %}
         <div class="nav-right">
-            <button class="create" type="submit">Next Page</button>
+            <button class="page_buttion" type="submit">Next Page</button>
         </div>
+        {% endif %}
     </nav>
 </body>
 </html>
