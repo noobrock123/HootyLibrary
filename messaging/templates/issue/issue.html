@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="{% static 'issue/style.css' %}">
 </head>
 <body>
-    <form class="card" method="post">
-        {% csrf_token %}
+    <div class="card">
         <div class="card-profile">
+        <form method="post">
+        {% csrf_token %}
             <div class="reportbook">
                 <h2>Issue for {{ book.book_name }}</h2><p>{{ book.book_id }}</p>
             </div>
@@ -28,8 +29,13 @@
         </div>
         <div class="button">
             <button class="confirm" type="submit">Issue</button>
-            <button class="cancle" type="submit">Cancle</button>
         </div>
     </form>
+    <div class="button">
+        <form action="../">
+            <button class="cancle" type="submit">Cancel</button>
+        </form>
+    </div>
+    </div>
 </body>
 </html>

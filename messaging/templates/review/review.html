@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="{% static 'review/style.css' %}">
 </head>
 <body>
-    <form class="card" method="post">
-        {% csrf_token %}
+    <div class="card">
         <div class="card-profile">
+        <form method="post">
+        {% csrf_token %}
             <div class="reportbook">
                 <h2>Reviewing {{ book.book_name }}</h2><p> {{ book.book_id }}</p>
             </div>
             <div class="image-profile">
-                <img src="{{ book.thumbnail.url }}">
+                <img src="{% url 'book_views:book_thumbnail' book.book_id %}">
             </div>
             <div class="name">
                 <h1>Title</h1>
@@ -64,16 +65,21 @@
                         <span class="option-text">5</span>
                     </option>
                 </select>
-            </div>
-        <div class="card-content">
+        </div>
+        <div class="text-box">
             <h1>what do you have to say?</h1>
             <textarea type="text" cols="40" rows="5" name="msg" placeholder="Enter your opinions here..."></textarea>
         </div>
         <div class="button">
             <button class="confirm" type="submit">Review</button>
-            <button class="cancle" type="submit">Cancle</button>
         </div>
-    </form>
+        </form>
+        <div class="button">
+            <form action="../">
+                <button class="cancle" type="submit">Cancel</button>
+            </form>
+        </div>
+    </div>
     <script src="{% static 'review/script.js' %}"></script>
 </body>
 </html>
