@@ -85,7 +85,7 @@ def create_book(request):
         genres = request.POST.getlist('genres')
         thumbnail = request.FILES.get('thumbnail')
         pdf_files = request.FILES.get('pdf_files')
-        author = User.username
+        author = User.objects.get(user_id=request.user.user_id)
         create = True
         if not book_name:
             create = False
@@ -100,7 +100,7 @@ def create_book(request):
             book_name=book_name,
             description=description,
             book_type=book_type,
-            author=request.user,
+            author=author,
             thumbnail=thumbnail,
             pdf_files=pdf_files,
             genres=genres,
