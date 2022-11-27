@@ -4,14 +4,14 @@
     {% load static %}
     <head>
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{% static "about/style.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'about/style.css' %}">
     <body>
         <section>
-            <img src="{% static "about/images/stars.png" %}" id="stars">
-            <img src="{% static "about/images/moon.png" %}" id="moon">
-            <img src="{% static "about/images/mountains_behind.png" %}" id="mountains_behind">
-            <img src="{% static "about/images/mountains_front.png" %}" id="mountains_front">
-            <img src="{% static "about/images/logo.png" %}" id="logo">
+            <img src="{% static 'about/images/stars.png' %}" id="stars">
+            <img src="{% static 'about/images/moon.png' %}" id="moon">
+            <img src="{% static 'about/images/mountains_behind.png' %}" id="mountains_behind">
+            <img src="{% static 'about/images/mountains_front.png' %}" id="mountains_front">
+            <img src="{% static 'about/images/logo.png' %}" id="logo">
         </section>
         <div class="sec" id="sec">
             <h2>ABOUT US</h2>
@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="imgBx">
-                            <img src="images/img1.jpg" alt="">
+                            <img src="{% static 'about/images/main.png' %}" alt="">
                         </div>
                         <div class="contentBx">
                             <h4>6310530016</h4>
@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="imgBx">
-                            <img src="images/img1.jpg" alt="">
+                            <img src="{% static 'about/images/main.png' %}" alt="">
                         </div>
                         <div class="contentBx">
                             <h4>6310682726</h4>
@@ -43,7 +43,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="imgBx">
-                            <img src="images/img1.jpg" alt="">
+                            <img src="{% static 'about/images/main.png' %}" alt="">
                         </div>
                         <div class="contentBx">
                             <h4>6310682742</h4>
@@ -55,7 +55,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="imgBx">
-                            <img src="images/img1.jpg" alt="">
+                            <img src="{% static 'about/images/main.png' %}" alt="">
                         </div>
                         <div class="contentBx">
                             <h4>6310682825</h4>
@@ -67,7 +67,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="imgBx">
-                            <img src="images/img1.jpg" alt="">
+                            <img src="{% static 'about/images/main.png' %}" alt="">
                         </div>
                         <div class="contentBx">
                             <h4>6310682767</h4>
@@ -79,8 +79,8 @@
         
             </div>
             <div class="link">
-                <p><a href="https://github.com/noobrock123/HootyLibrary"><img src="images/github.png" alt=""></a>github</p>
-                <p><a href="https://www.pivotaltracker.com/n/projects/2606749"><img src="images/pivotaltracker.png" alt=""></a>pivotaltracker</p>
+                <p><a href="https://github.com/noobrock123/HootyLibrary"><img src="{% static 'about/images/github.png' %}" alt=""></a></p>
+                <p><a href="https://www.pivotaltracker.com/n/projects/2606749"><img src="{% static 'about/images/pivotaltracker.png' %}" alt=""></a></p>
             </div>
         </div>
 
