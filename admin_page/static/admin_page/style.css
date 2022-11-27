@@ -42,6 +42,7 @@ nav {
   padding-top: 10px;
   padding-bottom: 10px;
   outline: none;
+  display: flex;
 }
 
 .nav-right .button .btt {
