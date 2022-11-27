@@ -18,15 +18,17 @@
 {% endif %}
 
     <div class="card">
-        <form action="" method="post">
+        <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="card-profile">
                 <div class="image-profile">
-                    <img src="{% static 'addbook/images/not found book.jpg' %}">
+                    <img id="output" src="{% static 'addbook/images/not found book.jpg' %}">
                 </div>
                 <div class="browse">
-                    <button class="browse-btn" type="button">Browes IMG</button>
-                    <button class="browse-btn" type="button">Browes PDF</button>
+                    <input type="file" name="thumbnail" id="" accept="image/png, image/jpeg"  onchange="loadFile(event)">
+                    <input type="file" name="pdf_files" id="" accept="pdf_files">
+                    <!-- <button class="browse-btn" type="button">Browes IMG</button> -->
+                    <!-- <button class="browse-btn" type="button">Browes PDF</button> -->
                 </div>
                 <div class="type-head">
                     <p>Genres</p>
@@ -53,12 +55,18 @@
                 <p>Book's short story</p>
                 <textarea type="text" cols="40" name="description" rows="5" placeholder="Enter your Book's short story here..."></textarea>
                 <p>Book Type</p>
-                <select name="book_type" id="">
-                    <option value="1"><span class="option-text">Education</span></option>
-                    <option class="option">
-                        <span class="option-text">Entertain</span>
-                    </option>
-                </select>
+                <div class="select-menu">
+                    
+                        <select name="book_type" id="" class="select-btn">
+                            <option value="1"><span class="option-text">Education</span></option>
+                            <option class="option" value="2">
+                                <span class="option-text">Entertain</span>
+                            </option>
+                        </select>   
+                    
+                    
+                </div>
+                
                 <!-- <div class="select-menu">
                     <div class="select-btn">
                         <span class="sBtn-text">Select your option</span>
@@ -84,7 +92,12 @@
         
 
     </div>
-    <script src="script.js"></script>
+    <script>
+        var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+    </script>
 </body>
 </html>
 
