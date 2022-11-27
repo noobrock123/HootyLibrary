@@ -9,63 +9,90 @@
     <link rel="stylesheet" href="{% static 'addbook/style.css' %}">
 </head>
 <body>
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
     <div class="card">
-        <div class="card-profile">
-            <div class="image-profile">
-                <img src="{% static 'addbok/images/img1' %}">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-profile">
+                <div class="image-profile">
+                    <img id="output" src="{% static 'addbook/images/not found book.jpg' %}">
+                </div>
+                <div class="browse">
+                    <input type="file" name="thumbnail" id="" accept="image/png, image/jpeg"  onchange="loadFile(event)">
+                    <input type="file" name="pdf_files" id="" accept="pdf_files">
+                    <!-- <button class="browse-btn" type="button">Browes IMG</button> -->
+                    <!-- <button class="browse-btn" type="button">Browes PDF</button> -->
+                </div>
+                <div class="type-head">
+                    <p>Genres</p>
+                    {% for genre in genres %}
+                    <div class="group">
+                        <input type="checkbox" id="{{genre.genre_list}}" name="genres" value="{{genre.genre_list}}"/>
+                        <label for="{{genre.genre_list}}">{{genre.genre_list}}</label>
+                      </div>
+  
+                    {% endfor %}
+                </div>
+                                  
             </div>
-            <div class="browse">
-                <button class="browse-btn" type="submit">Browes IMG</button>
-                <button class="browse-btn" type="submit">Browes PDF</button>
+            <div class="card-content">
+                <h2 class="title">Create Book</h2>
+                <p>Book Name</p>
+                <input type="text" placeholder="Book Name" required name="book_name" class="name">
+                <p>Book's short story</p>
+                <textarea type="text" cols="40" name="description" rows="5" placeholder="Enter your Book's short story here..."></textarea>
+                <p>Book Type</p>
+                <div class="select-menu">
+                    
+                        <select name="book_type" id="" class="select-btn">
+                            <option value="1"><span class="option-text">Education</span></option>
+                            <option class="option" value="2">
+                                <span class="option-text">Entertain</span>
+                            </option>
+                        </select>   
+                    
+                    
+                </div>
+                
+                <!-- <div class="select-menu">
+                    <div class="select-btn">
+                        <span class="sBtn-text">Select your option</span>
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+            
+                    <select class="options">
+                        <option class="option">
+                            <span class="option-text">Education</span>
+                        </option>
+                        <option class="option">
+                            <span class="option-text">Entertain</span>
+                        </option>
+                    </select>
+                </div> -->
+                <div class="button">
+                    <button class="confirm" type="submit">Confirm</button>
+                    <a href="{% url 'MAIN_APP:home' %}"><button class="cancle" type="button">Cancle</button></a>
+                    
+                </div>
             </div>
-            <div class="type-head">
-                <p>Genres</p>
-                <div class="group">
-                  <input type="checkbox" id="xd" />
-                  <label for="xd">COMEDY</label>
-                </div>
-          
-                <div class="group">
-                  <input type="checkbox" id="figma" />
-                  <label for="figma">MONSTERS</label>
-                </div>
-          
-                <div class="group">
-                  <input type="checkbox" id="sketch" />
-                  <label for="sketch">DEMONS</label>
-                </div>
-              </div>
-        </div>
-        <div class="card-content">
-            <h2 class="title">Create Book</h2>
-            <p>Book Name</p>
-            <input type="text" placeholder="Book Name" required class="name">
-            <p>Book's short story</p>
-            <textarea type="text" cols="40" rows="5" placeholder="Enter your Book's short story here..."></textarea>
-            <p>Book Type</p>
-            <div class="select-menu">
-                <div class="select-btn">
-                    <span class="sBtn-text">Select your option</span>
-                    <i class="bx bx-chevron-down"></i>
-                </div>
+        </form>
         
-                <label class="options">
-                    <option class="option">
-                        <span class="option-text">Education</span>
-                    </option>
-                    <option class="option">
-                        <span class="option-text">Entertain</span>
-                    </option>
-                </label>
-            </div>
-            <div class="button">
-                <button class="confirm" type="submit">Confirm</button>
-                <button class="cancle" type="submit">Cancle</button>
-            </div>
-        </div>
 
     </div>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script> 
+         var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+     </script>
 </body>
 </html>
 
