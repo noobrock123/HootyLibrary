@@ -14,9 +14,13 @@
             <div class="left-box">
                 <div class="line"></div>
                 <form action="{% provider_login_url 'google' %}" method="post">
-                    <button type="button"><img src="{% static 'sign_up/images/gmail.png' %}">Create with Google</button>
+                    {% csrf_token %}
+                    <button type="submit"><img src="{% static 'sign_up/images/gmail.png' %}">Sign in with Google</button>
                 </form>
-                <button type="button"><img src="{% static 'sign_up/images/facebook.png' %}">Connect with facebook</button>
+                <form action="{% provider_login_url 'facebook' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit"><img src="{% static 'sign_up/images/facebook.png' %}">Sign in  with Facebook</button>
+                </form>
             </div>
             <div class="right-box">
                 <form method="post">

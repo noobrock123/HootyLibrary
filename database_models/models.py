@@ -51,7 +51,7 @@ def get_profile_pic_path(instance, file):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    user_id = models.TextField(primary_key=True, max_length=12)
+    user_id = models.TextField(primary_key=True, max_length=12,default=CustomAccountManager().user_random_id)
     username = models.CharField(unique=True, max_length=32)
     alias_name = models.CharField(max_length=40, blank=True)
     email = models.EmailField(_('Email'), unique=True,
