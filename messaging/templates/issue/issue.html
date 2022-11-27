@@ -15,7 +15,7 @@
                 <h2>Issue for {{ book.book_name }}</h2><p>{{ book.book_id }}</p>
             </div>
             <div class="image-profile">
-                <img src="{{ book.thumbnail.url }}">
+                <img src="{% url 'book_views:book_thumbnail' book.book_id %}">
             </div>
             <div class="name">
                 <h1>Title</h1>
