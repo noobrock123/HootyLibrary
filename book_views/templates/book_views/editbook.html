@@ -25,8 +25,8 @@
                     <img src="{% static 'addbook/images/not found book.jpg' %}">
                 </div>
                 <div class="browse">
-                    <button class="browse-btn" type="submit">Browes IMG</button>
-                    <button class="browse-btn" type="submit">Browes PDF</button>
+                    <button class="browse-btn" type="button">Browes IMG</button>
+                    <button class="browse-btn" type="button">Browes PDF</button>
                 </div>
                 <div class="type-head">
                     <p>Genres</p>
@@ -51,10 +51,16 @@
                 <p>Book Name</p>
                 <input type="text" placeholder="Book Name" required name="book_name" class="name">
                 <p>Book's short story</p>
-                <textarea type="text" cols="40" rows="5" placeholder="Enter your Book's short story here..."></textarea>
+                <textarea type="text" cols="40" name="description" rows="5" placeholder="Enter your Book's short story here..."></textarea>
                 <p>Book Type</p>
-                <div class="select-menu">
-                    <!-- <div class="select-btn">
+                <select name="book_type" id="">
+                    <option value="1"><span class="option-text">Education</span></option>
+                    <option class="option">
+                        <span class="option-text">Entertain</span>
+                    </option>
+                </select>
+                <!-- <div class="select-menu">
+                    <div class="select-btn">
                         <span class="sBtn-text">Select your option</span>
                         <i class="bx bx-chevron-down"></i>
                     </div>
@@ -66,8 +72,8 @@
                         <option class="option">
                             <span class="option-text">Entertain</span>
                         </option>
-                    </select> -->
-                </div>
+                    </select>
+                </div> -->
                 <div class="button">
                     <button class="confirm" type="submit">Confirm</button>
                     <a href="{% url 'MAIN_APP:home' %}"><button class="cancle" type="button">Cancle</button></a>
