@@ -10,13 +10,6 @@
 </head>
 
 <body>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-    </ul>
-    {% endif %}
     <form class="card" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="card-profile">
@@ -26,7 +19,7 @@
                 {% else %}
                 <img src="{{ user.profile_pic.url }}">
                 {% endif %}
-                <input class="browes" type="file" name="profile_pic" accept="image/png, image/jpeg"></input>
+                <input  type="file" name="profile_pic" accept="image/png, image/jpeg"></input>
             </div>
             <div class="name">
                 <h5>Alias name</h5>
