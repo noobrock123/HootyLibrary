@@ -16,15 +16,15 @@
 
         </div>
         <div class="nav-right">
-            <h1>Hello, {{username}}</h1>
+            <h1>Welcome, {{admin_name}}</h1>
             <div class="button">
                 <form action="{% url 'MAIN_APP:home' %}">
-                    <button class="btt" type="submit">homepage</button>
+                    <button class="btt" type="submit">Homepage</button>
                 </form>
                 <form action="/admin_django/">
-                    <button class="btt" type="submit">Django admin</button>
+                    <button class="btt" type="submit">Django Admin</button>
                 </form>
-                <form action="">
+                <form action="{% url 'MAIN_APP:sign_out' %}">
                     <button class="btt" type="submit">Log Out</button>
                 </form>
             </div>
