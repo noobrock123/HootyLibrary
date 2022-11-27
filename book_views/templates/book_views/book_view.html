@@ -26,7 +26,7 @@
             <div class="book_attribs">
                 <h1 style="display: inline-block;">{{book.book_name}}  </h1>
                 <small>({{book.book_id}})</small>
-                    <h3>Author:  <a href="">{{ book.author.username }}</a></h3>
+                    <h3>Author:  <a href="{% url 'userProfile:user_profile' book.author.user_id %}">{{ book.author.username }}</a></h3>
                 <h3>Rating:
                     {% if has_reviews %}
                     {{ book.get_avg_score }}
@@ -42,40 +42,30 @@
         </div>
         <div class="adtribute">
             <div>
-                <form action="{% url 'book_views:messaging:reviews' book.book_id %}">
+                <form action="{% url 'book_views:show_reviews' book.book_id 1 %}">
                     <input type="submit" name="" value="Read Review ({{book.get_reviews.count}})" id="" >
-
                 </form>
-
             </div>
             <div>
-                <form action="{% url 'book_views:messaging:issues' book.book_id %}">
+                <form action="{% url 'book_views:show_issues' book.book_id 1 %}">
                     <input type="submit" name="" value="Read Issues ({{book.get_issues.count}})" id="" >
-
                 </form>
-
             </div>
-            {% if not is_author %}
+            {% if not is_author and is_login %}
             <div>
                 <form action="create_review">
                     <input class="maker" type="submit" name="" value="Create Review" id="" >
-
                 </form>
-
             </div>
             <div>
                 <form action="create_issue">
                     <input class="maker" type="submit" name="" value="Create Issues" id="" >
-
                 </form>
-
             </div>
             <div>
                 <form action="create_report">
                     <input class="report" type="submit" name="" value="Report This Book" id="" >
-
                 </form>
-
             </div>
             {% endif %}
         </div>

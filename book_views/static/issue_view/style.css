@@ -9,6 +9,8 @@ a{
   text-decoration: none;
   color: #5a5a5a;
 }
+
+
   
 .flex-div {
   display: flex;
@@ -27,7 +29,7 @@ a{
 
 .container {
   display: grid;
-  grid-template-columns: 180px auto;
+  grid-template-columns: 180px auto 260px; 
   }
 
 .container img{
@@ -41,8 +43,10 @@ a{
 }
 .container .card-content {
   margin-top: 30px;
+  margin-right: 0px;
 }
 .card-content h3 {
+  width: auto;
   margin-bottom: 20px;
   text-align: left;
 }
@@ -53,6 +57,36 @@ a{
   margin-bottom: 4px;
   opacity: 40%;
   font-size: 14px;
+}
+.container .issue_status {
+  text-align: center;
+  margin: auto;
+  margin-top: 30px;
+  width: auto;
+}
+.issue_status .confirm_text {
+  font-weight: bold;
+  color: green;
+}
+.issue_status .not_confirm_text {
+  font-weight: bold;
+  color: red;
+}
+.issue_status img {
+  height: 20px;
+  width: 20px;
+  margin: 0px;
+}
+.issue_status button {
+  margin-top: 16px;
+  font-weight: bold;
+  background: rgb(250, 203, 47);
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  color: #fff;
 }
 
 .message {
