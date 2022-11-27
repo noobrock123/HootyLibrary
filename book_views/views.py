@@ -50,27 +50,20 @@ def book_views(request, book_id):
     has_reviews = True if Review.objects.filter(book_refer=book) else False
     if request.user.is_authenticated:
         user = User.objects.get(user_id=request.user.user_id)
-        print(book.author != user)
-        if book.author != user:
-            read = Read.objects.get_or_create(user_refer=user, book_refer=book)
-            read[0].save()
-            is_author = False
-        else:
+        if request.user == book.author:
             is_author = True
         try:
             favorite = Favorite.objects.filter(book_refer=book).get(user_refer=user)
         except:
             favorite = None
-    print(is_author)
     context = {
         'is_login': request.user.is_authenticated,
         'book': book,
-        'is author': is_author,
+        'is_author': is_author,
         'favorite':favorite,
         'has_reviews':has_reviews,
-        
     }
-    return render(request, 'book_views/templates/book_views/book_view.html', context)
+    return render(request, 'book_views/book_view.html', context)
 
 
 @login_required(login_url='register:log_in')
@@ -158,7 +151,7 @@ def show_issues(request, book_id, page):
     books = Issue.objects.filter(book_refer=book)
     books = books[8 * (page -1): (8 * page) -1]
     is_author = False
-    if (request.user != book.author):
+    if request.user == book.author:
         is_author = True
     if request.method == "POST":
         user_id = request.POST.get('to_resolve')

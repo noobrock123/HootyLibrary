@@ -11,9 +11,10 @@
 
 
   .card{
-    width: 1000px;
+    width: 500px;
     position: center;
     height: 600px;
+    max-height: 800px;
     margin-left: 20px;
     margin-top: 20px;
     overflow: hidden;

@@ -51,22 +51,22 @@
                     <input type="submit" name="" value="Read Issues ({{book.get_issues.count}})" id="" >
                 </form>
             </div>
-            {% if not is_author and is_login %}
-            <div>
-                <form action="create_review">
-                    <input class="maker" type="submit" name="" value="Create Review" id="" >
-                </form>
-            </div>
-            <div>
-                <form action="create_issue">
-                    <input class="maker" type="submit" name="" value="Create Issues" id="" >
-                </form>
-            </div>
-            <div>
-                <form action="create_report">
-                    <input class="report" type="submit" name="" value="Report This Book" id="" >
-                </form>
-            </div>
+            {% if not is_author %}
+                <div>
+                    <form action="create_review">
+                        <input class="maker" type="submit" name="" value="Create Review" id="" >
+                    </form>
+                </div>
+                <div>
+                    <form action="create_issue">
+                        <input class="maker" type="submit" name="" value="Create Issues" id="" >
+                    </form>
+                </div>
+                <div>
+                    <form action="create_report">
+                        <input class="report" type="submit" name="" value="Report This Book" id="" >
+                    </form>
+                </div>
             {% endif %}
         </div>
         

@@ -10,25 +10,32 @@
 <body>
     <div class="card">
         <div class="card-profile">
+        <form method="post">
+            {% csrf_token %}
             <div class="reportbook">
                 <h2>Reporting {{ book.book_name }}</h2><p>{{ book.book_id }}</p>
             </div>
             <div class="image-profile">
-                <img src="{{ book.thumbnail.url }}">
+                <img src="{% url 'book_views:book_thumbnail' book.book_id %}">
             </div>
             <div class="name">
                 <h1>Title</h1>
-                <input type="text" placeholder="Title" required class="input-edit">
+                <input type="text" placeholder="Title" name="title" required class="input-edit">
             </div>
         </div>
         <div class="card-content">
             <h1>what do you report for?</h1>
-            <textarea type="text" cols="40" rows="5" placeholder="Things to report" name="msg"></textarea>
+            <textarea type="text" cols="40" rows="5" placeholder="Things to report" name="msg" required></textarea>
         </div>
         <div class="button">
             <button class="confirm" type="submit">Report</button>
-            <button class="cancle" type="submit">Cancle</button>
         </div>
+        </form>
+    <div class="button">
+        <form action="../">
+            <button class="cancle" type="submit">Cancel</button>
+        </form>
+    </div>
     </div>
 </body>
 </html>
