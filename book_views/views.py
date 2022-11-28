@@ -82,10 +82,8 @@ def create_book(request):
         create = True
         if not book_name:
             create = False
-            messages.error(request, 'book_name is required ! ! ! ')
         if not book_type:
             create = False
-            messages.error(request, 'book_type is required ! ! ! ')
         if not create:
             return render(request, 'book_views/editbook.html', context)
         # print(genres)

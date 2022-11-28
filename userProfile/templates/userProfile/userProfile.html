@@ -17,8 +17,12 @@
         <img src="{% url 'userProfile:user_picture' user_id %}" alt="">
       </div>
       <div class="card-content">
+        {% if not alias_name %}
+        <h3>{{username}}</h3>
+        {% else %}
         <h3>{{alias_name}}</h3>
         <p>{{username}}</p>
+        {% endif %}
       </div>
       <div class="bio">
         <p>{{bio}}</p>
