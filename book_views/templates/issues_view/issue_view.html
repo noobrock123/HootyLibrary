@@ -30,7 +30,7 @@
         <div class="card-profile"></div>
         <div>
         <div class="container">
-            <img src="{{ book.issuer.profile_pic.url}}" />
+            <img src="{% url 'userProfile:user_picture' book.issuer.user_id }" />
             <div class="card-content">
                 <p>{{ book.issue_date }}</p>
                 <a href="{% url 'userProfile:user_profile' book.issuer.user_id %}">
