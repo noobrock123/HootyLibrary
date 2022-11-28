@@ -106,11 +106,13 @@
                     {% if not is_user_authenticated %} 
                     <img src="{% static 'homepage/images/img1.jpg' %}">
                     {% else %}
+                    <a href="{% url 'userProfile:user_profile' user.user_id %}">
                         {% if not user.profile_pic %}
                         <img src="{% static 'homepage/images/img1.jpg' %}">
                         {% else %}
                         <img src="{{ user.profile_pic.url }}">
                         {% endif %}
+                    </a>
                     {% endif %}
                     {% if not is_user_authenticated %}
                     <h3>Annoymous</h3>
